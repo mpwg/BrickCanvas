@@ -2,6 +2,9 @@
 
 Dieses Dokument definiert die minimalen Architekturregeln für den BrickCanvas-MVP. Ziel ist eine klare Trennung zwischen UI, Orchestrierung, Domäne und technischen Services, damit spätere Implementierungen ohne große Umbauten möglich bleiben.
 
+Relevante Architekturentscheidungen:
+- `docs/adr/0001-swiftui-first.md`
+
 ## Architekturziele
 
 - End-to-End-Flow aus `docs/issues/mvp-flow.md` stabil umsetzbar halten
@@ -26,11 +29,15 @@ Verantwortung:
 - Darstellung
 - Nutzerinteraktionen
 - lokale, kurzlebige View-Zustände
+- neue UI-Implementierungen standardmäßig in SwiftUI
 
 Nicht verantwortlich für:
 - Farbmatching-Algorithmik
 - Mosaik-Generierung
 - Speicher-/Export-Details
+
+Zusatzregel:
+- UIKit oder AppKit sind nur zulässig, wenn keine tragfähige SwiftUI-Implementierung möglich ist. Siehe `docs/adr/0001-swiftui-first.md`.
 
 ### 2. Workflow / Orchestration Layer
 
@@ -115,4 +122,3 @@ Nicht erlaubt:
 - Persistenzformat für Projekte (JSON-only vs. hybrid mit Binärartefakten)
 - Synchrones vs. asynchrones Pipeline-Orchestrieren mit Abbruchfähigkeit
 - Minimaler Umfang der Export-Engine im MVP (nur Bauplan oder inkl. Teileliste als separates Format)
-
