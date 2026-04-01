@@ -1,0 +1,68 @@
+import Foundation
+import Testing
+@testable import BrickCanvas
+
+struct DomainModelTests {
+    @Test
+    func generatedProjectCodableRoundTripPreservesIdentity() throws {
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601
+
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+
+        let data = try encoder.encode(DomainFixtures.generatedProject)
+        let decoded = try decoder.decode(BrickCanvasProject.self, from: data)
+
+        #expect(decoded == DomainFixtures.generatedProject)
+        #expect(decoded.isGenerated)
+    }
+
+    @Test
+    func gridRejectsDuplicateCoordinates() throws {
+        let size = try MosaicGridSize(width: 2, height: 2)
+
+        do {
+            _ = try MosaicGrid(
+                size: size,
+                cells: [
+                    MosaicCell(coordinate: MosaicCoordinate(x: 0, y: 0), colorID: "red"),
+                    MosaicCell(coordinate: MosaicCoordinate(x: 0, y: 0), colorID: "blue"),
+                    MosaicCell(coordinate: MosaicCoordinate(x: 0, y: 1), colorID: "yellow"),
+                    MosaicCell(coordinate: MosaicCoordinate(x: 1, y: 1), colorID: "white")
+                ]
+            )
+            Issue.record("Expected duplicate coordinate error.")
+        } catch let error as DomainModelError {
+            #expect(error == .duplicateCoordinate(MosaicCoordinate(x: 0, y: 0)))
+        }
+    }
+
+    @Test
+    func gridRejectsCoordinateOutsideBounds() throws {
+        let size = try MosaicGridSize(width: 2, height: 2)
+
+        do {
+            _ = try MosaicGrid(
+                size: size,
+                cells: [
+                    MosaicCell(coordinate: MosaicCoordinate(x: 0, y: 0), colorID: "red"),
+                    MosaicCell(coordinate: MosaicCoordinate(x: 1, y: 0), colorID: "blue"),
+                    MosaicCell(coordinate: MosaicCoordinate(x: 2, y: 1), colorID: "yellow"),
+                    MosaicCell(coordinate: MosaicCoordinate(x: 1, y: 1), colorID: "white")
+                ]
+            )
+            Issue.record("Expected out-of-bounds coordinate error.")
+        } catch let error as DomainModelError {
+            #expect(error == .coordinateOutOfBounds(MosaicCoordinate(x: 2, y: 1), size: size))
+        }
+    }
+
+    @Test
+    func partRequirementIdentityIsStableAcrossFixtures() throws {
+        let ids = Set(DomainFixtures.partRequirements.map(\.id))
+
+        #expect(ids.count == DomainFixtures.partRequirements.count)
+        #expect(ids.contains("round_plate_1x1::bright-red"))
+    }
+}

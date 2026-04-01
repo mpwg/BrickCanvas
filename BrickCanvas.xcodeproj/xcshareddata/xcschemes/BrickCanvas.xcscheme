@@ -39,6 +39,17 @@
          </BuildableReference>
       </MacroExpansion>
       <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A955363A5DAA0B83D84BCF5C"
+               BuildableName = "BrickCanvasTests.xctest"
+               BlueprintName = "BrickCanvasTests"
+               ReferencedContainer = "container:BrickCanvas.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <CommandLineArguments>
       </CommandLineArguments>
