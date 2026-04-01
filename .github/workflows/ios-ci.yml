@@ -1,0 +1,43 @@
+name: iOS CI
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    name: Build and test on macOS 26 / Xcode 26.4
+    runs-on: macos-26
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Select Xcode 26.4
+        run: sudo xcode-select -s /Applications/Xcode_26.4.app
+
+      - name: Show Xcode version
+        run: xcodebuild -version
+
+      - name: Generate Xcode project
+        run: xcodegen generate
+
+      - name: Build app
+        run: >
+          xcodebuild
+          -project BrickCanvas.xcodeproj
+          -scheme BrickCanvas
+          -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.4'
+          build
+
+      - name: Run tests
+        run: >
+          xcodebuild
+          -project BrickCanvas.xcodeproj
+          -scheme BrickCanvas
+          -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.4'
+          test
