@@ -29,4 +29,19 @@ targets:
         CODE_SIGN_STYLE: Automatic
         DEVELOPMENT_TEAM: ""
     scheme:
-      testTargets: []
+      testTargets:
+        - BrickCanvasTests
+  BrickCanvasTests:
+    type: bundle.unit-test
+    platform: iOS
+    deploymentTarget: "26.4"
+    sources:
+      - path: BrickCanvasTests
+    dependencies:
+      - target: BrickCanvas
+    settings:
+      base:
+        PRODUCT_NAME: BrickCanvasTests
+        PRODUCT_MODULE_NAME: BrickCanvasTests
+        PRODUCT_BUNDLE_IDENTIFIER: com.mpwg.BrickCanvasTests
+        GENERATE_INFOPLIST_FILE: YES

@@ -1,0 +1,35 @@
+# Basierend auf den offiziellen GitHub-Templates fuer Swift und Xcode:
+# https://github.com/github/gitignore/blob/main/Swift.gitignore
+# https://github.com/github/gitignore/blob/main/Global/Xcode.gitignore
+
+## Xcode user state
+xcuserdata/
+**/xcuserdata/
+*.xcuserstate
+
+## Swift / Xcode build artefacts
+.build/
+DerivedData/
+*.hmap
+*.ipa
+*.dSYM
+*.dSYM.zip
+
+## Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+## SwiftPM
+.swiftpm/
+
+## Carthage
+Carthage/Build/
+
+## fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+
+## Local macOS files
+.DS_Store
