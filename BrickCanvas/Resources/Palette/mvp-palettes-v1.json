@@ -1,0 +1,97 @@
+{
+  "version": "2026.04-mvp-v1",
+  "palettes": [
+    {
+      "id": "mvp-default",
+      "name": "MVP Default",
+      "notes": "Kuratierte Startpalette für den BrickCanvas-MVP mit gut verfügbaren, kontrastreichen Farben.",
+      "colors": [
+        {
+          "id": "white",
+          "name": "White",
+          "rgb": { "red": 255, "green": 255, "blue": 255 },
+          "isActive": true,
+          "notes": "Wichtige Highlight- und Hintergrundfarbe."
+        },
+        {
+          "id": "black",
+          "name": "Black",
+          "rgb": { "red": 27, "green": 42, "blue": 52 },
+          "isActive": true,
+          "notes": "Dunkle Kontraste und Konturen."
+        },
+        {
+          "id": "light-bluish-gray",
+          "name": "Light Bluish Gray",
+          "rgb": { "red": 160, "green": 165, "blue": 169 },
+          "isActive": true,
+          "notes": "Neutrale Mitteltöne."
+        },
+        {
+          "id": "dark-bluish-gray",
+          "name": "Dark Bluish Gray",
+          "rgb": { "red": 99, "green": 95, "blue": 98 },
+          "isActive": true,
+          "notes": "Dunkle neutrale Mitteltöne."
+        },
+        {
+          "id": "bright-red",
+          "name": "Bright Red",
+          "rgb": { "red": 201, "green": 26, "blue": 9 },
+          "isActive": true,
+          "notes": "Satte Akzentfarbe."
+        },
+        {
+          "id": "bright-blue",
+          "name": "Bright Blue",
+          "rgb": { "red": 0, "green": 85, "blue": 191 },
+          "isActive": true,
+          "notes": "Klarer Blauwert für Himmel und Kleidung."
+        },
+        {
+          "id": "bright-yellow",
+          "name": "Bright Yellow",
+          "rgb": { "red": 242, "green": 205, "blue": 55 },
+          "isActive": true,
+          "notes": "Helle warme Akzentfarbe."
+        },
+        {
+          "id": "bright-orange",
+          "name": "Bright Orange",
+          "rgb": { "red": 254, "green": 138, "blue": 24 },
+          "isActive": true,
+          "notes": "Zusätzliche warme Sättigung."
+        },
+        {
+          "id": "reddish-brown",
+          "name": "Reddish Brown",
+          "rgb": { "red": 88, "green": 42, "blue": 18 },
+          "isActive": true,
+          "notes": "Warmer Dunkelton."
+        },
+        {
+          "id": "tan",
+          "name": "Tan",
+          "rgb": { "red": 228, "green": 205, "blue": 158 },
+          "isActive": true,
+          "notes": "Warmer heller Neutralton."
+        },
+        {
+          "id": "bright-green",
+          "name": "Bright Green",
+          "rgb": { "red": 75, "green": 151, "blue": 75 },
+          "isActive": true,
+          "notes": "Natürliche Grüntöne."
+        },
+        {
+          "id": "dark-green",
+          "name": "Dark Green",
+          "rgb": { "red": 24, "green": 70, "blue": 50 },
+          "isActive": true,
+          "notes": "Dunkles Grün für Tiefe und Schatten."
+        }
+      ]
+    }
+  ]
+}
+

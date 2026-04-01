@@ -240,6 +240,16 @@ Build from the command line:
 xcodebuild -project BrickCanvas.xcodeproj -scheme BrickCanvas -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.4' build
 ```
 
+## Current Palette Dataset
+
+The current MVP palette dataset lives in `BrickCanvas/Resources/Palette/mvp-palettes-v1.json`.
+
+- versioned JSON resource
+- one curated palette: `mvp-default`
+- small starter set intended for MVP reviewability and future expansion
+
+The dataset is loaded through `BundledPaletteService` and validated for duplicate IDs and structurally invalid entries before use.
+
 ## Key Challenges
 
 ### Visual quality
