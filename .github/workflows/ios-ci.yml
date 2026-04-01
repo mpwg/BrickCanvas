@@ -37,44 +37,6 @@ jobs:
       - name: Show available simulators
         run: xcrun simctl list devices available
 
-      - name: Boot installed CI simulator
-        id: simulator
-        shell: bash
-        run: |
-          set -euo pipefail
-
-          simulator_udid="$(
-            xcrun simctl list devices available -j \
-              | jq -r '
-                  if .devices["com.apple.CoreSimulator.SimRuntime.iOS-26-4"] != null then
-                    (
-                      .devices["com.apple.CoreSimulator.SimRuntime.iOS-26-4"][]
-                      | select(.name == "iPhone 17")
-                      | .udid
-                    )
-                  elif .devices["com.apple.CoreSimulator.SimRuntime.iOS-26-2"] != null then
-                    (
-                      .devices["com.apple.CoreSimulator.SimRuntime.iOS-26-2"][]
-                      | select(.name == "iPhone 17")
-                      | .udid
-                    )
-                  else
-                    empty
-                  end
-                ' \
-              | head -n1
-          )"
-
-          if [[ -z "${simulator_udid}" ]]; then
-            echo "Kein installierter iPhone-17-Simulator für iOS 26.4 oder 26.2 gefunden." >&2
-            exit 1
-          fi
-
-          xcrun simctl boot "${simulator_udid}"
-          xcrun simctl bootstatus "${simulator_udid}" -b
-
-          echo "simulator_udid=${simulator_udid}" >> "${GITHUB_OUTPUT}"
-
       - name: Build app
         run: >
           xcodebuild
@@ -88,5 +50,5 @@ jobs:
           xcodebuild
           -project BrickCanvas.xcodeproj
           -scheme BrickCanvas
-          -destination "id=${{ steps.simulator.outputs.simulator_udid }}"
+          -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.2'
           test
