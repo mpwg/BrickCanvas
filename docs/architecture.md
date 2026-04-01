@@ -81,6 +81,24 @@ Verantwortung:
 Regel:
 - Services kennen einander nur über explizite Schnittstellen.
 
+Geplante Contract-Einstiegspunkte:
+- `ImageImportService.importImage(_:)`
+- `PaletteService.availablePalettes()` und `PaletteService.palette(for:)`
+- `ColorMatcherService.nearestColor(for:)`
+- `MosaicGeneratorService.generateMosaic(from:)`
+- `PartPlannerService.planParts(for:)`
+- `ExportEngine.export(_:)`
+- `ProjectStorage.save(_:)`, `loadProject(id:)`, `listProjects()`, `deleteProject(id:)`
+
+Verantwortung pro Service:
+- `ImageImportService`: importiert und normalisiert Rohbilddaten in ein UI-freies Service-Artefakt
+- `PaletteService`: liefert versionierte Farbpaletten und Palette-Metadaten
+- `ColorMatcherService`: mappt einzelne Farbproben deterministisch auf erlaubte Brick-Farben
+- `MosaicGeneratorService`: erzeugt das zentrale `MosaicGrid` aus Bild, Crop und Konfiguration
+- `PartPlannerService`: leitet Teileanforderungen aus einem Grid ab
+- `ExportEngine`: erzeugt exportierbare Dateien aus Projektartefakten
+- `ProjectStorage`: persistiert und lädt Projekte unabhaengig von UI und Export
+
 ## Abhängigkeitsregeln
 
 Erlaubte Richtung:
@@ -92,6 +110,7 @@ Nicht erlaubt:
 - Domain → konkrete Infrastruktur
 - UI → tiefe Service-Implementierungsdetails
 - Feature A → Feature B (direkte Kopplung)
+- Service-Implementierung A → Service-Implementierung B ohne Protokollgrenze
 
 ## Datenfluss im MVP
 
@@ -108,6 +127,15 @@ Nicht erlaubt:
 - Jede Workflow-Phase hat mindestens: `Idle`, `Running`, `Success`, `Error`.
 - Fehler werden im Orchestrator in einen UI-tauglichen, domänennahen Fehlerzustand gemappt.
 - UI zeigt Fehler an, entscheidet aber nicht über Recovery-Strategien.
+- Service-Grenzen liefern fachliche Fehler über klar benannte Contract-Fehler oder domänennahe Fehlerzustände.
+
+## Service-Design-Regeln
+
+- Service-Protokolle bleiben klein und fokussiert.
+- Ein Service soll nur einen fachlichen Verantwortungsbereich besitzen.
+- Requests und Responses bleiben `Sendable` und UI-frei.
+- UIKit oder SwiftUI-Typen dürfen nicht durch Service- oder Storage-Verträge leaken.
+- Konkrete Implementierungen leben spaeter hinter diesen Protokollen und bleiben austauschbar.
 
 ## Testleitplanken
 

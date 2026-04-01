@@ -8,19 +8,27 @@
 
 /* Begin PBXBuildFile section */
 		0A1170E1E8FC38EF56C3107B /* PartRequirement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009C834DB48C092DB1015255 /* PartRequirement.swift */; };
+		0E9BD9BFDA7608BC52219787 /* ImageImportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88479A229C7CBC68EDC6376 /* ImageImportService.swift */; };
 		10E328BFA67381E82DA0EB31 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D0A43D9C2331A94A30440AA /* Assets.xcassets */; };
 		181CE4078562ECCEFB887B55 /* NewProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652720582467A4724A7E2783 /* NewProjectView.swift */; };
 		1F65914E2EBC9749C826EBF4 /* MosaicGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F6FFA2D27797E0A9B78A8C /* MosaicGrid.swift */; };
 		2B0493190267D2EE1262B432 /* BrickCanvasProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C750B13372C1E6C2AD86BF4 /* BrickCanvasProject.swift */; };
 		333F0DADFD19AADA5C830913 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE556B3C800E41ED603BF256 /* HomeView.swift */; };
+		35F8B8623FDF79130906A258 /* ServiceContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F3270DD18B0CB0BA613F68 /* ServiceContracts.swift */; };
 		38C2095418EC54ABE5B86CD6 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807F1DBE3FA1D492D1160B2D /* AppView.swift */; };
 		4151412B3B64A914BCDEE59F /* DomainFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5208914C66036D724C51E14 /* DomainFixtures.swift */; };
+		47C4D0CE1C66607257994692 /* PartPlannerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4E8FA216D4D104518BB785 /* PartPlannerService.swift */; };
+		51B1E14D8FE6ED116FD51DF0 /* ProjectStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27328A1DFFB85E1B4100A41B /* ProjectStorage.swift */; };
+		7B8AA63AEE58C5D26A004924 /* MosaicGeneratorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4340B149D50C0ED9B3F7B5D /* MosaicGeneratorService.swift */; };
 		7C21BA37EF70E2DB46707A33 /* DomainModelError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72524E73BC66D1359123859 /* DomainModelError.swift */; };
 		808FEE2CBD2D1F7799BA8CEC /* DomainModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018174ECD6CE96BB27C3C982 /* DomainModelTests.swift */; };
 		829DB268A9A5791D55A4F654 /* PreviewProjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6002C4F397D13D4E8D8BF9 /* PreviewProjects.swift */; };
+		8C46580481DC1CA99E4D5E67 /* PaletteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B9DF8E2551EFF8678C4D5 /* PaletteService.swift */; };
 		9265200C67750ED66E86AA26 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AE3B34F7F68EA6C8A0343 /* SettingsView.swift */; };
 		B3DB96675BD11DF262A17722 /* ProjectDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE3227DE6F318912A4AF67D /* ProjectDetailView.swift */; };
+		BEB8B00D8FF94B5274B81B6D /* ExportEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B438B6CF9B3540D037A8458 /* ExportEngine.swift */; };
 		C6A4DA72755863F706FAFF10 /* PlaceholderScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A14474999418FE4BEA892E /* PlaceholderScreen.swift */; };
+		CF1148274402E687F2E96894 /* ColorMatcherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01789753A54D8B48DE7835D4 /* ColorMatcherService.swift */; };
 		E220D91BF91141428E6A48E2 /* AppTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = A787C4D9FE97A055723F44F7 /* AppTab.swift */; };
 		F10BF6B7E25F3BBF843DDB65 /* BrickCanvasApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C59FE7958A9652A98453F0E /* BrickCanvasApp.swift */; };
 		FB7876CA6E36724D7749DC9E /* BrickColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622642926E0A370DF5C63957 /* BrickColor.swift */; };
@@ -38,23 +46,31 @@
 
 /* Begin PBXFileReference section */
 		009C834DB48C092DB1015255 /* PartRequirement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartRequirement.swift; sourceTree = "<group>"; };
+		01789753A54D8B48DE7835D4 /* ColorMatcherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorMatcherService.swift; sourceTree = "<group>"; };
 		018174ECD6CE96BB27C3C982 /* DomainModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainModelTests.swift; sourceTree = "<group>"; };
+		0B438B6CF9B3540D037A8458 /* ExportEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportEngine.swift; sourceTree = "<group>"; };
 		0C750B13372C1E6C2AD86BF4 /* BrickCanvasProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrickCanvasProject.swift; sourceTree = "<group>"; };
 		1C59FE7958A9652A98453F0E /* BrickCanvasApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrickCanvasApp.swift; sourceTree = "<group>"; };
+		27328A1DFFB85E1B4100A41B /* ProjectStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectStorage.swift; sourceTree = "<group>"; };
 		3EE3227DE6F318912A4AF67D /* ProjectDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailView.swift; sourceTree = "<group>"; };
 		4D0A43D9C2331A94A30440AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		52A14474999418FE4BEA892E /* PlaceholderScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderScreen.swift; sourceTree = "<group>"; };
 		622642926E0A370DF5C63957 /* BrickColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrickColor.swift; sourceTree = "<group>"; };
 		652720582467A4724A7E2783 /* NewProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectView.swift; sourceTree = "<group>"; };
 		807F1DBE3FA1D492D1160B2D /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
+		A02B9DF8E2551EFF8678C4D5 /* PaletteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteService.swift; sourceTree = "<group>"; };
 		A0F6FFA2D27797E0A9B78A8C /* MosaicGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MosaicGrid.swift; sourceTree = "<group>"; };
 		A72524E73BC66D1359123859 /* DomainModelError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainModelError.swift; sourceTree = "<group>"; };
 		A787C4D9FE97A055723F44F7 /* AppTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTab.swift; sourceTree = "<group>"; };
+		AF4E8FA216D4D104518BB785 /* PartPlannerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartPlannerService.swift; sourceTree = "<group>"; };
 		B3182DF5BF077E08691A044C /* BrickCanvas.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = BrickCanvas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA8AE3B34F7F68EA6C8A0343 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		BE556B3C800E41ED603BF256 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		C0F3270DD18B0CB0BA613F68 /* ServiceContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceContracts.swift; sourceTree = "<group>"; };
+		C4340B149D50C0ED9B3F7B5D /* MosaicGeneratorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MosaicGeneratorService.swift; sourceTree = "<group>"; };
 		D49936810BD0B65DDAE074A9 /* BrickCanvasTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = BrickCanvasTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5208914C66036D724C51E14 /* DomainFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainFixtures.swift; sourceTree = "<group>"; };
+		D88479A229C7CBC68EDC6376 /* ImageImportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageImportService.swift; sourceTree = "<group>"; };
 		EE6002C4F397D13D4E8D8BF9 /* PreviewProjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewProjects.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -73,6 +89,22 @@
 				BA8AE3B34F7F68EA6C8A0343 /* SettingsView.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		22911F9F0BB91185DCE7BD7A /* ExportEngine */ = {
+			isa = PBXGroup;
+			children = (
+				0B438B6CF9B3540D037A8458 /* ExportEngine.swift */,
+			);
+			path = ExportEngine;
+			sourceTree = "<group>";
+		};
+		2948735BD6304BB546911BE6 /* ColorMatcher */ = {
+			isa = PBXGroup;
+			children = (
+				01789753A54D8B48DE7835D4 /* ColorMatcherService.swift */,
+			);
+			path = ColorMatcher;
 			sourceTree = "<group>";
 		};
 		2FFC0C2247188AF5D155CFB8 = {
@@ -100,9 +132,19 @@
 				3D7816E8F4E24979B7F0C4D3 /* Domain */,
 				B9CED9AE854441CDC2004C6E /* Features */,
 				4C393C2164A28798FA49B77C /* Resources */,
+				7F0ED7121FECE5998CBF414F /* Services */,
 				DEA30E5B644E6AEB31669A38 /* Shared */,
+				DE8D01E750C2C938FE9F3B54 /* Storage */,
 			);
 			path = BrickCanvas;
+			sourceTree = "<group>";
+		};
+		49423F2B9ED91B6F5A29F54E /* Palette */ = {
+			isa = PBXGroup;
+			children = (
+				A02B9DF8E2551EFF8678C4D5 /* PaletteService.swift */,
+			);
+			path = Palette;
 			sourceTree = "<group>";
 		};
 		4C393C2164A28798FA49B77C /* Resources */ = {
@@ -121,6 +163,22 @@
 			path = PreviewData;
 			sourceTree = "<group>";
 		};
+		4D800882272EE746ED49ECA6 /* ImageImport */ = {
+			isa = PBXGroup;
+			children = (
+				D88479A229C7CBC68EDC6376 /* ImageImportService.swift */,
+			);
+			path = ImageImport;
+			sourceTree = "<group>";
+		};
+		5DB5EBEB707C1D34AA88215F /* PartPlanner */ = {
+			isa = PBXGroup;
+			children = (
+				AF4E8FA216D4D104518BB785 /* PartPlannerService.swift */,
+			);
+			path = PartPlanner;
+			sourceTree = "<group>";
+		};
 		603E094DAE67DFC4DBD8476B /* BrickCanvasTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -136,6 +194,28 @@
 				D49936810BD0B65DDAE074A9 /* BrickCanvasTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		7F0ED7121FECE5998CBF414F /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				C0F3270DD18B0CB0BA613F68 /* ServiceContracts.swift */,
+				2948735BD6304BB546911BE6 /* ColorMatcher */,
+				22911F9F0BB91185DCE7BD7A /* ExportEngine */,
+				4D800882272EE746ED49ECA6 /* ImageImport */,
+				8B4FAB711FAEA454B3C3FFAE /* MosaicGenerator */,
+				49423F2B9ED91B6F5A29F54E /* Palette */,
+				5DB5EBEB707C1D34AA88215F /* PartPlanner */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		8B4FAB711FAEA454B3C3FFAE /* MosaicGenerator */ = {
+			isa = PBXGroup;
+			children = (
+				C4340B149D50C0ED9B3F7B5D /* MosaicGeneratorService.swift */,
+			);
+			path = MosaicGenerator;
 			sourceTree = "<group>";
 		};
 		A77F4D92637432841D6500EA /* Models */ = {
@@ -191,6 +271,14 @@
 				652720582467A4724A7E2783 /* NewProjectView.swift */,
 			);
 			path = NewProject;
+			sourceTree = "<group>";
+		};
+		DE8D01E750C2C938FE9F3B54 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				27328A1DFFB85E1B4100A41B /* ProjectStorage.swift */,
+			);
+			path = Storage;
 			sourceTree = "<group>";
 		};
 		DEA30E5B644E6AEB31669A38 /* Shared */ = {
@@ -315,15 +403,23 @@
 				F10BF6B7E25F3BBF843DDB65 /* BrickCanvasApp.swift in Sources */,
 				2B0493190267D2EE1262B432 /* BrickCanvasProject.swift in Sources */,
 				FB7876CA6E36724D7749DC9E /* BrickColor.swift in Sources */,
+				CF1148274402E687F2E96894 /* ColorMatcherService.swift in Sources */,
 				4151412B3B64A914BCDEE59F /* DomainFixtures.swift in Sources */,
 				7C21BA37EF70E2DB46707A33 /* DomainModelError.swift in Sources */,
+				BEB8B00D8FF94B5274B81B6D /* ExportEngine.swift in Sources */,
 				333F0DADFD19AADA5C830913 /* HomeView.swift in Sources */,
+				0E9BD9BFDA7608BC52219787 /* ImageImportService.swift in Sources */,
+				7B8AA63AEE58C5D26A004924 /* MosaicGeneratorService.swift in Sources */,
 				1F65914E2EBC9749C826EBF4 /* MosaicGrid.swift in Sources */,
 				181CE4078562ECCEFB887B55 /* NewProjectView.swift in Sources */,
+				8C46580481DC1CA99E4D5E67 /* PaletteService.swift in Sources */,
+				47C4D0CE1C66607257994692 /* PartPlannerService.swift in Sources */,
 				0A1170E1E8FC38EF56C3107B /* PartRequirement.swift in Sources */,
 				C6A4DA72755863F706FAFF10 /* PlaceholderScreen.swift in Sources */,
 				829DB268A9A5791D55A4F654 /* PreviewProjects.swift in Sources */,
 				B3DB96675BD11DF262A17722 /* ProjectDetailView.swift in Sources */,
+				51B1E14D8FE6ED116FD51DF0 /* ProjectStorage.swift in Sources */,
+				35F8B8623FDF79130906A258 /* ServiceContracts.swift in Sources */,
 				9265200C67750ED66E86AA26 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
