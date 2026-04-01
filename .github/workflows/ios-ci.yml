@@ -23,6 +23,11 @@ jobs:
       - name: Show Xcode version
         run: xcodebuild -version
 
+      - name: Install XcodeGen
+        env:
+          HOMEBREW_NO_AUTO_UPDATE: "1"
+        run: brew install xcodegen
+
       - name: Generate Xcode project
         run: xcodegen generate
 
