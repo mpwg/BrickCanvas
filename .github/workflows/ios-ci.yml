@@ -31,12 +31,66 @@ jobs:
       - name: Generate Xcode project
         run: xcodegen generate
 
+      - name: Show available simulator runtimes
+        run: xcrun simctl list runtimes available
+
+      - name: Create CI simulator
+        id: simulator
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          device_type_id="$(xcrun simctl list devicetypes -j | jq -r '.devicetypes[] | select(.name == "iPhone 17") | .identifier' | head -n1)"
+          if [[ -z "${device_type_id}" ]]; then
+            echo "Kein Device-Typ für iPhone 17 gefunden." >&2
+            exit 1
+          fi
+
+          runtime_id="$(
+            xcrun simctl list runtimes available -j \
+              | jq -r '
+                  if any(.runtimes[]; .platform == "iOS" and .identifier == "com.apple.CoreSimulator.SimRuntime.iOS-26-4") then
+                    "com.apple.CoreSimulator.SimRuntime.iOS-26-4"
+                  elif any(.runtimes[]; .platform == "iOS" and .identifier == "com.apple.CoreSimulator.SimRuntime.iOS-26-2") then
+                    "com.apple.CoreSimulator.SimRuntime.iOS-26-2"
+                  else
+                    empty
+                  end
+                '
+          )"
+
+          if [[ -z "${runtime_id}" ]]; then
+            runtime_id="$(
+              xcrun simctl list runtimes available -j \
+                | jq -r '
+                    .runtimes[]
+                    | select(.platform == "iOS")
+                    | .identifier
+                  ' \
+                | sort -V \
+                | tail -n1
+            )"
+          fi
+
+          if [[ -z "${runtime_id}" ]]; then
+            echo "Kein verfügbares iOS-Simulator-Runtime gefunden." >&2
+            exit 1
+          fi
+
+          simulator_name="BrickCanvas CI"
+          simulator_udid="$(xcrun simctl create "${simulator_name}" "${device_type_id}" "${runtime_id}")"
+          xcrun simctl boot "${simulator_udid}"
+          xcrun simctl bootstatus "${simulator_udid}" -b
+
+          echo "runtime_id=${runtime_id}" >> "${GITHUB_OUTPUT}"
+          echo "simulator_udid=${simulator_udid}" >> "${GITHUB_OUTPUT}"
+
       - name: Build app
         run: >
           xcodebuild
           -project BrickCanvas.xcodeproj
           -scheme BrickCanvas
-          -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.2'
+          -destination "id=${{ steps.simulator.outputs.simulator_udid }}"
           build
 
       - name: Run tests
@@ -44,5 +98,9 @@ jobs:
           xcodebuild
           -project BrickCanvas.xcodeproj
           -scheme BrickCanvas
-          -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.2'
+          -destination "id=${{ steps.simulator.outputs.simulator_udid }}"
           test
+
+      - name: Delete CI simulator
+        if: always()
+        run: xcrun simctl delete "${{ steps.simulator.outputs.simulator_udid }}"
