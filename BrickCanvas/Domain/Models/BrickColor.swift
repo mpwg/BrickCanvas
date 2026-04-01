@@ -6,12 +6,14 @@ struct BrickColor: Identifiable, Codable, Hashable, Sendable {
     let name: String
     let rgb: RGBColor
     let isActive: Bool
+    let notes: String?
 
-    init(id: String, name: String, rgb: RGBColor, isActive: Bool = true) {
+    init(id: String, name: String, rgb: RGBColor, isActive: Bool = true, notes: String? = nil) {
         self.id = id
         self.name = name
         self.rgb = rgb
         self.isActive = isActive
+        self.notes = notes
     }
 }
 
@@ -30,4 +32,3 @@ struct RGBColor: Codable, Hashable, Sendable {
         String(format: "#%02X%02X%02X", red, green, blue)
     }
 }
-

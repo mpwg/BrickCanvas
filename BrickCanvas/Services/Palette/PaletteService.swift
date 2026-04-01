@@ -1,10 +1,6 @@
 import Foundation
 
-struct PaletteDescriptor: Identifiable, Codable, Hashable, Sendable {
-    let id: String
-    let name: String
-    let colors: [BrickColor]
-}
+typealias PaletteDescriptor = BrickPalette
 
 struct PaletteQuery: Hashable, Sendable {
     let paletteID: String
@@ -21,3 +17,41 @@ protocol PaletteService: Sendable {
     func palette(for query: PaletteQuery) async throws -> PaletteDescriptor
 }
 
+enum PaletteCatalogDecoder {
+    static func decode(data: Data) throws -> PaletteCatalog {
+        let decoder = JSONDecoder()
+        return try decoder.decode(PaletteCatalog.self, from: data).validated()
+    }
+}
+
+struct BundledPaletteService: PaletteService {
+    private let catalog: PaletteCatalog
+
+    init(bundle: Bundle = .main, resourceName: String = "mvp-palettes-v1") throws {
+        let url = bundle.url(forResource: resourceName, withExtension: "json", subdirectory: "Palette")
+            ?? bundle.url(forResource: resourceName, withExtension: "json")
+
+        guard let url else {
+            throw ServiceError.unavailable("Palette-Ressource \(resourceName).json wurde nicht gefunden.")
+        }
+
+        let data = try Data(contentsOf: url)
+        self.catalog = try PaletteCatalogDecoder.decode(data: data)
+    }
+
+    init(catalog: PaletteCatalog) {
+        self.catalog = catalog
+    }
+
+    func availablePalettes() async throws -> [PaletteDescriptor] {
+        catalog.palettes
+    }
+
+    func palette(for query: PaletteQuery) async throws -> PaletteDescriptor {
+        guard let palette = catalog.palettes.first(where: { $0.id == query.paletteID }) else {
+            throw ServiceError.unavailable("Palette \(query.paletteID) ist nicht verfügbar.")
+        }
+
+        return palette.filtered(includeInactiveColors: query.includeInactiveColors)
+    }
+}

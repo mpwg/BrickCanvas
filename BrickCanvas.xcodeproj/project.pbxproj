@@ -16,6 +16,7 @@
 		333F0DADFD19AADA5C830913 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE556B3C800E41ED603BF256 /* HomeView.swift */; };
 		35F8B8623FDF79130906A258 /* ServiceContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F3270DD18B0CB0BA613F68 /* ServiceContracts.swift */; };
 		38C2095418EC54ABE5B86CD6 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807F1DBE3FA1D492D1160B2D /* AppView.swift */; };
+		394A609B3E31AAA1B78E43D0 /* mvp-palettes-v1.json in Resources */ = {isa = PBXBuildFile; fileRef = C9C8FFDBD0B342CCBDCB6712 /* mvp-palettes-v1.json */; };
 		4151412B3B64A914BCDEE59F /* DomainFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5208914C66036D724C51E14 /* DomainFixtures.swift */; };
 		47C4D0CE1C66607257994692 /* PartPlannerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4E8FA216D4D104518BB785 /* PartPlannerService.swift */; };
 		51B1E14D8FE6ED116FD51DF0 /* ProjectStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27328A1DFFB85E1B4100A41B /* ProjectStorage.swift */; };
@@ -27,8 +28,10 @@
 		9265200C67750ED66E86AA26 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AE3B34F7F68EA6C8A0343 /* SettingsView.swift */; };
 		B3DB96675BD11DF262A17722 /* ProjectDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE3227DE6F318912A4AF67D /* ProjectDetailView.swift */; };
 		BEB8B00D8FF94B5274B81B6D /* ExportEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B438B6CF9B3540D037A8458 /* ExportEngine.swift */; };
+		C2069591EF909C1AA995F9FF /* BrickPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD949CBAEF2C82B40D19891A /* BrickPalette.swift */; };
 		C6A4DA72755863F706FAFF10 /* PlaceholderScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A14474999418FE4BEA892E /* PlaceholderScreen.swift */; };
 		CF1148274402E687F2E96894 /* ColorMatcherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01789753A54D8B48DE7835D4 /* ColorMatcherService.swift */; };
+		CF38E8A4CC13CA635D788F19 /* PaletteServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9629E4C96EFFCF190CA44D /* PaletteServiceTests.swift */; };
 		E220D91BF91141428E6A48E2 /* AppTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = A787C4D9FE97A055723F44F7 /* AppTab.swift */; };
 		F10BF6B7E25F3BBF843DDB65 /* BrickCanvasApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C59FE7958A9652A98453F0E /* BrickCanvasApp.swift */; };
 		FB7876CA6E36724D7749DC9E /* BrickColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622642926E0A370DF5C63957 /* BrickColor.swift */; };
@@ -62,12 +65,15 @@
 		A0F6FFA2D27797E0A9B78A8C /* MosaicGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MosaicGrid.swift; sourceTree = "<group>"; };
 		A72524E73BC66D1359123859 /* DomainModelError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainModelError.swift; sourceTree = "<group>"; };
 		A787C4D9FE97A055723F44F7 /* AppTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTab.swift; sourceTree = "<group>"; };
+		AC9629E4C96EFFCF190CA44D /* PaletteServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteServiceTests.swift; sourceTree = "<group>"; };
 		AF4E8FA216D4D104518BB785 /* PartPlannerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartPlannerService.swift; sourceTree = "<group>"; };
 		B3182DF5BF077E08691A044C /* BrickCanvas.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = BrickCanvas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA8AE3B34F7F68EA6C8A0343 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		BE556B3C800E41ED603BF256 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		C0F3270DD18B0CB0BA613F68 /* ServiceContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceContracts.swift; sourceTree = "<group>"; };
 		C4340B149D50C0ED9B3F7B5D /* MosaicGeneratorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MosaicGeneratorService.swift; sourceTree = "<group>"; };
+		C9C8FFDBD0B342CCBDCB6712 /* mvp-palettes-v1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "mvp-palettes-v1.json"; sourceTree = "<group>"; };
+		CD949CBAEF2C82B40D19891A /* BrickPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrickPalette.swift; sourceTree = "<group>"; };
 		D49936810BD0B65DDAE074A9 /* BrickCanvasTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = BrickCanvasTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5208914C66036D724C51E14 /* DomainFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainFixtures.swift; sourceTree = "<group>"; };
 		D88479A229C7CBC68EDC6376 /* ImageImportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageImportService.swift; sourceTree = "<group>"; };
@@ -116,11 +122,20 @@
 			);
 			sourceTree = "<group>";
 		};
+		3C3667CBB40C91CBC4C4FD3C /* Palette */ = {
+			isa = PBXGroup;
+			children = (
+				AC9629E4C96EFFCF190CA44D /* PaletteServiceTests.swift */,
+			);
+			path = Palette;
+			sourceTree = "<group>";
+		};
 		3D7816E8F4E24979B7F0C4D3 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
 				0225A16D9F3273528292ACAA /* Fixtures */,
 				A77F4D92637432841D6500EA /* Models */,
+				7B7865A7AEF9406D7978D082 /* Palette */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -151,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				4D0A43D9C2331A94A30440AA /* Assets.xcassets */,
+				7F917011511B4BC38B38A57D /* Palette */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -183,6 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				BF82CFA3EA8951786D4F75D6 /* Domain */,
+				3C3667CBB40C91CBC4C4FD3C /* Palette */,
 			);
 			path = BrickCanvasTests;
 			sourceTree = "<group>";
@@ -194,6 +211,14 @@
 				D49936810BD0B65DDAE074A9 /* BrickCanvasTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		7B7865A7AEF9406D7978D082 /* Palette */ = {
+			isa = PBXGroup;
+			children = (
+				CD949CBAEF2C82B40D19891A /* BrickPalette.swift */,
+			);
+			path = Palette;
 			sourceTree = "<group>";
 		};
 		7F0ED7121FECE5998CBF414F /* Services */ = {
@@ -208,6 +233,14 @@
 				5DB5EBEB707C1D34AA88215F /* PartPlanner */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		7F917011511B4BC38B38A57D /* Palette */ = {
+			isa = PBXGroup;
+			children = (
+				C9C8FFDBD0B342CCBDCB6712 /* mvp-palettes-v1.json */,
+			);
+			path = Palette;
 			sourceTree = "<group>";
 		};
 		8B4FAB711FAEA454B3C3FFAE /* MosaicGenerator */ = {
@@ -388,6 +421,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				10E328BFA67381E82DA0EB31 /* Assets.xcassets in Resources */,
+				394A609B3E31AAA1B78E43D0 /* mvp-palettes-v1.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,6 +437,7 @@
 				F10BF6B7E25F3BBF843DDB65 /* BrickCanvasApp.swift in Sources */,
 				2B0493190267D2EE1262B432 /* BrickCanvasProject.swift in Sources */,
 				FB7876CA6E36724D7749DC9E /* BrickColor.swift in Sources */,
+				C2069591EF909C1AA995F9FF /* BrickPalette.swift in Sources */,
 				CF1148274402E687F2E96894 /* ColorMatcherService.swift in Sources */,
 				4151412B3B64A914BCDEE59F /* DomainFixtures.swift in Sources */,
 				7C21BA37EF70E2DB46707A33 /* DomainModelError.swift in Sources */,
@@ -429,6 +464,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				808FEE2CBD2D1F7799BA8CEC /* DomainModelTests.swift in Sources */,
+				CF38E8A4CC13CA635D788F19 /* PaletteServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
