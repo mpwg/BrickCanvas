@@ -1,0 +1,51 @@
+name: iOS CI
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    name: Build and test on macOS 26 / Xcode 26
+    runs-on: macos-26
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Show Xcode version
+        run: xcodebuild -version
+
+      - name: Install XcodeGen
+        env:
+          HOMEBREW_NO_AUTO_UPDATE: "1"
+        run: brew install xcodegen
+
+      - name: Generate Xcode project
+        run: xcodegen generate
+
+      - name: Show available simulator runtimes
+        run: xcrun simctl list runtimes available
+
+      - name: Show available simulators
+        run: xcrun simctl list devices available
+
+      - name: Build app
+        run: >
+          xcodebuild
+          -project BrickCanvas.xcodeproj
+          -scheme BrickCanvas
+          -destination 'generic/platform=iOS Simulator'
+          build
+
+      - name: Run tests
+        run: >
+          xcodebuild
+          -project BrickCanvas.xcodeproj
+          -scheme BrickCanvas
+          -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.2'
+          test

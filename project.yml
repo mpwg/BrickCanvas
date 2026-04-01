@@ -5,12 +5,12 @@ settings:
   base:
     PRODUCT_NAME: BrickCanvas
     SWIFT_VERSION: 6.0
-    IPHONEOS_DEPLOYMENT_TARGET: 26.4
+    IPHONEOS_DEPLOYMENT_TARGET: 26.2
 targets:
   BrickCanvas:
     type: application
     platform: iOS
-    deploymentTarget: "26.4"
+    deploymentTarget: "26.2"
     sources:
       - path: BrickCanvas
     resources:
@@ -34,7 +34,7 @@ targets:
   BrickCanvasTests:
     type: bundle.unit-test
     platform: iOS
-    deploymentTarget: "26.4"
+    deploymentTarget: "26.2"
     sources:
       - path: BrickCanvasTests
     dependencies:
