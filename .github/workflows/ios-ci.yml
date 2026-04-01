@@ -90,7 +90,7 @@ jobs:
           xcodebuild
           -project BrickCanvas.xcodeproj
           -scheme BrickCanvas
-          -destination "id=${{ steps.simulator.outputs.simulator_udid }}"
+          -destination 'generic/platform=iOS Simulator'
           build
 
       - name: Run tests
