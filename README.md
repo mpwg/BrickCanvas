@@ -237,7 +237,7 @@ xcodegen generate
 Build from the command line:
 
 ```bash
-xcodebuild -project BrickCanvas.xcodeproj -scheme BrickCanvas -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.4' build
+xcodebuild -project BrickCanvas.xcodeproj -scheme BrickCanvas -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.2' build
 ```
 
 ## Current Palette Dataset
