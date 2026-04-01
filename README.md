@@ -215,6 +215,31 @@ For a first version, an Apple-platform-first native app makes sense.
 - `ExportEngine`
 - `ProjectStorage`
 
+## Current App Scaffold
+
+The repository now contains the initial iOS app skeleton for the MVP:
+
+- SwiftUI app entry point
+- tab-based root navigation
+- placeholder screens for Home, New Project, Projects, and Settings
+- XcodeGen-based project definition in `project.yml`
+
+This scaffold is intentionally limited to app structure and navigation. Domain models, image processing, and color matching are introduced in later PR slices.
+
+## Local Development
+
+Generate the Xcode project:
+
+```bash
+xcodegen generate
+```
+
+Build from the command line:
+
+```bash
+xcodebuild -project BrickCanvas.xcodeproj -scheme BrickCanvas -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.4' build
+```
+
 ## Key Challenges
 
 ### Visual quality

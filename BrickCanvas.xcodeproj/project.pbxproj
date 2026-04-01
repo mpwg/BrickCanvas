@@ -1,0 +1,415 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		10E328BFA67381E82DA0EB31 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D0A43D9C2331A94A30440AA /* Assets.xcassets */; };
+		181CE4078562ECCEFB887B55 /* NewProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652720582467A4724A7E2783 /* NewProjectView.swift */; };
+		333F0DADFD19AADA5C830913 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE556B3C800E41ED603BF256 /* HomeView.swift */; };
+		38C2095418EC54ABE5B86CD6 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807F1DBE3FA1D492D1160B2D /* AppView.swift */; };
+		9265200C67750ED66E86AA26 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AE3B34F7F68EA6C8A0343 /* SettingsView.swift */; };
+		B3DB96675BD11DF262A17722 /* ProjectDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE3227DE6F318912A4AF67D /* ProjectDetailView.swift */; };
+		C6A4DA72755863F706FAFF10 /* PlaceholderScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A14474999418FE4BEA892E /* PlaceholderScreen.swift */; };
+		E220D91BF91141428E6A48E2 /* AppTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = A787C4D9FE97A055723F44F7 /* AppTab.swift */; };
+		F10BF6B7E25F3BBF843DDB65 /* BrickCanvasApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C59FE7958A9652A98453F0E /* BrickCanvasApp.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1C59FE7958A9652A98453F0E /* BrickCanvasApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrickCanvasApp.swift; sourceTree = "<group>"; };
+		3EE3227DE6F318912A4AF67D /* ProjectDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailView.swift; sourceTree = "<group>"; };
+		4D0A43D9C2331A94A30440AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		52A14474999418FE4BEA892E /* PlaceholderScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderScreen.swift; sourceTree = "<group>"; };
+		652720582467A4724A7E2783 /* NewProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectView.swift; sourceTree = "<group>"; };
+		807F1DBE3FA1D492D1160B2D /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
+		A787C4D9FE97A055723F44F7 /* AppTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTab.swift; sourceTree = "<group>"; };
+		B3182DF5BF077E08691A044C /* BrickCanvas.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = BrickCanvas.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA8AE3B34F7F68EA6C8A0343 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		BE556B3C800E41ED603BF256 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		205BCF91122F4800DFBB1CD5 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				BA8AE3B34F7F68EA6C8A0343 /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		2FFC0C2247188AF5D155CFB8 = {
+			isa = PBXGroup;
+			children = (
+				44CB1ABE8E2CD05497FDDF8C /* BrickCanvas */,
+				6DEB47C63243769B90893DCA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		44CB1ABE8E2CD05497FDDF8C /* BrickCanvas */ = {
+			isa = PBXGroup;
+			children = (
+				FE3AF81176EC3ABB05F684F1 /* App */,
+				B9CED9AE854441CDC2004C6E /* Features */,
+				4C393C2164A28798FA49B77C /* Resources */,
+				DEA30E5B644E6AEB31669A38 /* Shared */,
+			);
+			path = BrickCanvas;
+			sourceTree = "<group>";
+		};
+		4C393C2164A28798FA49B77C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4D0A43D9C2331A94A30440AA /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		6DEB47C63243769B90893DCA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B3182DF5BF077E08691A044C /* BrickCanvas.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A993F578D57E54F831F07585 /* ProjectDetail */ = {
+			isa = PBXGroup;
+			children = (
+				3EE3227DE6F318912A4AF67D /* ProjectDetailView.swift */,
+			);
+			path = ProjectDetail;
+			sourceTree = "<group>";
+		};
+		B9CED9AE854441CDC2004C6E /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				C09A96F2F18453F34774E9D2 /* Home */,
+				DC6358FAFEC9B7ECFEAD6870 /* NewProject */,
+				A993F578D57E54F831F07585 /* ProjectDetail */,
+				205BCF91122F4800DFBB1CD5 /* Settings */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		C09A96F2F18453F34774E9D2 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				BE556B3C800E41ED603BF256 /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		DC6358FAFEC9B7ECFEAD6870 /* NewProject */ = {
+			isa = PBXGroup;
+			children = (
+				652720582467A4724A7E2783 /* NewProjectView.swift */,
+			);
+			path = NewProject;
+			sourceTree = "<group>";
+		};
+		DEA30E5B644E6AEB31669A38 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				E3B5C147524C1656424BE91D /* UI */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		E3B5C147524C1656424BE91D /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				52A14474999418FE4BEA892E /* PlaceholderScreen.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		FE3AF81176EC3ABB05F684F1 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				A787C4D9FE97A055723F44F7 /* AppTab.swift */,
+				807F1DBE3FA1D492D1160B2D /* AppView.swift */,
+				1C59FE7958A9652A98453F0E /* BrickCanvasApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A035072FED6DF5A6A6168F91 /* BrickCanvas */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B827192C7EEEA57A6FD10134 /* Build configuration list for PBXNativeTarget "BrickCanvas" */;
+			buildPhases = (
+				29641B56204C64BC74794FC9 /* Sources */,
+				7C3EA916E0D2BE49AFFCED46 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BrickCanvas;
+			packageProductDependencies = (
+			);
+			productName = BrickCanvas;
+			productReference = B3182DF5BF077E08691A044C /* BrickCanvas.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EDD6B1B01E6ADBB9EC5D198C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					A035072FED6DF5A6A6168F91 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 8ED7BDB9DD53B2BF637BD2EF /* Build configuration list for PBXProject "BrickCanvas" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 2FFC0C2247188AF5D155CFB8;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 6DEB47C63243769B90893DCA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A035072FED6DF5A6A6168F91 /* BrickCanvas */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7C3EA916E0D2BE49AFFCED46 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				10E328BFA67381E82DA0EB31 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		29641B56204C64BC74794FC9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E220D91BF91141428E6A48E2 /* AppTab.swift in Sources */,
+				38C2095418EC54ABE5B86CD6 /* AppView.swift in Sources */,
+				F10BF6B7E25F3BBF843DDB65 /* BrickCanvasApp.swift in Sources */,
+				333F0DADFD19AADA5C830913 /* HomeView.swift in Sources */,
+				181CE4078562ECCEFB887B55 /* NewProjectView.swift in Sources */,
+				C6A4DA72755863F706FAFF10 /* PlaceholderScreen.swift in Sources */,
+				B3DB96675BD11DF262A17722 /* ProjectDetailView.swift in Sources */,
+				9265200C67750ED66E86AA26 /* SettingsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1ABF162DBF92313AEDBE5A9C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = BrickCanvas;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDefault;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mpwg.BrickCanvas;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		3BBCB5B86BECEA5F3BAF2D90 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = BrickCanvas;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		548CF2F24DA31C77B503BC50 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = BrickCanvas;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDefault;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mpwg.BrickCanvas;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DB155D38049605F89829B67E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = BrickCanvas;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8ED7BDB9DD53B2BF637BD2EF /* Build configuration list for PBXProject "BrickCanvas" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB155D38049605F89829B67E /* Debug */,
+				3BBCB5B86BECEA5F3BAF2D90 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		B827192C7EEEA57A6FD10134 /* Build configuration list for PBXNativeTarget "BrickCanvas" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				548CF2F24DA31C77B503BC50 /* Debug */,
+				1ABF162DBF92313AEDBE5A9C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EDD6B1B01E6ADBB9EC5D198C /* Project object */;
+}
