@@ -36,7 +36,7 @@ jobs:
           xcodebuild
           -project BrickCanvas.xcodeproj
           -scheme BrickCanvas
-          -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.4'
+          -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.2'
           build
 
       - name: Run tests
@@ -44,5 +44,5 @@ jobs:
           xcodebuild
           -project BrickCanvas.xcodeproj
           -scheme BrickCanvas
-          -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.4'
+          -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.2'
           test
