@@ -25,7 +25,6 @@ Bezieht sich auf:
 - `#1`
 
 Ziel-Pfade:
-- `BrickCanvas.xcodeproj/`
 - `BrickCanvas/`
 - `BrickCanvas/App/`
 - `BrickCanvas/Features/Home/`
@@ -33,6 +32,7 @@ Ziel-Pfade:
 - `BrickCanvas/Features/ProjectDetail/`
 - `BrickCanvas/Features/Settings/`
 - `Assets.xcassets/`
+- `project.yml`
 - `README.md`
 
 Nicht in dieser PR:

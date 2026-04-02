@@ -6,6 +6,7 @@
 xcuserdata/
 **/xcuserdata/
 *.xcuserstate
+*.xcodeproj/
 
 ## Swift / Xcode build artefacts
 .build/
