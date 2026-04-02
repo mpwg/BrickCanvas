@@ -12,11 +12,10 @@ struct NewProjectView: View {
     @State private var cropRegion: CropRegion?
     @State private var cropPreset: CropAspectPreset = .square
     @State private var mosaicSize: Double = 48
-    @State private var errorMessage: String?
-    @State private var isImporting = false
+    @State private var importState: NewProjectImportState = .idle
+    @State private var importTask: Task<Void, Never>?
 
     private let imageImportService = DefaultImageImportService()
-    private let imageCropService = DefaultImageCropService()
 
     var body: some View {
         GeometryReader { proxy in
@@ -33,13 +32,13 @@ struct NewProjectView: View {
                     importCard
                         .frame(maxWidth: pageWidth, alignment: .leading)
 
-                    if let errorMessage {
-                        errorCard(message: errorMessage)
+                    if case .importing(let step) = importState {
+                        loadingCard(for: step)
                             .frame(maxWidth: pageWidth, alignment: .leading)
                     }
 
-                    if isImporting {
-                        loadingCard
+                    if case .failed(let presentation) = importState {
+                        errorCard(presentation: presentation)
                             .frame(maxWidth: pageWidth, alignment: .leading)
                     }
 
@@ -53,7 +52,7 @@ struct NewProjectView: View {
 
                         mosaicConfigurationCard(previewImage: previewImage)
                             .frame(maxWidth: pageWidth, alignment: .leading)
-                    } else if isImporting == false {
+                    } else if importState.isRunning == false {
                         emptyStateCard
                             .frame(maxWidth: pageWidth, alignment: .leading)
                     }
@@ -67,9 +66,10 @@ struct NewProjectView: View {
         .navigationTitle("Neues Projekt")
         .navigationBarTitleDisplayMode(.inline)
         .onChange(of: selectedPhotoItem) { _, newItem in
-            Task {
-                await importPhoto(from: newItem)
-            }
+            startImport(from: newItem)
+        }
+        .onDisappear {
+            cancelImport()
         }
     }
 
@@ -106,17 +106,30 @@ struct NewProjectView: View {
                     .padding(.vertical, 18)
             }
             .buttonStyle(.borderedProminent)
-            .disabled(isImporting)
+            .disabled(importState.isRunning)
         }
         .cardStyle()
     }
 
-    private var loadingCard: some View {
-        HStack(spacing: 12) {
-            ProgressView()
-            Text("Bild wird importiert und ausgerichtet …")
-                .foregroundStyle(.secondary)
-            Spacer(minLength: 0)
+    private func loadingCard(for step: ImportProgressStep) -> some View {
+        VStack(alignment: .leading, spacing: 14) {
+            HStack(spacing: 12) {
+                ProgressView()
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(step.title)
+                        .font(.headline)
+
+                    Text(step.message)
+                        .foregroundStyle(.secondary)
+                }
+
+                Spacer(minLength: 0)
+            }
+
+            Button("Import abbrechen") {
+                cancelImport()
+            }
+            .buttonStyle(.bordered)
         }
         .cardStyle()
     }
@@ -139,13 +152,31 @@ struct NewProjectView: View {
         .cardStyle(tint: .blue.opacity(0.08))
     }
 
-    private func errorCard(message: String) -> some View {
-        ContentUnavailableView(
-            "Import fehlgeschlagen",
-            systemImage: "exclamationmark.triangle",
-            description: Text(message)
-        )
-        .frame(maxWidth: .infinity, alignment: .leading)
+    private func errorCard(presentation: ImportErrorPresentation) -> some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Label(presentation.title, systemImage: "exclamationmark.triangle")
+                .font(.title3.weight(.semibold))
+
+            Text(presentation.message)
+                .foregroundStyle(.secondary)
+
+            Text(presentation.recoverySuggestion)
+                .font(.footnote)
+                .foregroundStyle(.secondary)
+
+            HStack(spacing: 12) {
+                Button("Erneut versuchen") {
+                    startImport(from: selectedPhotoItem)
+                }
+                .buttonStyle(.borderedProminent)
+                .disabled(selectedPhotoItem == nil)
+
+                Button("Fehler ausblenden") {
+                    importState = .idle
+                }
+                .buttonStyle(.bordered)
+            }
+        }
         .cardStyle()
     }
 
@@ -319,19 +350,34 @@ struct NewProjectView: View {
         }
     }
 
-    @MainActor
-    private func importPhoto(from item: PhotosPickerItem?) async {
+    private func startImport(from item: PhotosPickerItem?) {
+        importTask?.cancel()
+
         guard let item else {
+            importState = .idle
             return
         }
 
-        isImporting = true
-        errorMessage = nil
+        importTask = Task {
+            await importPhoto(from: item)
+        }
+    }
+
+    private func cancelImport() {
+        importTask?.cancel()
+        importTask = nil
+        importState = .idle
+    }
+
+    @MainActor
+    private func importPhoto(from item: PhotosPickerItem) async {
+        importState = .importing(.requestingImageData)
 
         do {
             guard let data = try await item.loadTransferable(type: Data.self) else {
                 throw ServiceError.unavailable("Für das ausgewählte Foto konnten keine Bilddaten geladen werden.")
             }
+            try Task.checkCancellation()
 
             let supportedType = item.supportedContentTypes.first
             let filenameExtension = supportedType?.preferredFilenameExtension ?? "jpg"
@@ -345,21 +391,24 @@ struct NewProjectView: View {
                     mimeType: supportedType?.preferredMIMEType ?? "image/jpeg"
                 )
             )
+            importState = .importing(.normalizingImage)
             let result = try await imageImportService.importImage(request)
+            try Task.checkCancellation()
 
+            importState = .importing(.preparingEditor)
             importedImage = result.image
             previewImage = try makePreviewImage(from: result.image.asset.data)
             cropRegion = nil
             cropPreset = .square
             mosaicSize = 48
+            importState = .idle
+        } catch is CancellationError {
+            importState = .idle
         } catch {
-            importedImage = nil
-            previewImage = nil
-            cropRegion = nil
-            errorMessage = error.localizedDescription
+            importState = .failed(ImportErrorPresentation.from(error))
         }
 
-        isImporting = false
+        importTask = nil
     }
 
     private func detailText(for image: ImportedImage) -> String {
