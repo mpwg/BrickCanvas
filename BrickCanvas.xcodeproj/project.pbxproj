@@ -31,6 +31,7 @@
 		829DB268A9A5791D55A4F654 /* PreviewProjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6002C4F397D13D4E8D8BF9 /* PreviewProjects.swift */; };
 		8C46580481DC1CA99E4D5E67 /* PaletteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02B9DF8E2551EFF8678C4D5 /* PaletteService.swift */; };
 		9265200C67750ED66E86AA26 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AE3B34F7F68EA6C8A0343 /* SettingsView.swift */; };
+		A8F638512D3DDF9BEC852C6B /* PerceptualColorMatcherServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0673263446F0740218BB895F /* PerceptualColorMatcherServiceTests.swift */; };
 		B3DB96675BD11DF262A17722 /* ProjectDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE3227DE6F318912A4AF67D /* ProjectDetailView.swift */; };
 		BEB8B00D8FF94B5274B81B6D /* ExportEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B438B6CF9B3540D037A8458 /* ExportEngine.swift */; };
 		C2069591EF909C1AA995F9FF /* BrickPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD949CBAEF2C82B40D19891A /* BrickPalette.swift */; };
@@ -57,6 +58,7 @@
 		01789753A54D8B48DE7835D4 /* ColorMatcherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorMatcherService.swift; sourceTree = "<group>"; };
 		018174ECD6CE96BB27C3C982 /* DomainModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainModelTests.swift; sourceTree = "<group>"; };
 		0322DBAB44B7480978781927 /* PerceptualColorDistanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerceptualColorDistanceTests.swift; sourceTree = "<group>"; };
+		0673263446F0740218BB895F /* PerceptualColorMatcherServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerceptualColorMatcherServiceTests.swift; sourceTree = "<group>"; };
 		0B438B6CF9B3540D037A8458 /* ExportEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportEngine.swift; sourceTree = "<group>"; };
 		0C750B13372C1E6C2AD86BF4 /* BrickCanvasProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrickCanvasProject.swift; sourceTree = "<group>"; };
 		1C59FE7958A9652A98453F0E /* BrickCanvasApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrickCanvasApp.swift; sourceTree = "<group>"; };
@@ -366,6 +368,7 @@
 			isa = PBXGroup;
 			children = (
 				0322DBAB44B7480978781927 /* PerceptualColorDistanceTests.swift */,
+				0673263446F0740218BB895F /* PerceptualColorMatcherServiceTests.swift */,
 			);
 			path = ColorMatcher;
 			sourceTree = "<group>";
@@ -523,6 +526,7 @@
 				808FEE2CBD2D1F7799BA8CEC /* DomainModelTests.swift in Sources */,
 				CF38E8A4CC13CA635D788F19 /* PaletteServiceTests.swift in Sources */,
 				20C20A2CC2637713DC5154E0 /* PerceptualColorDistanceTests.swift in Sources */,
+				A8F638512D3DDF9BEC852C6B /* PerceptualColorMatcherServiceTests.swift in Sources */,
 				499AFC7E6FCE1B4631ED9523 /* PipelineFixtureCatalogTests.swift in Sources */,
 				33DBE881BAECAFB098DB5392 /* PipelineFixtureSupport.swift in Sources */,
 			);
