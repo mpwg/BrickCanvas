@@ -1,0 +1,65 @@
+{
+  "version": "2026.04-pipeline-fixtures-v1",
+  "fixtures": [
+    {
+      "id": "warm-sunrise-4x4",
+      "name": "Warm Sunrise 4x4",
+      "notes": "Referenzfall fuer Preview-, Teilelisten- und Build-Plan-Validierung auf Basis des gemeinsamen Domain-Fixtures.",
+      "paletteID": "mvp-default",
+      "mosaicSize": { "width": 4, "height": 4 },
+      "cropRegion": { "originX": 0.0, "originY": 0.0, "width": 1.0, "height": 1.0 },
+      "sourcePixels": [
+        ["#C91A09", "#C91A09", "#0055BF", "#0055BF"],
+        ["#C91A09", "#F2CD37", "#F2CD37", "#0055BF"],
+        ["#FFFFFF", "#F2CD37", "#F2CD37", "#FFFFFF"],
+        ["#FFFFFF", "#FFFFFF", "#0055BF", "#0055BF"]
+      ],
+      "expectedColorRows": [
+        ["bright-red", "bright-red", "bright-blue", "bright-blue"],
+        ["bright-red", "bright-yellow", "bright-yellow", "bright-blue"],
+        ["white", "bright-yellow", "bright-yellow", "white"],
+        ["white", "white", "bright-blue", "bright-blue"]
+      ],
+      "expectedPartRequirements": [
+        { "part": "round_plate_1x1", "colorID": "bright-red", "quantity": 4 },
+        { "part": "round_plate_1x1", "colorID": "bright-blue", "quantity": 5 },
+        { "part": "round_plate_1x1", "colorID": "bright-yellow", "quantity": 4 },
+        { "part": "round_plate_1x1", "colorID": "white", "quantity": 3 }
+      ],
+      "expectedBuildPlanRows": [
+        ["bright-red", "bright-red", "bright-blue", "bright-blue"],
+        ["bright-red", "bright-yellow", "bright-yellow", "bright-blue"],
+        ["white", "bright-yellow", "bright-yellow", "white"],
+        ["white", "white", "bright-blue", "bright-blue"]
+      ]
+    },
+    {
+      "id": "neutral-spectrum-3x2",
+      "name": "Neutral Spectrum 3x2",
+      "notes": "Kleiner QA-Fall mit neutralen und warmen Tönen fuer deterministische Mini-Checks.",
+      "paletteID": "mvp-default",
+      "mosaicSize": { "width": 3, "height": 2 },
+      "cropRegion": { "originX": 0.0, "originY": 0.0, "width": 1.0, "height": 1.0 },
+      "sourcePixels": [
+        ["#1B2A34", "#635F62", "#A0A5A9"],
+        ["#E4CD9E", "#FE8A18", "#FFFFFF"]
+      ],
+      "expectedColorRows": [
+        ["black", "dark-bluish-gray", "light-bluish-gray"],
+        ["tan", "bright-orange", "white"]
+      ],
+      "expectedPartRequirements": [
+        { "part": "round_plate_1x1", "colorID": "black", "quantity": 1 },
+        { "part": "round_plate_1x1", "colorID": "dark-bluish-gray", "quantity": 1 },
+        { "part": "round_plate_1x1", "colorID": "light-bluish-gray", "quantity": 1 },
+        { "part": "round_plate_1x1", "colorID": "tan", "quantity": 1 },
+        { "part": "round_plate_1x1", "colorID": "bright-orange", "quantity": 1 },
+        { "part": "round_plate_1x1", "colorID": "white", "quantity": 1 }
+      ],
+      "expectedBuildPlanRows": [
+        ["black", "dark-bluish-gray", "light-bluish-gray"],
+        ["tan", "bright-orange", "white"]
+      ]
+    }
+  ]
+}

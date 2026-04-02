@@ -14,12 +14,15 @@
 		1F65914E2EBC9749C826EBF4 /* MosaicGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F6FFA2D27797E0A9B78A8C /* MosaicGrid.swift */; };
 		2B0493190267D2EE1262B432 /* BrickCanvasProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C750B13372C1E6C2AD86BF4 /* BrickCanvasProject.swift */; };
 		333F0DADFD19AADA5C830913 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE556B3C800E41ED603BF256 /* HomeView.swift */; };
+		33DBE881BAECAFB098DB5392 /* PipelineFixtureSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF473AF05CDD54493DABB32B /* PipelineFixtureSupport.swift */; };
 		35F8B8623FDF79130906A258 /* ServiceContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F3270DD18B0CB0BA613F68 /* ServiceContracts.swift */; };
 		38C2095418EC54ABE5B86CD6 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807F1DBE3FA1D492D1160B2D /* AppView.swift */; };
 		394A609B3E31AAA1B78E43D0 /* mvp-palettes-v1.json in Resources */ = {isa = PBXBuildFile; fileRef = C9C8FFDBD0B342CCBDCB6712 /* mvp-palettes-v1.json */; };
 		4151412B3B64A914BCDEE59F /* DomainFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5208914C66036D724C51E14 /* DomainFixtures.swift */; };
 		47C4D0CE1C66607257994692 /* PartPlannerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4E8FA216D4D104518BB785 /* PartPlannerService.swift */; };
+		499AFC7E6FCE1B4631ED9523 /* PipelineFixtureCatalogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD928D35790A12B85CF48D42 /* PipelineFixtureCatalogTests.swift */; };
 		51B1E14D8FE6ED116FD51DF0 /* ProjectStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27328A1DFFB85E1B4100A41B /* ProjectStorage.swift */; };
+		6D379CEC9512428B7A42FCA7 /* pipeline-fixtures-v1.json in Resources */ = {isa = PBXBuildFile; fileRef = 8F0A3757875B5948ED076FCC /* pipeline-fixtures-v1.json */; };
 		7B8AA63AEE58C5D26A004924 /* MosaicGeneratorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4340B149D50C0ED9B3F7B5D /* MosaicGeneratorService.swift */; };
 		7C21BA37EF70E2DB46707A33 /* DomainModelError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72524E73BC66D1359123859 /* DomainModelError.swift */; };
 		808FEE2CBD2D1F7799BA8CEC /* DomainModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018174ECD6CE96BB27C3C982 /* DomainModelTests.swift */; };
@@ -61,11 +64,13 @@
 		622642926E0A370DF5C63957 /* BrickColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrickColor.swift; sourceTree = "<group>"; };
 		652720582467A4724A7E2783 /* NewProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectView.swift; sourceTree = "<group>"; };
 		807F1DBE3FA1D492D1160B2D /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
+		8F0A3757875B5948ED076FCC /* pipeline-fixtures-v1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "pipeline-fixtures-v1.json"; sourceTree = "<group>"; };
 		A02B9DF8E2551EFF8678C4D5 /* PaletteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteService.swift; sourceTree = "<group>"; };
 		A0F6FFA2D27797E0A9B78A8C /* MosaicGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MosaicGrid.swift; sourceTree = "<group>"; };
 		A72524E73BC66D1359123859 /* DomainModelError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainModelError.swift; sourceTree = "<group>"; };
 		A787C4D9FE97A055723F44F7 /* AppTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTab.swift; sourceTree = "<group>"; };
 		AC9629E4C96EFFCF190CA44D /* PaletteServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteServiceTests.swift; sourceTree = "<group>"; };
+		AD928D35790A12B85CF48D42 /* PipelineFixtureCatalogTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipelineFixtureCatalogTests.swift; sourceTree = "<group>"; };
 		AF4E8FA216D4D104518BB785 /* PartPlannerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartPlannerService.swift; sourceTree = "<group>"; };
 		B3182DF5BF077E08691A044C /* BrickCanvas.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = BrickCanvas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA8AE3B34F7F68EA6C8A0343 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -78,6 +83,7 @@
 		D5208914C66036D724C51E14 /* DomainFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainFixtures.swift; sourceTree = "<group>"; };
 		D88479A229C7CBC68EDC6376 /* ImageImportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageImportService.swift; sourceTree = "<group>"; };
 		EE6002C4F397D13D4E8D8BF9 /* PreviewProjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewProjects.swift; sourceTree = "<group>"; };
+		EF473AF05CDD54493DABB32B /* PipelineFixtureSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipelineFixtureSupport.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -87,6 +93,22 @@
 				D5208914C66036D724C51E14 /* DomainFixtures.swift */,
 			);
 			path = Fixtures;
+			sourceTree = "<group>";
+		};
+		04B75DCE22A101A65BD5214B /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				AD928D35790A12B85CF48D42 /* PipelineFixtureCatalogTests.swift */,
+			);
+			path = Fixtures;
+			sourceTree = "<group>";
+		};
+		0C8ADA3EAA5FE652F311693E /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				EF473AF05CDD54493DABB32B /* PipelineFixtureSupport.swift */,
+			);
+			path = Support;
 			sourceTree = "<group>";
 		};
 		205BCF91122F4800DFBB1CD5 /* Settings */ = {
@@ -166,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				4D0A43D9C2331A94A30440AA /* Assets.xcassets */,
+				62AC16E3990BC35AA030CFB8 /* Fixtures */,
 				7F917011511B4BC38B38A57D /* Palette */,
 			);
 			path = Resources;
@@ -199,9 +222,19 @@
 			isa = PBXGroup;
 			children = (
 				BF82CFA3EA8951786D4F75D6 /* Domain */,
+				04B75DCE22A101A65BD5214B /* Fixtures */,
 				3C3667CBB40C91CBC4C4FD3C /* Palette */,
+				0C8ADA3EAA5FE652F311693E /* Support */,
 			);
 			path = BrickCanvasTests;
+			sourceTree = "<group>";
+		};
+		62AC16E3990BC35AA030CFB8 /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				8F0A3757875B5948ED076FCC /* pipeline-fixtures-v1.json */,
+			);
+			path = Fixtures;
 			sourceTree = "<group>";
 		};
 		6DEB47C63243769B90893DCA /* Products */ = {
@@ -422,6 +455,7 @@
 			files = (
 				10E328BFA67381E82DA0EB31 /* Assets.xcassets in Resources */,
 				394A609B3E31AAA1B78E43D0 /* mvp-palettes-v1.json in Resources */,
+				6D379CEC9512428B7A42FCA7 /* pipeline-fixtures-v1.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -465,6 +499,8 @@
 			files = (
 				808FEE2CBD2D1F7799BA8CEC /* DomainModelTests.swift in Sources */,
 				CF38E8A4CC13CA635D788F19 /* PaletteServiceTests.swift in Sources */,
+				499AFC7E6FCE1B4631ED9523 /* PipelineFixtureCatalogTests.swift in Sources */,
+				33DBE881BAECAFB098DB5392 /* PipelineFixtureSupport.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
