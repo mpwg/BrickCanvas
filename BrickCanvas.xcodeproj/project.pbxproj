@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0070C2937F3B6FC089594FAE /* PerceptualColorDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C72B4F38457D2929BB9E4C /* PerceptualColorDistance.swift */; };
 		0A1170E1E8FC38EF56C3107B /* PartRequirement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009C834DB48C092DB1015255 /* PartRequirement.swift */; };
 		0E9BD9BFDA7608BC52219787 /* ImageImportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88479A229C7CBC68EDC6376 /* ImageImportService.swift */; };
 		10E328BFA67381E82DA0EB31 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D0A43D9C2331A94A30440AA /* Assets.xcassets */; };
 		181CE4078562ECCEFB887B55 /* NewProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652720582467A4724A7E2783 /* NewProjectView.swift */; };
 		1F65914E2EBC9749C826EBF4 /* MosaicGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F6FFA2D27797E0A9B78A8C /* MosaicGrid.swift */; };
+		20C20A2CC2637713DC5154E0 /* PerceptualColorDistanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0322DBAB44B7480978781927 /* PerceptualColorDistanceTests.swift */; };
 		2B0493190267D2EE1262B432 /* BrickCanvasProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C750B13372C1E6C2AD86BF4 /* BrickCanvasProject.swift */; };
 		333F0DADFD19AADA5C830913 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE556B3C800E41ED603BF256 /* HomeView.swift */; };
 		33DBE881BAECAFB098DB5392 /* PipelineFixtureSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF473AF05CDD54493DABB32B /* PipelineFixtureSupport.swift */; };
@@ -54,12 +56,14 @@
 		009C834DB48C092DB1015255 /* PartRequirement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartRequirement.swift; sourceTree = "<group>"; };
 		01789753A54D8B48DE7835D4 /* ColorMatcherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorMatcherService.swift; sourceTree = "<group>"; };
 		018174ECD6CE96BB27C3C982 /* DomainModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainModelTests.swift; sourceTree = "<group>"; };
+		0322DBAB44B7480978781927 /* PerceptualColorDistanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerceptualColorDistanceTests.swift; sourceTree = "<group>"; };
 		0B438B6CF9B3540D037A8458 /* ExportEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportEngine.swift; sourceTree = "<group>"; };
 		0C750B13372C1E6C2AD86BF4 /* BrickCanvasProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrickCanvasProject.swift; sourceTree = "<group>"; };
 		1C59FE7958A9652A98453F0E /* BrickCanvasApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrickCanvasApp.swift; sourceTree = "<group>"; };
 		27328A1DFFB85E1B4100A41B /* ProjectStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectStorage.swift; sourceTree = "<group>"; };
 		3EE3227DE6F318912A4AF67D /* ProjectDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailView.swift; sourceTree = "<group>"; };
 		4D0A43D9C2331A94A30440AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		51C72B4F38457D2929BB9E4C /* PerceptualColorDistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerceptualColorDistance.swift; sourceTree = "<group>"; };
 		52A14474999418FE4BEA892E /* PlaceholderScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderScreen.swift; sourceTree = "<group>"; };
 		622642926E0A370DF5C63957 /* BrickColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrickColor.swift; sourceTree = "<group>"; };
 		652720582467A4724A7E2783 /* NewProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectView.swift; sourceTree = "<group>"; };
@@ -221,6 +225,7 @@
 		603E094DAE67DFC4DBD8476B /* BrickCanvasTests */ = {
 			isa = PBXGroup;
 			children = (
+				DEFEBFAF12EC6FE27DFDC440 /* ColorMatcher */,
 				BF82CFA3EA8951786D4F75D6 /* Domain */,
 				04B75DCE22A101A65BD5214B /* Fixtures */,
 				3C3667CBB40C91CBC4C4FD3C /* Palette */,
@@ -350,10 +355,19 @@
 		DEA30E5B644E6AEB31669A38 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				ED43BDF2EE1E83C91658141E /* Color */,
 				4CA87E66F881E543CD03091F /* PreviewData */,
 				E3B5C147524C1656424BE91D /* UI */,
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		DEFEBFAF12EC6FE27DFDC440 /* ColorMatcher */ = {
+			isa = PBXGroup;
+			children = (
+				0322DBAB44B7480978781927 /* PerceptualColorDistanceTests.swift */,
+			);
+			path = ColorMatcher;
 			sourceTree = "<group>";
 		};
 		E3B5C147524C1656424BE91D /* UI */ = {
@@ -362,6 +376,14 @@
 				52A14474999418FE4BEA892E /* PlaceholderScreen.swift */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		ED43BDF2EE1E83C91658141E /* Color */ = {
+			isa = PBXGroup;
+			children = (
+				51C72B4F38457D2929BB9E4C /* PerceptualColorDistance.swift */,
+			);
+			path = Color;
 			sourceTree = "<group>";
 		};
 		FE3AF81176EC3ABB05F684F1 /* App */ = {
@@ -484,6 +506,7 @@
 				8C46580481DC1CA99E4D5E67 /* PaletteService.swift in Sources */,
 				47C4D0CE1C66607257994692 /* PartPlannerService.swift in Sources */,
 				0A1170E1E8FC38EF56C3107B /* PartRequirement.swift in Sources */,
+				0070C2937F3B6FC089594FAE /* PerceptualColorDistance.swift in Sources */,
 				C6A4DA72755863F706FAFF10 /* PlaceholderScreen.swift in Sources */,
 				829DB268A9A5791D55A4F654 /* PreviewProjects.swift in Sources */,
 				B3DB96675BD11DF262A17722 /* ProjectDetailView.swift in Sources */,
@@ -499,6 +522,7 @@
 			files = (
 				808FEE2CBD2D1F7799BA8CEC /* DomainModelTests.swift in Sources */,
 				CF38E8A4CC13CA635D788F19 /* PaletteServiceTests.swift in Sources */,
+				20C20A2CC2637713DC5154E0 /* PerceptualColorDistanceTests.swift in Sources */,
 				499AFC7E6FCE1B4631ED9523 /* PipelineFixtureCatalogTests.swift in Sources */,
 				33DBE881BAECAFB098DB5392 /* PipelineFixtureSupport.swift in Sources */,
 			);
