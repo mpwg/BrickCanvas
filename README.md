@@ -231,8 +231,10 @@ This scaffold is intentionally limited to app structure and navigation. Domain m
 Generate the Xcode project:
 
 ```bash
-xcodegen generate
+./scripts/generate-xcode-project.sh
 ```
+
+`project.yml` is the only source of truth for the generated Xcode project. `BrickCanvas.xcodeproj/` is not versioned and should be regenerated locally when needed.
 
 Build from the command line:
 
