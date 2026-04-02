@@ -95,15 +95,15 @@ Am Ende des kritischen Pfads soll ein Nutzer:
 
 ### Phase 3 — Mosaikpipeline
 
-14. `#15` Resize image to stud resolution
+14. `#15` Downsample crop to stud-aligned working raster
     Abhängig von: `#6`, `#8`
     Blockiert: `#16`
-    Warum hier: Resize ist der direkte Eingang in die Grid-Erzeugung.
+    Warum hier: Das direkte Downsampling aus dem Original-Crop liefert die fachlich sauberen Eingangsdaten für Quantisierung und Dithering.
 
-15. `#16` Generate mosaic grid model
+15. `#16` Quantize working raster and generate mosaic grid
     Abhängig von: `#2`, `#13`, `#15`
     Blockiert: `#17`, `#18`, `#19`, `#22`, `#27`
-    Warum hier: Das Grid ist das zentrale Artefakt für Vorschau, Teile und Bauplan.
+    Warum hier: Hier entsteht das zentrale Artefakt für Vorschau, Teile und Bauplan inklusive der fachlich entscheidenden Palette-Quantisierung.
 
 16. `#19` Create 1x1 part requirement generator
     Abhängig von: `#16`

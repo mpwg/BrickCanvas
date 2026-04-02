@@ -320,31 +320,40 @@ Improve final mosaic quality by optionally reducing the image palette before fin
 
 ## Epic 5 — Mosaic Generation
 
-### Issue 15 — Resize image to stud resolution
+### Issue 15 — Downsample crop to stud-aligned working raster
 **Labels:** `algorithm`, `mvp`, `P0`
 **Effort:** M
 
 #### Goal
-Convert the cropped image into the exact target pixel dimensions that correspond to the stud grid.
+Convert the cropped source image directly from original resolution into a stud-aligned working raster that preserves as much perceptual image information as possible for later palette quantization and dithering.
 
 #### Acceptance Criteria
-- 24x24 selection generates a 24x24 raster
-- 48x48 selection generates a 48x48 raster
-- 64x64 selection generates a 64x64 raster
-- Resizing is stable and testable
+- 24x24 selection generates a deterministic 24x24 working raster
+- 48x48 selection generates a deterministic 48x48 working raster
+- 64x64 selection generates a deterministic 64x64 working raster
+- The working raster is derived directly from the cropped original image, not from a previously quantized intermediate image
+- Downsampling uses a documented, testable resampling strategy appropriate for strong reduction ratios
+- Resulting samples remain in a full-color working representation and are not yet mapped to LEGO palette colors
+- Downsampling is stable and covered by tests
 
 ---
 
-### Issue 16 — Generate mosaic grid model
+### Issue 16 — Quantize working raster and generate mosaic grid
 **Labels:** `algorithm`, `mvp`, `P0`
 **Effort:** M
 
 #### Goal
-Create a grid representation where every cell corresponds to one stud.
+Convert the stud-aligned working raster into the final `MosaicGrid` by mapping every cell to an allowed LEGO color using a high-quality, efficient dithering algorithm.
 
 #### Acceptance Criteria
 - Grid dimensions match selected size
 - Every cell has coordinates and a resolved target color
+- Palette quantization is performed against the allowed LEGO palette, not against unrestricted RGB output
+- Dithering is implemented as error diffusion on the stud raster
+- The default algorithm is documented and chosen for a quality/performance tradeoff suitable for interactive use
+- The implementation uses a modern standard baseline:
+  Ostromoukhov-style variable-coefficient error diffusion as the default base, with Zhou/Fang-style threshold modulation evaluated as an optional follow-up if it materially improves mid-tone quality without destabilizing color output
+- The pipeline remains deterministic and testable
 - Grid can be rendered in previews and used by downstream systems
 
 ---
