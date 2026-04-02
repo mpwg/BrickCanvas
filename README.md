@@ -239,7 +239,7 @@ This scaffold is intentionally limited to app structure and navigation. Domain m
 Prüfe den Installationsstatus:
 
 ```bash
-xcodebuild -showComponent MetalToolchain -json
+xcodebuild -showComponent MetalToolchain
 ```
 
 Falls die Toolchain noch nicht installiert ist:
