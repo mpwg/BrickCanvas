@@ -12,6 +12,7 @@
 - Generierte Dateien unter `BrickCanvas.xcodeproj/` werden nicht versioniert und bei Bedarf lokal oder in CI neu erzeugt.
 - Für das Erzeugen des Projekts ist das Repo-Skript `scripts/generate-xcode-project.sh` zu verwenden.
 - Nach jeder Änderung muss sofort ein Commit erstellt werden, damit ein sauberes Rollback auf eine vorherige Version möglich bleibt.
+- Lokale Commits dürfen niemals direkt auf `main` erfolgen. Vor dem ersten Commit ist immer ein Arbeitsbranch zu erstellen und darauf zu committen.
 - Verlinke Pull Requests immer mit den zugehörigen Issues.
 - Wenn ein Pull Request ein Issue vollständig behebt, muss der Pull Request das Issue beim Merge automatisch schließen, zum Beispiel mit `Closes #123`.
 - Prüfe nach Merges, ob Issues bereits automatisch geschlossen wurden oder manuell geschlossen werden müssen.
