@@ -228,6 +228,26 @@ This scaffold is intentionally limited to app structure and navigation. Domain m
 
 ## Local Development
 
+### Requirements
+
+- Xcode 26
+- XcodeGen
+- Metal Toolchain
+
+`BrickCanvas` bindet [`DitheringEngine`](https://github.com/Eskils/DitheringEngine) als echtes Swift Package von GitHub ein. Das Paket enthält Metal-Shader für Ordered-Dithering-Verfahren. Deshalb muss die Metal Toolchain lokal installiert sein, damit der Build inklusive Package-Abhängigkeiten vollständig läuft.
+
+Prüfe den Installationsstatus:
+
+```bash
+xcodebuild -showComponent MetalToolchain -json
+```
+
+Falls die Toolchain noch nicht installiert ist:
+
+```bash
+xcodebuild -downloadComponent MetalToolchain
+```
+
 Generate the Xcode project:
 
 ```bash
@@ -241,6 +261,16 @@ Build from the command line:
 ```bash
 xcodebuild -project BrickCanvas.xcodeproj -scheme BrickCanvas -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.2' build
 ```
+
+Run tests from the command line:
+
+```bash
+xcodebuild test -project BrickCanvas.xcodeproj -scheme BrickCanvas -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.4'
+```
+
+## CI
+
+GitHub Actions restores a cached Metal Toolchain bundle when available. Only if no matching cache entry exists, the workflow downloads the toolchain, imports it, and then builds the project. This keeps the upstream Swift Package reference intact while avoiding unnecessary component downloads on unchanged CI images.
 
 ## Current Palette Dataset
 
