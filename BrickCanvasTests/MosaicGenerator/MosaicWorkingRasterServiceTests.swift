@@ -78,7 +78,8 @@ struct MosaicWorkingRasterServiceTests {
             configuration: MosaicConfiguration(
                 mosaicSize: mosaicSize,
                 paletteID: "mvp-default",
-                part: .roundPlate1x1
+                part: .roundPlate1x1,
+                ditheringMethod: .ostromoukhov
             ),
             palette: DomainFixtures.paletteDescriptor
         )

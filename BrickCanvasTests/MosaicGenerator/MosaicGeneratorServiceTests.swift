@@ -43,7 +43,8 @@ struct MosaicGeneratorServiceTests {
             configuration: MosaicConfiguration(
                 mosaicSize: size,
                 paletteID: "black-white",
-                part: .roundPlate1x1
+                part: .roundPlate1x1,
+                ditheringMethod: .floydSteinberg
             ),
             palette: BrickPalette(
                 id: "black-white",
@@ -62,6 +63,40 @@ struct MosaicGeneratorServiceTests {
         #expect(colorIDs == ["black", "white", "black", "white"])
     }
 
+    @Test
+    func generatorSupportsOstromoukhovDithering() async throws {
+        let size = try MosaicGridSize(width: 6, height: 1)
+        let request = try MosaicGenerationRequest(
+            image: makeHorizontalGradientImportedImage(
+                width: 6,
+                height: 1,
+                values: [20, 70, 110, 145, 185, 230]
+            ),
+            cropRegion: CropRegion(originX: 0, originY: 0, width: 1, height: 1),
+            configuration: MosaicConfiguration(
+                mosaicSize: size,
+                paletteID: "black-white",
+                part: .roundPlate1x1,
+                ditheringMethod: .ostromoukhov
+            ),
+            palette: BrickPalette(
+                id: "black-white",
+                name: "Black White",
+                notes: nil,
+                colors: [
+                    BrickColor(id: "black", name: "Black", rgb: RGBColor(red: 0, green: 0, blue: 0)),
+                    BrickColor(id: "white", name: "White", rgb: RGBColor(red: 255, green: 255, blue: 255))
+                ]
+            )
+        )
+
+        let result = try await service.generateMosaic(from: request)
+        let colorIDs = result.grid.cells.map(\.colorID)
+
+        #expect(colorIDs.count == 6)
+        #expect(Set(colorIDs).isSubset(of: ["black", "white"]))
+    }
+
     private func makeRequest(for fixture: PipelineFixture) throws -> MosaicGenerationRequest {
         MosaicGenerationRequest(
             image: try makeImportedImage(from: fixture.sourcePixels),
@@ -69,7 +104,8 @@ struct MosaicGeneratorServiceTests {
             configuration: MosaicConfiguration(
                 mosaicSize: try MosaicGridSize(width: fixture.mosaicSize.width, height: fixture.mosaicSize.height),
                 paletteID: fixture.paletteID,
-                part: .roundPlate1x1
+                part: .roundPlate1x1,
+                ditheringMethod: .floydSteinberg
             ),
             palette: try palette(for: fixture)
         )
@@ -159,6 +195,36 @@ struct MosaicGeneratorServiceTests {
         }
 
         return try makeImportedImage(from: image, filename: "\(width)x\(height)-uniform.png")
+    }
+
+    private func makeHorizontalGradientImportedImage(width: Int, height: Int, values: [UInt8]) throws -> ImportedImage {
+        guard values.count == width else {
+            throw ServiceError.invalidInput("Der Gradienten-Test erwartet genau einen Wert pro Pixelspalte.")
+        }
+
+        guard let context = CGContext(
+            data: nil,
+            width: width,
+            height: height,
+            bitsPerComponent: 8,
+            bytesPerRow: 0,
+            space: CGColorSpace(name: CGColorSpace.sRGB) ?? CGColorSpaceCreateDeviceRGB(),
+            bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue
+        ) else {
+            throw ServiceError.processingFailed("Gradienten-Testbild konnte nicht vorbereitet werden.")
+        }
+
+        for x in 0..<width {
+            let value = CGFloat(values[x]) / 255.0
+            context.setFillColor(CGColor(red: value, green: value, blue: value, alpha: 1))
+            context.fill(CGRect(x: x, y: 0, width: 1, height: height))
+        }
+
+        guard let image = context.makeImage() else {
+            throw ServiceError.processingFailed("Gradienten-Testbild besitzt keine CGImage-Repräsentation.")
+        }
+
+        return try makeImportedImage(from: image, filename: "\(width)x\(height)-gradient.png")
     }
 
     private func makeImportedImage(from image: CGImage, filename: String) throws -> ImportedImage {

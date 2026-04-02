@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @AppStorage(PaletteListMode.storageKey) private var paletteListModeRawValue = PaletteListMode.simple.rawValue
+    @AppStorage(MosaicDitheringMethod.storageKey) private var ditheringMethodRawValue = MosaicDitheringMethod.ostromoukhov.rawValue
     @State private var palette: BrickPalette?
     @State private var paletteLoadingError: String?
 
@@ -9,6 +10,7 @@ struct SettingsView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
                 header
+                ditheringMethodCard
                 paletteModeCard
                 paletteContent
             }
@@ -26,6 +28,11 @@ struct SettingsView: View {
     private var selectedPaletteListMode: PaletteListMode {
         get { PaletteListMode(rawValue: paletteListModeRawValue) ?? .simple }
         nonmutating set { paletteListModeRawValue = newValue.rawValue }
+    }
+
+    private var selectedDitheringMethod: MosaicDitheringMethod {
+        get { MosaicDitheringMethod(rawValue: ditheringMethodRawValue) ?? .ostromoukhov }
+        nonmutating set { ditheringMethodRawValue = newValue.rawValue }
     }
 
     private var displayedColors: [BrickColor] {
@@ -59,12 +66,53 @@ struct SettingsView: View {
                 .font(.caption.weight(.semibold))
                 .foregroundStyle(.orange)
 
-            Text("Farbpalette")
+            Text("Rendering")
                 .font(.largeTitle.weight(.bold))
 
-            Text("Lege fest, ob BrickCanvas standardmäßig nur die 12 Basisfarben oder die vollständige LEGO-Farbtabelle mit seltenen Farben verwendet.")
+            Text("Lege fest, wie BrickCanvas neue Mosaike standardmäßig auf die LEGO-Palette quantisiert und welche Farbliste dabei angeboten wird.")
                 .foregroundStyle(.secondary)
         }
+    }
+
+    private var ditheringMethodCard: some View {
+        VStack(alignment: .leading, spacing: 18) {
+            Text("Dithering")
+                .font(.title3.weight(.semibold))
+
+            Picker("Dithering", selection: $ditheringMethodRawValue) {
+                ForEach(MosaicDitheringMethod.allCases) { method in
+                    Text(method.title).tag(method.rawValue)
+                }
+            }
+            .pickerStyle(.segmented)
+
+            VStack(alignment: .leading, spacing: 10) {
+                ForEach(MosaicDitheringMethod.allCases) { method in
+                    HStack(alignment: .top, spacing: 12) {
+                        Image(systemName: method == selectedDitheringMethod ? "checkmark.circle.fill" : "circle")
+                            .foregroundStyle(method == selectedDitheringMethod ? .orange : .secondary)
+
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text(method.title)
+                                .font(.headline)
+
+                            Text(method.shortDescription)
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+
+                            Text(method.detailDescription)
+                                .font(.footnote)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                }
+            }
+
+            Text("Die Auswahl wird als Standard für neue Mosaik-Generierungen gespeichert. Ostromoukhov ist auf visuelle Qualität optimiert, Floyd-Steinberg bleibt als klassische Fallback-Methode verfügbar.")
+                .font(.footnote)
+                .foregroundStyle(.secondary)
+        }
+        .settingsCardStyle()
     }
 
     private var paletteModeCard: some View {

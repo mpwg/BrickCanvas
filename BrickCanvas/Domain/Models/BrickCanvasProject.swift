@@ -30,6 +30,19 @@ struct MosaicConfiguration: Codable, Hashable, Sendable {
     let mosaicSize: MosaicGridSize
     let paletteID: String
     let part: BrickPart
+    let ditheringMethod: MosaicDitheringMethod
+
+    init(
+        mosaicSize: MosaicGridSize,
+        paletteID: String,
+        part: BrickPart,
+        ditheringMethod: MosaicDitheringMethod = .floydSteinberg
+    ) {
+        self.mosaicSize = mosaicSize
+        self.paletteID = paletteID
+        self.part = part
+        self.ditheringMethod = ditheringMethod
+    }
 }
 
 struct GeneratedProjectArtifacts: Codable, Hashable, Sendable {
@@ -77,4 +90,3 @@ struct BrickCanvasProject: Identifiable, Codable, Hashable, Sendable {
         generatedArtifacts != nil
     }
 }
-

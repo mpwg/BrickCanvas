@@ -63,13 +63,13 @@ struct ErrorDiffusionMosaicGeneratorService: MosaicGeneratorService {
         var diffusionBuffer = workingRaster.pixels.map(DiffusionColor.init)
         var cells: [MosaicCell] = []
         cells.reserveCapacity(workingRaster.size.studCount)
+        let strategy = ErrorDiffusionStrategy(method: request.configuration.ditheringMethod)
 
         for y in 0..<workingRaster.size.height {
             let isLeftToRight = y.isMultiple(of: 2)
             let xRange = isLeftToRight
                 ? Array(0..<workingRaster.size.width)
                 : Array((0..<workingRaster.size.width).reversed())
-            let weights = isLeftToRight ? ErrorDiffusionWeights.forward : ErrorDiffusionWeights.backward
 
             for x in xRange {
                 let index = (y * workingRaster.size.width) + x
@@ -93,7 +93,9 @@ struct ErrorDiffusionMosaicGeneratorService: MosaicGeneratorService {
                     error: error,
                     fromX: x,
                     y: y,
-                    weights: weights,
+                    sample: sample,
+                    isLeftToRight: isLeftToRight,
+                    strategy: strategy,
                     width: workingRaster.size.width,
                     height: workingRaster.size.height,
                     buffer: &diffusionBuffer
@@ -303,15 +305,28 @@ private struct ErrorDiffusionWeight {
     let weight: Double
 }
 
-private enum ErrorDiffusionWeights {
-    static let forward: [ErrorDiffusionWeight] = [
+private struct ErrorDiffusionStrategy {
+    let method: MosaicDitheringMethod
+
+    func weights(for sample: RGBColor, isLeftToRight: Bool) -> [ErrorDiffusionWeight] {
+        switch method {
+        case .floydSteinberg:
+            return isLeftToRight ? Self.floydSteinbergForward : Self.floydSteinbergBackward
+        case .ostromoukhov:
+            let intensity = DiffusionColor(rgb: sample).normalizedLuminance
+            let coefficientSet = OstromoukhovCoefficientSet.forIntensity(intensity)
+            return coefficientSet.weights(isLeftToRight: isLeftToRight)
+        }
+    }
+
+    private static let floydSteinbergForward: [ErrorDiffusionWeight] = [
         ErrorDiffusionWeight(dx: 1, dy: 0, weight: 7.0 / 16.0),
         ErrorDiffusionWeight(dx: -1, dy: 1, weight: 3.0 / 16.0),
         ErrorDiffusionWeight(dx: 0, dy: 1, weight: 5.0 / 16.0),
         ErrorDiffusionWeight(dx: 1, dy: 1, weight: 1.0 / 16.0)
     ]
 
-    static let backward: [ErrorDiffusionWeight] = [
+    private static let floydSteinbergBackward: [ErrorDiffusionWeight] = [
         ErrorDiffusionWeight(dx: -1, dy: 0, weight: 7.0 / 16.0),
         ErrorDiffusionWeight(dx: 1, dy: 1, weight: 3.0 / 16.0),
         ErrorDiffusionWeight(dx: 0, dy: 1, weight: 5.0 / 16.0),
@@ -319,15 +334,53 @@ private enum ErrorDiffusionWeights {
     ]
 }
 
+private struct OstromoukhovCoefficientSet {
+    let right: Double
+    let downLeft: Double
+    let down: Double
+
+    static func forIntensity(_ intensity: Double) -> Self {
+        let index = Int((intensity.clamped(to: 0...1) * 255.0).rounded())
+        let divisor = Double(OstromoukhovCoefficients.divisors[index])
+        let coefficientIndex = index * 3
+
+        return Self(
+            right: Double(OstromoukhovCoefficients.coefficients[coefficientIndex]) / divisor,
+            downLeft: Double(OstromoukhovCoefficients.coefficients[coefficientIndex + 1]) / divisor,
+            down: Double(OstromoukhovCoefficients.coefficients[coefficientIndex + 2]) / divisor
+        )
+    }
+
+    func weights(isLeftToRight: Bool) -> [ErrorDiffusionWeight] {
+        if isLeftToRight {
+            return [
+                ErrorDiffusionWeight(dx: 1, dy: 0, weight: right),
+                ErrorDiffusionWeight(dx: -1, dy: 1, weight: downLeft),
+                ErrorDiffusionWeight(dx: 0, dy: 1, weight: down)
+            ]
+        }
+
+        return [
+            ErrorDiffusionWeight(dx: -1, dy: 0, weight: right),
+            ErrorDiffusionWeight(dx: 1, dy: 1, weight: downLeft),
+            ErrorDiffusionWeight(dx: 0, dy: 1, weight: down)
+        ]
+    }
+}
+
 private func diffuse(
     error: DiffusionColor,
     fromX x: Int,
     y: Int,
-    weights: [ErrorDiffusionWeight],
+    sample: RGBColor,
+    isLeftToRight: Bool,
+    strategy: ErrorDiffusionStrategy,
     width: Int,
     height: Int,
     buffer: inout [DiffusionColor]
 ) {
+    let weights = strategy.weights(for: sample, isLeftToRight: isLeftToRight)
+
     for weight in weights {
         let targetX = x + weight.dx
         let targetY = y + weight.dy
@@ -344,5 +397,15 @@ private func diffuse(
 private extension Double {
     func clamped(to range: ClosedRange<Double>) -> Double {
         Swift.min(Swift.max(self, range.lowerBound), range.upperBound)
+    }
+}
+
+private extension DiffusionColor {
+    var normalizedLuminance: Double {
+        let normalizedRed = red.clamped(to: 0...255) / 255.0
+        let normalizedGreen = green.clamped(to: 0...255) / 255.0
+        let normalizedBlue = blue.clamped(to: 0...255) / 255.0
+
+        return (0.2126 * normalizedRed) + (0.7152 * normalizedGreen) + (0.0722 * normalizedBlue)
     }
 }
