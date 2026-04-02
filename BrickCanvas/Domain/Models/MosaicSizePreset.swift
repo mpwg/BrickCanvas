@@ -22,6 +22,10 @@ enum MosaicSizePreset: String, CaseIterable, Codable, Hashable, Identifiable, Se
         "\(gridSize.width) × \(gridSize.height)"
     }
 
+    var compactTitle: String {
+        "\(gridSize.width)"
+    }
+
     var subtitle: String {
         "\(gridSize.studCount) Noppen"
     }
