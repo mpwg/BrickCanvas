@@ -8,6 +8,7 @@ struct NewProjectView: View {
     @State private var previewImage: CGImage?
     @State private var cropRegion: CropRegion?
     @State private var cropPreset: CropAspectPreset = .square
+    @State private var mosaicSizePreset: MosaicSizePreset = .medium48x48
     @State private var errorMessage: String?
     @State private var isImporting = false
 
@@ -46,6 +47,9 @@ struct NewProjectView: View {
                             editorHeight: editorHeight
                         )
                         .frame(maxWidth: pageWidth, alignment: .leading)
+
+                        mosaicConfigurationCard(previewImage: previewImage)
+                            .frame(maxWidth: pageWidth, alignment: .leading)
                     } else if isImporting == false {
                         emptyStateCard
                             .frame(maxWidth: pageWidth, alignment: .leading)
@@ -191,6 +195,33 @@ struct NewProjectView: View {
         .cardStyle()
     }
 
+    private func mosaicConfigurationCard(previewImage: CGImage) -> some View {
+        VStack(alignment: .leading, spacing: 20) {
+            VStack(alignment: .leading, spacing: 8) {
+                Text("3. Mosaikgröße")
+                    .font(.title3.weight(.semibold))
+
+                Text("Die gewählte Größe definiert das Zielraster für die spätere Generierung. Größere Raster liefern mehr Detail, benötigen aber entsprechend mehr Einzelsteine.")
+                    .foregroundStyle(.secondary)
+            }
+
+            mosaicSizePicker
+
+            VStack(alignment: .leading, spacing: 10) {
+                Label(outputResolutionDescription(previewImage: previewImage), systemImage: "square.grid.3x3.fill")
+                    .fixedSize(horizontal: false, vertical: true)
+
+                if cropPreset != .square {
+                    Label("Die aktuellen Größen-Presets sind quadratisch. Für ein unverzerrtes Ergebnis ist ein quadratischer Zuschnitt empfohlen.", systemImage: "info.circle")
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            }
+            .font(.footnote)
+            .foregroundStyle(.secondary)
+        }
+        .cardStyle(tint: .orange.opacity(0.08))
+    }
+
     private var aspectPresetPicker: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text("Seitenverhältnis")
@@ -211,6 +242,42 @@ struct NewProjectView: View {
                                         .fill(cropPreset == preset ? Color.blue : Color(.secondarySystemBackground))
                                 )
                                 .foregroundStyle(cropPreset == preset ? .white : .primary)
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityLabel(preset.accessibilityLabel)
+                    }
+                }
+            }
+        }
+    }
+
+    private var mosaicSizePicker: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Zielgröße")
+                .font(.subheadline.weight(.semibold))
+
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 12) {
+                    ForEach(MosaicSizePreset.allCases) { preset in
+                        Button {
+                            mosaicSizePreset = preset
+                        } label: {
+                            VStack(alignment: .leading, spacing: 6) {
+                                Text(preset.title)
+                                    .font(.headline.weight(.semibold))
+
+                                Text(preset.subtitle)
+                                    .font(.subheadline)
+                                    .foregroundStyle(mosaicSizePreset == preset ? Color.white.opacity(0.88) : Color.secondary)
+                            }
+                            .frame(width: 140, alignment: .leading)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 14)
+                            .background(
+                                RoundedRectangle(cornerRadius: 20, style: .continuous)
+                                    .fill(mosaicSizePreset == preset ? Color.orange : Color(.secondarySystemBackground))
+                            )
+                            .foregroundStyle(mosaicSizePreset == preset ? Color.white : Color.primary)
                         }
                         .buttonStyle(.plain)
                         .accessibilityLabel(preset.accessibilityLabel)
@@ -252,6 +319,7 @@ struct NewProjectView: View {
             previewImage = try makePreviewImage(from: result.image.asset.data)
             cropRegion = nil
             cropPreset = .square
+            mosaicSizePreset = .medium48x48
         } catch {
             importedImage = nil
             previewImage = nil
@@ -278,6 +346,18 @@ struct NewProjectView: View {
             height: CGFloat(previewImage?.height ?? 1)
         ))
         return min(width / max(ratio, 0.1), 520)
+    }
+
+    private func outputResolutionDescription(previewImage: CGImage) -> String {
+        let size = mosaicSizePreset.gridSize
+
+        if let cropRegion {
+            let cropWidth = Int((Double(previewImage.width) * cropRegion.width).rounded())
+            let cropHeight = Int((Double(previewImage.height) * cropRegion.height).rounded())
+            return "Aktiver Zuschnitt \(cropWidth) × \(cropHeight) px -> Zielraster \(size.width) × \(size.height) Noppen (\(size.studCount) Positionen)"
+        }
+
+        return "Zielraster \(size.width) × \(size.height) Noppen (\(size.studCount) Positionen)"
     }
 
     private func makePreviewImage(from data: Data) throws -> CGImage {

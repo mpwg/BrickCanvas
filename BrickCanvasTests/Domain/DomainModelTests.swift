@@ -65,4 +65,20 @@ struct DomainModelTests {
         #expect(ids.count == DomainFixtures.partRequirements.count)
         #expect(ids.contains("round_plate_1x1::bright-red"))
     }
+
+    @Test
+    func mosaicSizePresetsMapToExpectedGridSizes() throws {
+        let expectedSizes: [MosaicSizePreset: MosaicGridSize] = [
+            .small24x24: try MosaicGridSize(width: 24, height: 24),
+            .medium48x48: try MosaicGridSize(width: 48, height: 48),
+            .large64x64: try MosaicGridSize(width: 64, height: 64)
+        ]
+
+        #expect(MosaicSizePreset.allCases.count == expectedSizes.count)
+
+        for preset in MosaicSizePreset.allCases {
+            #expect(preset.gridSize == expectedSizes[preset])
+            #expect(preset.subtitle.contains("\(preset.gridSize.studCount)"))
+        }
+    }
 }
