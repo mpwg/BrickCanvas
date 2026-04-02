@@ -1,7 +1,9 @@
 import Accelerate
 import CoreGraphics
+import DitheringEngine
 import Foundation
 import ImageIO
+import simd
 
 struct MosaicWorkingRaster: Codable, Hashable, Sendable {
     let size: MosaicGridSize
@@ -46,62 +48,21 @@ protocol MosaicGeneratorService: Sendable {
     func generateMosaic(from request: MosaicGenerationRequest) async throws -> MosaicGenerationResult
 }
 
-struct ErrorDiffusionMosaicGeneratorService: MosaicGeneratorService {
+struct PackageBackedMosaicGeneratorService: MosaicGeneratorService {
     private let workingRasterService: MosaicWorkingRasterService
-    private let colorMatcher: ColorMatcherService
 
     init(
-        workingRasterService: MosaicWorkingRasterService = HighQualityMosaicWorkingRasterService(),
-        colorMatcher: ColorMatcherService = PerceptualColorMatcherService()
+        workingRasterService: MosaicWorkingRasterService = HighQualityMosaicWorkingRasterService()
     ) {
         self.workingRasterService = workingRasterService
-        self.colorMatcher = colorMatcher
     }
 
     func generateMosaic(from request: MosaicGenerationRequest) async throws -> MosaicGenerationResult {
         let workingRaster = try await workingRasterService.makeWorkingRaster(from: request)
-        var diffusionBuffer = workingRaster.pixels.map(DiffusionColor.init)
-        var cells: [MosaicCell] = []
-        cells.reserveCapacity(workingRaster.size.studCount)
-        let strategy = ErrorDiffusionStrategy(method: request.configuration.ditheringMethod)
-
-        for y in 0..<workingRaster.size.height {
-            let isLeftToRight = y.isMultiple(of: 2)
-            let xRange = isLeftToRight
-                ? Array(0..<workingRaster.size.width)
-                : Array((0..<workingRaster.size.width).reversed())
-
-            for x in xRange {
-                let index = (y * workingRaster.size.width) + x
-                let sample = diffusionBuffer[index].clampedRGBColor
-                let matched = try await colorMatcher.nearestColor(
-                    for: ColorMatchRequest(
-                        sample: MatchableColorSample(rgbColor: sample),
-                        palette: request.palette
-                    )
-                ).matchedColor
-
-                cells.append(
-                    MosaicCell(
-                        coordinate: MosaicCoordinate(x: x, y: y),
-                        colorID: matched.id
-                    )
-                )
-
-                let error = diffusionBuffer[index] - DiffusionColor(rgb: matched.rgb)
-                diffuse(
-                    error: error,
-                    fromX: x,
-                    y: y,
-                    sample: sample,
-                    isLeftToRight: isLeftToRight,
-                    strategy: strategy,
-                    width: workingRaster.size.width,
-                    height: workingRaster.size.height,
-                    buffer: &diffusionBuffer
-                )
-            }
-        }
+        let ditheredPixels = try await Task.detached(priority: .userInitiated) {
+            try ditherPixels(in: workingRaster, using: request.configuration.ditheringMethod, palette: request.palette)
+        }.value
+        let cells = try buildCells(from: ditheredPixels, size: workingRaster.size, palette: request.palette)
 
         return MosaicGenerationResult(
             grid: try MosaicGrid(size: workingRaster.size, cells: cells)
@@ -249,163 +210,128 @@ private func makePixels(from buffer: vImage_Buffer, width: Int, height: Int) -> 
     return pixels
 }
 
-private struct DiffusionColor {
-    var red: Double
-    var green: Double
-    var blue: Double
+private func ditherPixels(
+    in workingRaster: MosaicWorkingRaster,
+    using method: MosaicDitheringMethod,
+    palette: PaletteDescriptor
+) throws -> [RGBColor] {
+    let inputImage = try makeCGImage(from: workingRaster)
+    let engine = DitheringEngine()
+    try engine.set(image: inputImage)
+    engine.preserveTransparency = false
 
-    init(rgb: RGBColor) {
-        self.red = Double(rgb.red)
-        self.green = Double(rgb.green)
-        self.blue = Double(rgb.blue)
+    let ditheredImage = try engine.dither(
+        usingMethod: method.packageMethod,
+        andPalette: .custom,
+        withDitherMethodSettings: method.makePackageSettings(),
+        withPaletteSettings: CustomPaletteSettingsConfiguration(entries: palette.colors.map(\.rgb.simd3))
+    )
+
+    return try extractPixels(
+        from: ditheredImage,
+        width: workingRaster.size.width,
+        height: workingRaster.size.height
+    )
+}
+
+private func makeCGImage(from workingRaster: MosaicWorkingRaster) throws -> CGImage {
+    let width = workingRaster.size.width
+    let height = workingRaster.size.height
+    var bytes: [UInt8] = []
+    bytes.reserveCapacity(width * height * 4)
+
+    for pixel in workingRaster.pixels {
+        bytes.append(pixel.red)
+        bytes.append(pixel.green)
+        bytes.append(pixel.blue)
+        bytes.append(255)
     }
 
-    var clampedRGBColor: RGBColor {
-        RGBColor(
-            red: UInt8(red.clamped(to: 0...255).rounded()),
-            green: UInt8(green.clamped(to: 0...255).rounded()),
-            blue: UInt8(blue.clamped(to: 0...255).rounded())
+    guard let colorSpace = CGColorSpace(name: CGColorSpace.sRGB),
+          let provider = CGDataProvider(data: Data(bytes) as CFData) else {
+        throw ServiceError.processingFailed("Das Arbeitsraster konnte nicht in ein CGImage überführt werden.")
+    }
+
+    guard let image = CGImage(
+        width: width,
+        height: height,
+        bitsPerComponent: 8,
+        bitsPerPixel: 32,
+        bytesPerRow: width * 4,
+        space: colorSpace,
+        bitmapInfo: CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue | CGBitmapInfo.byteOrder32Big.rawValue),
+        provider: provider,
+        decode: nil,
+        shouldInterpolate: false,
+        intent: .defaultIntent
+    ) else {
+        throw ServiceError.processingFailed("Das Arbeitsraster konnte nicht als Bild erzeugt werden.")
+    }
+
+    return image
+}
+
+private func extractPixels(from image: CGImage, width: Int, height: Int) throws -> [RGBColor] {
+    var format = try makeRGBAFormat()
+    let buffer = try makeSourceBuffer(from: image, format: &format)
+    defer {
+        free(buffer.data)
+    }
+
+    return makePixels(from: buffer, width: width, height: height)
+}
+
+private func buildCells(
+    from pixels: [RGBColor],
+    size: MosaicGridSize,
+    palette: PaletteDescriptor
+) throws -> [MosaicCell] {
+    let colorIDsByRGB = Dictionary(uniqueKeysWithValues: palette.colors.map { ($0.rgb, $0.id) })
+
+    return try pixels.enumerated().map { index, pixel in
+        guard let colorID = colorIDsByRGB[pixel] else {
+            throw ServiceError.processingFailed(
+                "Die Package-Ausgabe enthält eine Farbe außerhalb der Zielpalette: \(pixel.hexString)."
+            )
+        }
+
+        return MosaicCell(
+            coordinate: MosaicCoordinate(x: index % size.width, y: index / size.width),
+            colorID: colorID
         )
-    }
-
-    static func - (lhs: DiffusionColor, rhs: DiffusionColor) -> DiffusionColor {
-        DiffusionColor(
-            red: lhs.red - rhs.red,
-            green: lhs.green - rhs.green,
-            blue: lhs.blue - rhs.blue
-        )
-    }
-
-    static func + (lhs: DiffusionColor, rhs: DiffusionColor) -> DiffusionColor {
-        DiffusionColor(
-            red: lhs.red + rhs.red,
-            green: lhs.green + rhs.green,
-            blue: lhs.blue + rhs.blue
-        )
-    }
-
-    static func * (lhs: DiffusionColor, rhs: Double) -> DiffusionColor {
-        DiffusionColor(
-            red: lhs.red * rhs,
-            green: lhs.green * rhs,
-            blue: lhs.blue * rhs
-        )
-    }
-
-    private init(red: Double, green: Double, blue: Double) {
-        self.red = red
-        self.green = green
-        self.blue = blue
     }
 }
 
-private struct ErrorDiffusionWeight {
-    let dx: Int
-    let dy: Int
-    let weight: Double
+private extension RGBColor {
+    var simd3: SIMD3<UInt8> {
+        SIMD3(red, green, blue)
+    }
 }
 
-private struct ErrorDiffusionStrategy {
-    let method: MosaicDitheringMethod
-
-    func weights(for sample: RGBColor, isLeftToRight: Bool) -> [ErrorDiffusionWeight] {
-        switch method {
+private extension MosaicDitheringMethod {
+    var packageMethod: DitherMethod {
+        switch self {
+        case .threshold:
+            return .threshold
         case .floydSteinberg:
-            return isLeftToRight ? Self.floydSteinbergForward : Self.floydSteinbergBackward
-        case .ostromoukhov:
-            let intensity = DiffusionColor(rgb: sample).normalizedLuminance
-            let coefficientSet = OstromoukhovCoefficientSet.forIntensity(intensity)
-            return coefficientSet.weights(isLeftToRight: isLeftToRight)
+            return .floydSteinberg
+        case .atkinson:
+            return .atkinson
+        case .jarvisJudiceNinke:
+            return .jarvisJudiceNinke
+        case .bayer:
+            return .bayer
         }
     }
 
-    private static let floydSteinbergForward: [ErrorDiffusionWeight] = [
-        ErrorDiffusionWeight(dx: 1, dy: 0, weight: 7.0 / 16.0),
-        ErrorDiffusionWeight(dx: -1, dy: 1, weight: 3.0 / 16.0),
-        ErrorDiffusionWeight(dx: 0, dy: 1, weight: 5.0 / 16.0),
-        ErrorDiffusionWeight(dx: 1, dy: 1, weight: 1.0 / 16.0)
-    ]
-
-    private static let floydSteinbergBackward: [ErrorDiffusionWeight] = [
-        ErrorDiffusionWeight(dx: -1, dy: 0, weight: 7.0 / 16.0),
-        ErrorDiffusionWeight(dx: 1, dy: 1, weight: 3.0 / 16.0),
-        ErrorDiffusionWeight(dx: 0, dy: 1, weight: 5.0 / 16.0),
-        ErrorDiffusionWeight(dx: -1, dy: 1, weight: 1.0 / 16.0)
-    ]
-}
-
-private struct OstromoukhovCoefficientSet {
-    let right: Double
-    let downLeft: Double
-    let down: Double
-
-    static func forIntensity(_ intensity: Double) -> Self {
-        let index = Int((intensity.clamped(to: 0...1) * 255.0).rounded())
-        let divisor = Double(OstromoukhovCoefficients.divisors[index])
-        let coefficientIndex = index * 3
-
-        return Self(
-            right: Double(OstromoukhovCoefficients.coefficients[coefficientIndex]) / divisor,
-            downLeft: Double(OstromoukhovCoefficients.coefficients[coefficientIndex + 1]) / divisor,
-            down: Double(OstromoukhovCoefficients.coefficients[coefficientIndex + 2]) / divisor
-        )
-    }
-
-    func weights(isLeftToRight: Bool) -> [ErrorDiffusionWeight] {
-        if isLeftToRight {
-            return [
-                ErrorDiffusionWeight(dx: 1, dy: 0, weight: right),
-                ErrorDiffusionWeight(dx: -1, dy: 1, weight: downLeft),
-                ErrorDiffusionWeight(dx: 0, dy: 1, weight: down)
-            ]
+    func makePackageSettings() -> SettingsConfiguration {
+        switch self {
+        case .threshold, .atkinson, .jarvisJudiceNinke:
+            return EmptyPaletteSettingsConfiguration()
+        case .floydSteinberg:
+            return FloydSteinbergSettingsConfiguration(direction: .leftToRight)
+        case .bayer:
+            return BayerSettingsConfiguration(thresholdMapSize: 3, intensity: 0.85, performOnCPU: true)
         }
-
-        return [
-            ErrorDiffusionWeight(dx: -1, dy: 0, weight: right),
-            ErrorDiffusionWeight(dx: 1, dy: 1, weight: downLeft),
-            ErrorDiffusionWeight(dx: 0, dy: 1, weight: down)
-        ]
-    }
-}
-
-private func diffuse(
-    error: DiffusionColor,
-    fromX x: Int,
-    y: Int,
-    sample: RGBColor,
-    isLeftToRight: Bool,
-    strategy: ErrorDiffusionStrategy,
-    width: Int,
-    height: Int,
-    buffer: inout [DiffusionColor]
-) {
-    let weights = strategy.weights(for: sample, isLeftToRight: isLeftToRight)
-
-    for weight in weights {
-        let targetX = x + weight.dx
-        let targetY = y + weight.dy
-
-        guard (0..<width).contains(targetX), (0..<height).contains(targetY) else {
-            continue
-        }
-
-        let index = (targetY * width) + targetX
-        buffer[index] = buffer[index] + (error * weight.weight)
-    }
-}
-
-private extension Double {
-    func clamped(to range: ClosedRange<Double>) -> Double {
-        Swift.min(Swift.max(self, range.lowerBound), range.upperBound)
-    }
-}
-
-private extension DiffusionColor {
-    var normalizedLuminance: Double {
-        let normalizedRed = red.clamped(to: 0...255) / 255.0
-        let normalizedGreen = green.clamped(to: 0...255) / 255.0
-        let normalizedBlue = blue.clamped(to: 0...255) / 255.0
-
-        return (0.2126 * normalizedRed) + (0.7152 * normalizedGreen) + (0.0722 * normalizedBlue)
     }
 }

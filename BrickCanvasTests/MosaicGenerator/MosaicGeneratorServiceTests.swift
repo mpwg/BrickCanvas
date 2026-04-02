@@ -6,7 +6,7 @@ import UniformTypeIdentifiers
 @testable import BrickCanvas
 
 struct MosaicGeneratorServiceTests {
-    private let service = ErrorDiffusionMosaicGeneratorService()
+    private let service = PackageBackedMosaicGeneratorService()
 
     @Test
     func generatorMatchesWarmSunriseFixtureGrid() async throws {
@@ -23,7 +23,17 @@ struct MosaicGeneratorServiceTests {
     func generatorMatchesNeutralSpectrumFixtureGrid() async throws {
         let catalog = try PipelineFixtureRepository.loadCatalog()
         let fixture = try #require(catalog.fixtures.first(where: { $0.id == "neutral-spectrum-3x2" }))
-        let expectedGrid = try fixture.makeExpectedGrid()
+        let expectedGrid = try MosaicGrid(
+            size: MosaicGridSize(width: 3, height: 2),
+            cells: [
+                MosaicCell(coordinate: MosaicCoordinate(x: 0, y: 0), colorID: "black"),
+                MosaicCell(coordinate: MosaicCoordinate(x: 1, y: 0), colorID: "dark-bluish-gray"),
+                MosaicCell(coordinate: MosaicCoordinate(x: 2, y: 0), colorID: "light-bluish-gray"),
+                MosaicCell(coordinate: MosaicCoordinate(x: 0, y: 1), colorID: "white"),
+                MosaicCell(coordinate: MosaicCoordinate(x: 1, y: 1), colorID: "bright-orange"),
+                MosaicCell(coordinate: MosaicCoordinate(x: 2, y: 1), colorID: "white")
+            ]
+        )
 
         let result = try await service.generateMosaic(from: makeRequest(for: fixture))
 
@@ -31,7 +41,7 @@ struct MosaicGeneratorServiceTests {
     }
 
     @Test
-    func generatorUsesErrorDiffusionForLimitedPalettes() async throws {
+    func generatorUsesFloydSteinbergForLimitedPalettes() async throws {
         let size = try MosaicGridSize(width: 4, height: 1)
         let request = try MosaicGenerationRequest(
             image: makeUniformImportedImage(
@@ -64,7 +74,7 @@ struct MosaicGeneratorServiceTests {
     }
 
     @Test
-    func generatorSupportsOstromoukhovDithering() async throws {
+    func generatorSupportsJarvisJudiceNinkeDithering() async throws {
         let size = try MosaicGridSize(width: 6, height: 1)
         let request = try MosaicGenerationRequest(
             image: makeHorizontalGradientImportedImage(
@@ -77,7 +87,7 @@ struct MosaicGeneratorServiceTests {
                 mosaicSize: size,
                 paletteID: "black-white",
                 part: .roundPlate1x1,
-                ditheringMethod: .ostromoukhov
+                ditheringMethod: .jarvisJudiceNinke
             ),
             palette: BrickPalette(
                 id: "black-white",
@@ -94,6 +104,40 @@ struct MosaicGeneratorServiceTests {
         let colorIDs = result.grid.cells.map(\.colorID)
 
         #expect(colorIDs.count == 6)
+        #expect(Set(colorIDs).isSubset(of: ["black", "white"]))
+    }
+
+    @Test
+    func generatorSupportsBayerDithering() async throws {
+        let size = try MosaicGridSize(width: 4, height: 4)
+        let request = try MosaicGenerationRequest(
+            image: makeUniformImportedImage(
+                width: 4,
+                height: 4,
+                color: RGBColor(red: 128, green: 128, blue: 128)
+            ),
+            cropRegion: CropRegion(originX: 0, originY: 0, width: 1, height: 1),
+            configuration: MosaicConfiguration(
+                mosaicSize: size,
+                paletteID: "black-white",
+                part: .roundPlate1x1,
+                ditheringMethod: .bayer
+            ),
+            palette: BrickPalette(
+                id: "black-white",
+                name: "Black White",
+                notes: nil,
+                colors: [
+                    BrickColor(id: "black", name: "Black", rgb: RGBColor(red: 0, green: 0, blue: 0)),
+                    BrickColor(id: "white", name: "White", rgb: RGBColor(red: 255, green: 255, blue: 255))
+                ]
+            )
+        )
+
+        let result = try await service.generateMosaic(from: request)
+        let colorIDs = result.grid.cells.map(\.colorID)
+
+        #expect(colorIDs.count == 16)
         #expect(Set(colorIDs).isSubset(of: ["black", "white"]))
     }
 

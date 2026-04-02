@@ -6,6 +6,10 @@ settings:
     PRODUCT_NAME: BrickCanvas
     SWIFT_VERSION: 6.0
     IPHONEOS_DEPLOYMENT_TARGET: 26.2
+packages:
+  DitheringEngine:
+    url: https://github.com/Eskils/DitheringEngine
+    from: 1.10.0
 targets:
   BrickCanvas:
     type: application
@@ -15,6 +19,8 @@ targets:
       - path: BrickCanvas
     resources:
       - path: BrickCanvas/Resources
+    dependencies:
+      - package: DitheringEngine
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.mpwg.BrickCanvas

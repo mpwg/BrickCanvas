@@ -29,7 +29,7 @@ enum DomainFixtures {
         mosaicSize: try! MosaicGridSize(width: 4, height: 4),
         paletteID: "mvp-default",
         part: .roundPlate1x1,
-        ditheringMethod: .floydSteinberg
+        ditheringMethod: .jarvisJudiceNinke
     )
 
     static let grid = try! MosaicGrid(

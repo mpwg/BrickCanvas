@@ -36,7 +36,7 @@ struct MosaicConfiguration: Codable, Hashable, Sendable {
         mosaicSize: MosaicGridSize,
         paletteID: String,
         part: BrickPart,
-        ditheringMethod: MosaicDitheringMethod = .floydSteinberg
+        ditheringMethod: MosaicDitheringMethod = .jarvisJudiceNinke
     ) {
         self.mosaicSize = mosaicSize
         self.paletteID = paletteID

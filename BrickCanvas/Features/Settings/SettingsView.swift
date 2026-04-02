@@ -2,7 +2,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @AppStorage(PaletteListMode.storageKey) private var paletteListModeRawValue = PaletteListMode.simple.rawValue
-    @AppStorage(MosaicDitheringMethod.storageKey) private var ditheringMethodRawValue = MosaicDitheringMethod.ostromoukhov.rawValue
+    @AppStorage(MosaicDitheringMethod.storageKey) private var ditheringMethodRawValue = MosaicDitheringMethod.jarvisJudiceNinke.rawValue
     @State private var palette: BrickPalette?
     @State private var paletteLoadingError: String?
 
@@ -13,6 +13,7 @@ struct SettingsView: View {
                 ditheringMethodCard
                 paletteModeCard
                 paletteContent
+                packageCard
             }
             .frame(maxWidth: 880, alignment: .leading)
             .padding(.horizontal, 16)
@@ -31,9 +32,20 @@ struct SettingsView: View {
     }
 
     private var selectedDitheringMethod: MosaicDitheringMethod {
-        get { MosaicDitheringMethod(rawValue: ditheringMethodRawValue) ?? .ostromoukhov }
+        get { MosaicDitheringMethod(rawValue: ditheringMethodRawValue) ?? .jarvisJudiceNinke }
         nonmutating set { ditheringMethodRawValue = newValue.rawValue }
     }
+
+    private let packages: [PackageReference] = [
+        PackageReference(
+            name: "DitheringEngine",
+            version: "1.10.0",
+            integration: "Swift Package via GitHub",
+            license: "MIT",
+            sourceURL: "https://github.com/Eskils/DitheringEngine",
+            usage: "Stellt die auswählbaren Dithering-Verfahren für die Mosaik-Generierung bereit."
+        )
+    ]
 
     private var displayedColors: [BrickColor] {
         guard let palette else {
@@ -69,7 +81,7 @@ struct SettingsView: View {
             Text("Rendering")
                 .font(.largeTitle.weight(.bold))
 
-            Text("Lege fest, wie BrickCanvas neue Mosaike standardmäßig auf die LEGO-Palette quantisiert und welche Farbliste dabei angeboten wird.")
+            Text("Lege fest, wie BrickCanvas neue Mosaike standardmäßig auf die LEGO-Palette quantisiert, welche Farbliste angeboten wird und welche Swift Packages im Projekt verwendet werden.")
                 .foregroundStyle(.secondary)
         }
     }
@@ -79,16 +91,12 @@ struct SettingsView: View {
             Text("Dithering")
                 .font(.title3.weight(.semibold))
 
-            Picker("Dithering", selection: $ditheringMethodRawValue) {
-                ForEach(MosaicDitheringMethod.allCases) { method in
-                    Text(method.title).tag(method.rawValue)
-                }
-            }
-            .pickerStyle(.segmented)
-
             VStack(alignment: .leading, spacing: 10) {
                 ForEach(MosaicDitheringMethod.allCases) { method in
-                    HStack(alignment: .top, spacing: 12) {
+                    Button {
+                        selectedDitheringMethod = method
+                    } label: {
+                        HStack(alignment: .top, spacing: 12) {
                         Image(systemName: method == selectedDitheringMethod ? "checkmark.circle.fill" : "circle")
                             .foregroundStyle(method == selectedDitheringMethod ? .orange : .secondary)
 
@@ -105,10 +113,12 @@ struct SettingsView: View {
                                 .foregroundStyle(.secondary)
                         }
                     }
+                    }
+                    .buttonStyle(.plain)
                 }
             }
 
-            Text("Die Auswahl wird als Standard für neue Mosaik-Generierungen gespeichert. Ostromoukhov ist auf visuelle Qualität optimiert, Floyd-Steinberg bleibt als klassische Fallback-Methode verfügbar.")
+            Text("Die Auswahl wird als Standard für neue Mosaik-Generierungen gespeichert. Jarvis-Judice-Ninke ist hier der sinnvolle Qualitäts-Default, Floyd-Steinberg bleibt als klassische Alternative verfügbar.")
                 .font(.footnote)
                 .foregroundStyle(.secondary)
         }
@@ -196,6 +206,50 @@ struct SettingsView: View {
         }
     }
 
+    private var packageCard: some View {
+        VStack(alignment: .leading, spacing: 18) {
+            Text("Swift Packages")
+                .font(.title3.weight(.semibold))
+
+            ForEach(packages) { package in
+                VStack(alignment: .leading, spacing: 8) {
+                    HStack {
+                        Text(package.name)
+                            .font(.headline)
+
+                        Spacer()
+
+                        Text(package.version)
+                            .font(.caption.monospaced())
+                            .foregroundStyle(.secondary)
+                    }
+
+                    Text(package.usage)
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+
+                    Text("Lizenz: \(package.license)")
+                        .font(.footnote)
+
+                    Text("Einbindung: \(package.integration)")
+                        .font(.footnote)
+
+                    Text(package.sourceURL)
+                        .font(.footnote.monospaced())
+                        .foregroundStyle(.secondary)
+                        .textSelection(.enabled)
+                }
+                .padding(16)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(
+                    RoundedRectangle(cornerRadius: 20, style: .continuous)
+                        .fill(Color(.tertiarySystemGroupedBackground))
+                )
+            }
+        }
+        .settingsCardStyle()
+    }
+
     private func statCard(title: String, value: String, tint: Color) -> some View {
         VStack(alignment: .leading, spacing: 6) {
             Text(title)
@@ -262,6 +316,17 @@ struct SettingsView: View {
             paletteLoadingError = error.localizedDescription
         }
     }
+}
+
+private struct PackageReference: Identifiable {
+    let name: String
+    let version: String
+    let integration: String
+    let license: String
+    let sourceURL: String
+    let usage: String
+
+    var id: String { name }
 }
 
 #Preview {
