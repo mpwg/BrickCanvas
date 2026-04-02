@@ -1,7 +1,9 @@
 import Accelerate
 import CoreGraphics
+import DitheringEngine
 import Foundation
 import ImageIO
+import simd
 
 struct MosaicWorkingRaster: Codable, Hashable, Sendable {
     let size: MosaicGridSize
@@ -44,6 +46,28 @@ protocol MosaicWorkingRasterService: Sendable {
 
 protocol MosaicGeneratorService: Sendable {
     func generateMosaic(from request: MosaicGenerationRequest) async throws -> MosaicGenerationResult
+}
+
+struct PackageBackedMosaicGeneratorService: MosaicGeneratorService {
+    private let workingRasterService: MosaicWorkingRasterService
+
+    init(
+        workingRasterService: MosaicWorkingRasterService = HighQualityMosaicWorkingRasterService()
+    ) {
+        self.workingRasterService = workingRasterService
+    }
+
+    func generateMosaic(from request: MosaicGenerationRequest) async throws -> MosaicGenerationResult {
+        let workingRaster = try await workingRasterService.makeWorkingRaster(from: request)
+        let ditheredPixels = try await Task.detached(priority: .userInitiated) {
+            try ditherPixels(in: workingRaster, using: request.configuration.ditheringMethod, palette: request.palette)
+        }.value
+        let cells = try buildCells(from: ditheredPixels, size: workingRaster.size, palette: request.palette)
+
+        return MosaicGenerationResult(
+            grid: try MosaicGrid(size: workingRaster.size, cells: cells)
+        )
+    }
 }
 
 struct HighQualityMosaicWorkingRasterService: MosaicWorkingRasterService {
@@ -184,4 +208,130 @@ private func makePixels(from buffer: vImage_Buffer, width: Int, height: Int) -> 
     }
 
     return pixels
+}
+
+private func ditherPixels(
+    in workingRaster: MosaicWorkingRaster,
+    using method: MosaicDitheringMethod,
+    palette: PaletteDescriptor
+) throws -> [RGBColor] {
+    let inputImage = try makeCGImage(from: workingRaster)
+    let engine = DitheringEngine()
+    try engine.set(image: inputImage)
+    engine.preserveTransparency = false
+
+    let ditheredImage = try engine.dither(
+        usingMethod: method.packageMethod,
+        andPalette: .custom,
+        withDitherMethodSettings: method.makePackageSettings(),
+        withPaletteSettings: CustomPaletteSettingsConfiguration(entries: palette.colors.map(\.rgb.simd3))
+    )
+
+    return try extractPixels(
+        from: ditheredImage,
+        width: workingRaster.size.width,
+        height: workingRaster.size.height
+    )
+}
+
+private func makeCGImage(from workingRaster: MosaicWorkingRaster) throws -> CGImage {
+    let width = workingRaster.size.width
+    let height = workingRaster.size.height
+    var bytes: [UInt8] = []
+    bytes.reserveCapacity(width * height * 4)
+
+    for pixel in workingRaster.pixels {
+        bytes.append(pixel.red)
+        bytes.append(pixel.green)
+        bytes.append(pixel.blue)
+        bytes.append(255)
+    }
+
+    guard let colorSpace = CGColorSpace(name: CGColorSpace.sRGB),
+          let provider = CGDataProvider(data: Data(bytes) as CFData) else {
+        throw ServiceError.processingFailed("Das Arbeitsraster konnte nicht in ein CGImage überführt werden.")
+    }
+
+    guard let image = CGImage(
+        width: width,
+        height: height,
+        bitsPerComponent: 8,
+        bitsPerPixel: 32,
+        bytesPerRow: width * 4,
+        space: colorSpace,
+        bitmapInfo: CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue | CGBitmapInfo.byteOrder32Big.rawValue),
+        provider: provider,
+        decode: nil,
+        shouldInterpolate: false,
+        intent: .defaultIntent
+    ) else {
+        throw ServiceError.processingFailed("Das Arbeitsraster konnte nicht als Bild erzeugt werden.")
+    }
+
+    return image
+}
+
+private func extractPixels(from image: CGImage, width: Int, height: Int) throws -> [RGBColor] {
+    var format = try makeRGBAFormat()
+    let buffer = try makeSourceBuffer(from: image, format: &format)
+    defer {
+        free(buffer.data)
+    }
+
+    return makePixels(from: buffer, width: width, height: height)
+}
+
+private func buildCells(
+    from pixels: [RGBColor],
+    size: MosaicGridSize,
+    palette: PaletteDescriptor
+) throws -> [MosaicCell] {
+    let colorIDsByRGB = Dictionary(uniqueKeysWithValues: palette.colors.map { ($0.rgb, $0.id) })
+
+    return try pixels.enumerated().map { index, pixel in
+        guard let colorID = colorIDsByRGB[pixel] else {
+            throw ServiceError.processingFailed(
+                "Die Package-Ausgabe enthält eine Farbe außerhalb der Zielpalette: \(pixel.hexString)."
+            )
+        }
+
+        return MosaicCell(
+            coordinate: MosaicCoordinate(x: index % size.width, y: index / size.width),
+            colorID: colorID
+        )
+    }
+}
+
+private extension RGBColor {
+    var simd3: SIMD3<UInt8> {
+        SIMD3(red, green, blue)
+    }
+}
+
+private extension MosaicDitheringMethod {
+    var packageMethod: DitherMethod {
+        switch self {
+        case .threshold:
+            return .threshold
+        case .floydSteinberg:
+            return .floydSteinberg
+        case .atkinson:
+            return .atkinson
+        case .jarvisJudiceNinke:
+            return .jarvisJudiceNinke
+        case .bayer:
+            return .bayer
+        }
+    }
+
+    func makePackageSettings() -> SettingsConfiguration {
+        switch self {
+        case .threshold, .atkinson, .jarvisJudiceNinke:
+            return EmptyPaletteSettingsConfiguration()
+        case .floydSteinberg:
+            return FloydSteinbergSettingsConfiguration(direction: .leftToRight)
+        case .bayer:
+            return BayerSettingsConfiguration(thresholdMapSize: 3, intensity: 0.85, performOnCPU: true)
+        }
+    }
 }
