@@ -10,6 +10,13 @@ struct PaletteQuery: Hashable, Sendable {
         self.paletteID = paletteID
         self.includeInactiveColors = includeInactiveColors
     }
+
+    init(paletteID: String, listMode: PaletteListMode) {
+        self.init(
+            paletteID: paletteID,
+            includeInactiveColors: listMode.includesRareColors
+        )
+    }
 }
 
 protocol PaletteService: Sendable {

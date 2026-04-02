@@ -55,10 +55,10 @@ struct PerceptualColorMatcherService: ColorMatcherService {
 
     private func availableColors(for request: ColorMatchRequest) -> [BrickColor] {
         guard let allowedColorIDs = request.allowedColorIDs, !allowedColorIDs.isEmpty else {
-            return request.palette.activeColors
+            return request.palette.colors
         }
 
-        return request.palette.activeColors.filter { allowedColorIDs.contains($0.id) }
+        return request.palette.colors.filter { allowedColorIDs.contains($0.id) }
     }
 
     private func compare(lhs: BrickColor, rhs: BrickColor, sample: RGBColor) -> Bool {
