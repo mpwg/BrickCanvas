@@ -3,11 +3,15 @@ import PhotosUI
 import SwiftUI
 
 struct NewProjectView: View {
+    private static let minimumMosaicDimension = 16.0
+    private static let maximumMosaicDimension = 128.0
+
     @State private var selectedPhotoItem: PhotosPickerItem?
     @State private var importedImage: ImportedImage?
     @State private var previewImage: CGImage?
     @State private var cropRegion: CropRegion?
     @State private var cropPreset: CropAspectPreset = .square
+    @State private var mosaicSize: Double = 48
     @State private var errorMessage: String?
     @State private var isImporting = false
 
@@ -46,6 +50,9 @@ struct NewProjectView: View {
                             editorHeight: editorHeight
                         )
                         .frame(maxWidth: pageWidth, alignment: .leading)
+
+                        mosaicConfigurationCard(previewImage: previewImage)
+                            .frame(maxWidth: pageWidth, alignment: .leading)
                     } else if isImporting == false {
                         emptyStateCard
                             .frame(maxWidth: pageWidth, alignment: .leading)
@@ -191,6 +198,33 @@ struct NewProjectView: View {
         .cardStyle()
     }
 
+    private func mosaicConfigurationCard(previewImage: CGImage) -> some View {
+        VStack(alignment: .leading, spacing: 20) {
+            VStack(alignment: .leading, spacing: 8) {
+                Text("3. Mosaikgröße")
+                    .font(.title3.weight(.semibold))
+
+                Text("Die gewählte Größe definiert das Zielraster für die spätere Generierung. Größere Raster liefern mehr Detail, benötigen aber entsprechend mehr Einzelsteine.")
+                    .foregroundStyle(.secondary)
+            }
+
+            mosaicSizePicker
+
+            VStack(alignment: .leading, spacing: 10) {
+                Label(outputResolutionDescription(previewImage: previewImage), systemImage: "square.grid.3x3.fill")
+                    .fixedSize(horizontal: false, vertical: true)
+
+                if cropPreset != .square {
+                    Label("Die aktuellen Größen-Presets sind quadratisch. Für ein unverzerrtes Ergebnis ist ein quadratischer Zuschnitt empfohlen.", systemImage: "info.circle")
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            }
+            .font(.footnote)
+            .foregroundStyle(.secondary)
+        }
+        .cardStyle(tint: .orange.opacity(0.08))
+    }
+
     private var aspectPresetPicker: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text("Seitenverhältnis")
@@ -216,6 +250,71 @@ struct NewProjectView: View {
                         .accessibilityLabel(preset.accessibilityLabel)
                     }
                 }
+            }
+        }
+    }
+
+    private var mosaicSizePicker: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Zielgröße")
+                .font(.subheadline.weight(.semibold))
+
+            VStack(alignment: .leading, spacing: 14) {
+                HStack(alignment: .firstTextBaseline) {
+                    Text("\(currentMosaicDimension) × \(currentMosaicDimension)")
+                        .font(.title2.weight(.bold))
+
+                    Spacer()
+
+                    Text("\(currentMosaicGridSize.studCount) Noppen")
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(.secondary)
+                }
+
+                Slider(
+                    value: Binding(
+                        get: { mosaicSize },
+                        set: { mosaicSize = snappedMosaicSize(for: $0) }
+                    ),
+                    in: Self.minimumMosaicDimension...Self.maximumMosaicDimension,
+                    step: 1
+                )
+                .tint(.orange)
+                .accessibilityLabel("Mosaikgröße")
+                .accessibilityValue("\(currentMosaicDimension) mal \(currentMosaicDimension) Noppen")
+                .overlay(alignment: .bottomLeading) {
+                    GeometryReader { proxy in
+                        let trackWidth = max(proxy.size.width - 28, 1)
+
+                        ZStack(alignment: .leading) {
+                            ForEach(MosaicSizePreset.allCases) { preset in
+                                Capsule()
+                                    .fill(currentMosaicDimension == preset.gridSize.width ? Color.orange : Color.secondary.opacity(0.45))
+                                    .frame(width: 3, height: 10)
+                                    .offset(
+                                        x: markerOffset(
+                                            for: Double(preset.gridSize.width),
+                                            trackWidth: trackWidth
+                                        ),
+                                        y: 18
+                                    )
+                            }
+                        }
+                    }
+                    .frame(height: 28)
+                }
+
+                HStack {
+                    Text("\(Int(Self.minimumMosaicDimension))")
+                    Spacer()
+                    Text("\(Int(Self.maximumMosaicDimension))")
+                }
+                .font(.caption)
+                .foregroundStyle(.secondary)
+
+                Text("Der Slider erlaubt alle Werte von 16 bis \(Int(Self.maximumMosaicDimension)). An den bisherigen Standardgrößen 24, 48 und 64 rastet er ein.")
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
             }
         }
     }
@@ -252,6 +351,7 @@ struct NewProjectView: View {
             previewImage = try makePreviewImage(from: result.image.asset.data)
             cropRegion = nil
             cropPreset = .square
+            mosaicSize = 48
         } catch {
             importedImage = nil
             previewImage = nil
@@ -278,6 +378,43 @@ struct NewProjectView: View {
             height: CGFloat(previewImage?.height ?? 1)
         ))
         return min(width / max(ratio, 0.1), 520)
+    }
+
+    private func outputResolutionDescription(previewImage: CGImage) -> String {
+        let size = currentMosaicGridSize
+
+        if let cropRegion {
+            let cropWidth = Int((Double(previewImage.width) * cropRegion.width).rounded())
+            let cropHeight = Int((Double(previewImage.height) * cropRegion.height).rounded())
+            return "Aktiver Zuschnitt \(cropWidth) × \(cropHeight) px -> Zielraster \(size.width) × \(size.height) Noppen (\(size.studCount) Positionen)"
+        }
+
+        return "Zielraster \(size.width) × \(size.height) Noppen (\(size.studCount) Positionen)"
+    }
+
+    private var currentMosaicDimension: Int {
+        Int(mosaicSize.rounded())
+    }
+
+    private var currentMosaicGridSize: MosaicGridSize {
+        try! MosaicGridSize(width: currentMosaicDimension, height: currentMosaicDimension)
+    }
+
+    private func snappedMosaicSize(for proposedValue: Double) -> Double {
+        let roundedValue = proposedValue.rounded()
+        let snapValues = MosaicSizePreset.allCases.map { Double($0.gridSize.width) }
+
+        if let snapValue = snapValues.first(where: { abs($0 - roundedValue) <= 2 }) {
+            return snapValue
+        }
+
+        return roundedValue
+    }
+
+    private func markerOffset(for value: Double, trackWidth: CGFloat) -> CGFloat {
+        let clampedValue = min(max(value, Self.minimumMosaicDimension), Self.maximumMosaicDimension)
+        let normalizedValue = (clampedValue - Self.minimumMosaicDimension) / (Self.maximumMosaicDimension - Self.minimumMosaicDimension)
+        return trackWidth * normalizedValue + 14
     }
 
     private func makePreviewImage(from data: Data) throws -> CGImage {
