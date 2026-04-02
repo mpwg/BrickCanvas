@@ -107,6 +107,28 @@ struct PerceptualColorMatcherServiceTests {
             #expect(error == .invalidInput("Die Farbpalette enthält keine matchbaren Farben."))
         }
     }
+
+    @Test
+    func matcherUsesRareColorsWhenCompletePaletteIsLoaded() async throws {
+        let paletteService = try BundledPaletteService()
+        let palette = try await paletteService.palette(
+            for: PaletteQuery(
+                paletteID: "mvp-default",
+                listMode: .complete
+            )
+        )
+        let matcher = PerceptualColorMatcherService()
+
+        let result = try await matcher.nearestColor(
+            for: ColorMatchRequest(
+                sample: MatchableColorSample(red: 252, green: 252, blue: 252),
+                palette: palette,
+                allowedColorIDs: ["lego-47-trans-clear"]
+            )
+        )
+
+        #expect(result.matchedColor.id == "lego-47-trans-clear")
+    }
 }
 
 private extension Array {

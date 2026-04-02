@@ -12,6 +12,7 @@ struct PaletteServiceTests {
         #expect(palette.id == "mvp-default")
         #expect(palette.colors.count == 12)
         #expect(palette.colors.contains(where: { $0.id == "bright-red" }))
+        #expect(palette.colors.contains(where: { $0.id == "medium-blue" }))
         #expect(palette.colors.contains(where: { $0.id == "light-bluish-gray" }))
     }
 
@@ -22,7 +23,22 @@ struct PaletteServiceTests {
         let palettes = try await service.availablePalettes()
 
         #expect(palettes.count == 1)
-        #expect(palettes.first?.name == "MVP Default")
+        #expect(palettes.first?.name == "LEGO Standardpalette")
+    }
+
+    @Test
+    func bundledPaletteServiceCanLoadCompletePalette() async throws {
+        let service = try BundledPaletteService()
+
+        let palette = try await service.palette(
+            for: PaletteQuery(
+                paletteID: "mvp-default",
+                listMode: .complete
+            )
+        )
+
+        #expect(palette.colors.count == 273)
+        #expect(palette.colors.contains(where: { $0.id == "lego-47-trans-clear" }))
     }
 
     @Test
@@ -108,4 +124,3 @@ struct PaletteServiceTests {
         #expect(full.colors.count == 2)
     }
 }
-
