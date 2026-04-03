@@ -10,7 +10,7 @@ on:
 
 jobs:
   build-and-test:
-    name: Build and test on macOS 26 / Xcode 26.4
+    name: Build and test on macOS 26 / Xcode 26
     runs-on: macos-26
 
     steps:
