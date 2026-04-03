@@ -230,7 +230,7 @@ This scaffold is intentionally limited to app structure and navigation. Domain m
 
 ### Requirements
 
-- Xcode 26
+- Xcode 26.4
 - XcodeGen
 - Metal Toolchain
 
@@ -259,7 +259,7 @@ Generate the Xcode project:
 Build from the command line:
 
 ```bash
-xcodebuild -project BrickCanvas.xcodeproj -scheme BrickCanvas -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.2' build
+xcodebuild -project BrickCanvas.xcodeproj -scheme BrickCanvas -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.4' build
 ```
 
 Run tests from the command line:
