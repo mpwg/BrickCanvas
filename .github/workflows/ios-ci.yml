@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Select Xcode 26.4
         run: sudo xcode-select -s /Applications/Xcode_26.4.app/Contents/Developer
@@ -30,7 +30,7 @@ jobs:
 
       - name: Restore cached Metal Toolchain bundle
         id: metal-cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ${{ runner.temp }}/metal-toolchain
           key: metal-toolchain-${{ runner.os }}-xcode-26.4-${{ steps.metal-component.outputs.build_version }}
