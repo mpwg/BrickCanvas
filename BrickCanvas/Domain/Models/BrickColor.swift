@@ -15,6 +15,16 @@ struct BrickColor: Identifiable, Codable, Hashable, Sendable {
         self.isActive = isActive
         self.notes = notes
     }
+
+    func with(isActive: Bool) -> BrickColor {
+        BrickColor(
+            id: id,
+            name: name,
+            rgb: rgb,
+            isActive: isActive,
+            notes: notes
+        )
+    }
 }
 
 struct RGBColor: Codable, Hashable, Sendable {

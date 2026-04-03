@@ -5,17 +5,16 @@ typealias PaletteDescriptor = BrickPalette
 struct PaletteQuery: Hashable, Sendable {
     let paletteID: String
     let includeInactiveColors: Bool
+    let activeColorIDs: Set<String>?
 
-    init(paletteID: String, includeInactiveColors: Bool = false) {
+    init(
+        paletteID: String,
+        includeInactiveColors: Bool = false,
+        activeColorIDs: Set<String>? = nil
+    ) {
         self.paletteID = paletteID
         self.includeInactiveColors = includeInactiveColors
-    }
-
-    init(paletteID: String, listMode: PaletteListMode) {
-        self.init(
-            paletteID: paletteID,
-            includeInactiveColors: listMode.includesRareColors
-        )
+        self.activeColorIDs = activeColorIDs
     }
 }
 
@@ -59,6 +58,13 @@ struct BundledPaletteService: PaletteService {
             throw ServiceError.unavailable("Palette \(query.paletteID) ist nicht verfügbar.")
         }
 
-        return palette.filtered(includeInactiveColors: query.includeInactiveColors)
+        let effectivePalette: BrickPalette
+        if let activeColorIDs = query.activeColorIDs {
+            effectivePalette = palette.applyingActiveColorIDs(activeColorIDs)
+        } else {
+            effectivePalette = palette
+        }
+
+        return effectivePalette.filtered(includeInactiveColors: query.includeInactiveColors)
     }
 }

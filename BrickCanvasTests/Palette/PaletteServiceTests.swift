@@ -33,7 +33,7 @@ struct PaletteServiceTests {
         let palette = try await service.palette(
             for: PaletteQuery(
                 paletteID: "mvp-default",
-                listMode: .complete
+                includeInactiveColors: true
             )
         )
 
@@ -122,5 +122,62 @@ struct PaletteServiceTests {
         #expect(filtered.colors.count == 1)
         #expect(filtered.colors.first?.id == "active")
         #expect(full.colors.count == 2)
+    }
+
+    @Test
+    func paletteQueryAppliesCustomActiveColorIDs() async throws {
+        let catalog = try PaletteCatalogDecoder.decode(
+            data: Data(
+                """
+                {
+                  "version": "test",
+                  "palettes": [
+                    {
+                      "id": "test-palette",
+                      "name": "Test Palette",
+                      "notes": null,
+                      "colors": [
+                        {
+                          "id": "base",
+                          "name": "Base",
+                          "rgb": { "red": 255, "green": 255, "blue": 255 },
+                          "isActive": true,
+                          "notes": null
+                        },
+                        {
+                          "id": "rare",
+                          "name": "Rare",
+                          "rgb": { "red": 10, "green": 10, "blue": 10 },
+                          "isActive": false,
+                          "notes": null
+                        }
+                      ]
+                    }
+                  ]
+                }
+                """.utf8
+            )
+        )
+
+        let service = BundledPaletteService(catalog: catalog)
+
+        let filtered = try await service.palette(
+            for: PaletteQuery(
+                paletteID: "test-palette",
+                activeColorIDs: ["rare"]
+            )
+        )
+        let full = try await service.palette(
+            for: PaletteQuery(
+                paletteID: "test-palette",
+                includeInactiveColors: true,
+                activeColorIDs: ["rare"]
+            )
+        )
+
+        #expect(filtered.colors.count == 1)
+        #expect(filtered.colors.first?.id == "rare")
+        #expect(full.activeColors.map(\.id) == ["rare"])
+        #expect(full.colors.first(where: { $0.id == "base" })?.isActive == false)
     }
 }

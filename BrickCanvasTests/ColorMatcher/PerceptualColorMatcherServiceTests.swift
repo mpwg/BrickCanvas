@@ -114,7 +114,7 @@ struct PerceptualColorMatcherServiceTests {
         let palette = try await paletteService.palette(
             for: PaletteQuery(
                 paletteID: "mvp-default",
-                listMode: .complete
+                includeInactiveColors: true
             )
         )
         let matcher = PerceptualColorMatcherService()
