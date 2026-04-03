@@ -5,7 +5,7 @@ settings:
   base:
     PRODUCT_NAME: BrickCanvas
     SWIFT_VERSION: 6.0
-    IPHONEOS_DEPLOYMENT_TARGET: 26.2
+    IPHONEOS_DEPLOYMENT_TARGET: 26.4
 packages:
   DitheringEngine:
     url: https://github.com/Eskils/DitheringEngine
@@ -14,7 +14,7 @@ targets:
   BrickCanvas:
     type: application
     platform: iOS
-    deploymentTarget: "26.2"
+    deploymentTarget: "26.4"
     sources:
       - path: BrickCanvas
     resources:
@@ -45,7 +45,7 @@ targets:
   BrickCanvasTests:
     type: bundle.unit-test
     platform: iOS
-    deploymentTarget: "26.2"
+    deploymentTarget: "26.4"
     sources:
       - path: BrickCanvasTests
     dependencies:

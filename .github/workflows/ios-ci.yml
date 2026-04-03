@@ -10,8 +10,10 @@ on:
 
 jobs:
   build-and-test:
-    name: Build and test on macOS 26 / Xcode 26
+    name: Build and test on macOS 26 / Xcode 26.4
     runs-on: macos-26
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_26.4.app/Contents/Developer
 
     steps:
       - name: Check out repository
@@ -30,7 +32,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ${{ runner.temp }}/metal-toolchain
-          key: metal-toolchain-${{ runner.os }}-xcode-26-${{ steps.metal-component.outputs.build_version }}
+          key: metal-toolchain-${{ runner.os }}-xcode-26.4-${{ steps.metal-component.outputs.build_version }}
 
       - name: Download Metal Toolchain bundle
         if: steps.metal-cache.outputs.cache-hit != 'true'
@@ -73,7 +75,7 @@ jobs:
           xcodebuild
           -project BrickCanvas.xcodeproj
           -scheme BrickCanvas
-          -destination 'generic/platform=iOS Simulator'
+          -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.4'
           build
 
       - name: Run tests
@@ -81,5 +83,5 @@ jobs:
           xcodebuild
           -project BrickCanvas.xcodeproj
           -scheme BrickCanvas
-          -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.2'
+          -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.4'
           test
