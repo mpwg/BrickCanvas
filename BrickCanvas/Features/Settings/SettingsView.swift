@@ -3,6 +3,7 @@ import SwiftUI
 struct SettingsView: View {
     @AppStorage(PaletteListMode.storageKey) private var paletteListModeRawValue = PaletteListMode.simple.rawValue
     @AppStorage(MosaicDitheringMethod.storageKey) private var ditheringMethodRawValue = MosaicDitheringMethod.jarvisJudiceNinke.rawValue
+    @AppStorage(PaletteActivationStore.storageKey) private var paletteActivationStateRawValue = ""
     @State private var palette: BrickPalette?
     @State private var paletteLoadingError: String?
 
@@ -27,8 +28,26 @@ struct SettingsView: View {
     }
 
     private var selectedPaletteListMode: PaletteListMode {
-        get { PaletteListMode(rawValue: paletteListModeRawValue) ?? .simple }
-        nonmutating set { paletteListModeRawValue = newValue.rawValue }
+        get {
+            guard let palette else {
+                return PaletteListMode(rawValue: paletteListModeRawValue) ?? .simple
+            }
+
+            let activeColorIDs = PaletteActivationStore.activeColorIDs(from: paletteActivationStateRawValue, for: palette)
+            if activeColorIDs == palette.activeColorIDs {
+                return .simple
+            }
+
+            if activeColorIDs == palette.allColorIDs {
+                return .complete
+            }
+
+            return .custom
+        }
+        nonmutating set {
+            paletteListModeRawValue = newValue.rawValue
+            applyPalettePreset(newValue)
+        }
     }
 
     private var selectedDitheringMethod: MosaicDitheringMethod {
@@ -47,29 +66,29 @@ struct SettingsView: View {
         )
     ]
 
-    private var displayedColors: [BrickColor] {
-        guard let palette else {
-            return []
-        }
-
-        switch selectedPaletteListMode {
-        case .simple:
-            return palette.activeColors
-        case .complete:
-            return palette.colors
-        }
-    }
-
-    private var basisColorCount: Int {
+    private var basePaletteColorCount: Int {
         palette?.activeColors.count ?? 0
     }
 
-    private var rareColorCount: Int {
+    private var fullPaletteColorCount: Int {
+        palette?.colors.count ?? 0
+    }
+
+    private var activePaletteColorCount: Int {
+        effectivePalette?.activeColors.count ?? 0
+    }
+
+    private var inactivePaletteColorCount: Int {
+        max(fullPaletteColorCount - activePaletteColorCount, 0)
+    }
+
+    private var effectivePalette: BrickPalette? {
         guard let palette else {
-            return 0
+            return nil
         }
 
-        return palette.colors.count - palette.activeColors.count
+        let activeColorIDs = PaletteActivationStore.activeColorIDs(from: paletteActivationStateRawValue, for: palette)
+        return palette.applyingActiveColorIDs(activeColorIDs)
     }
 
     private var header: some View {
@@ -127,12 +146,15 @@ struct SettingsView: View {
 
     private var paletteModeCard: some View {
         VStack(alignment: .leading, spacing: 18) {
-            Text("Farbliste")
+            Text("Aktive Farben")
                 .font(.title3.weight(.semibold))
 
-            Picker("Farbliste", selection: $paletteListModeRawValue) {
+            Picker("Aktivierungsmodus", selection: Binding(
+                get: { selectedPaletteListMode },
+                set: { selectedPaletteListMode = $0 }
+            )) {
                 ForEach(PaletteListMode.allCases) { mode in
-                    Text(mode.title).tag(mode.rawValue)
+                    Text(mode.title).tag(mode)
                 }
             }
             .pickerStyle(.segmented)
@@ -155,24 +177,28 @@ struct SettingsView: View {
                 }
             }
             .animation(.default, value: selectedPaletteListMode)
+
+            Text("Du kannst jederzeit einzelne Farben direkt in der Liste umschalten. Das Dithering verwendet ausschließlich die hier aktiven Farben.")
+                .font(.footnote)
+                .foregroundStyle(.secondary)
         }
         .settingsCardStyle()
     }
 
     @ViewBuilder
     private var paletteContent: some View {
-        if palette != nil {
+        if let effectivePalette {
             VStack(alignment: .leading, spacing: 20) {
-                Text("Vorschau")
+                Text("Farbaktivierung")
                     .font(.title3.weight(.semibold))
 
                 HStack(spacing: 12) {
-                    statCard(title: "Basisfarben", value: "\(basisColorCount)", tint: .orange.opacity(0.18))
-                    statCard(title: "Seltene Farben", value: "\(rareColorCount)", tint: .blue.opacity(0.16))
-                    statCard(title: "Aktuelle Liste", value: "\(displayedColors.count)", tint: .green.opacity(0.16))
+                    statCard(title: "Basisfarben", value: "\(basePaletteColorCount)", tint: .orange.opacity(0.18))
+                    statCard(title: "Aktiv", value: "\(activePaletteColorCount)", tint: .green.opacity(0.16))
+                    statCard(title: "Inaktiv", value: "\(inactivePaletteColorCount)", tint: .blue.opacity(0.16))
                 }
 
-                Text("Die 12 Basisfarben orientieren sich an der Farbreferenz von 1000steine. In der vollständigen Ansicht werden zusätzlich alle seltenen Farben aus der importierten LEGO-Tabelle eingeblendet.")
+                Text("Die Basisfarben orientieren sich an der Farbreferenz von 1000steine. Darüber hinaus kannst du jede importierte LEGO-Farbe einzeln aktivieren oder deaktivieren.")
                     .font(.footnote)
                     .foregroundStyle(.secondary)
 
@@ -181,7 +207,7 @@ struct SettingsView: View {
                     alignment: .leading,
                     spacing: 12
                 ) {
-                    ForEach(displayedColors) { color in
+                    ForEach(effectivePalette.colors) { color in
                         colorChip(for: color)
                     }
                 }
@@ -268,34 +294,46 @@ struct SettingsView: View {
     }
 
     private func colorChip(for color: BrickColor) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            RoundedRectangle(cornerRadius: 14, style: .continuous)
-                .fill(Color(rgbColor: color.rgb))
-                .frame(height: 56)
-                .overlay(alignment: .topTrailing) {
-                    Text(color.isActive ? "Basis" : "Selten")
+        let isDefaultActive = palette?.activeColorIDs.contains(color.id) ?? false
+
+        return VStack(alignment: .leading, spacing: 10) {
+            HStack(alignment: .top, spacing: 10) {
+                RoundedRectangle(cornerRadius: 14, style: .continuous)
+                    .fill(Color(rgbColor: color.rgb))
+                    .frame(width: 48, height: 48)
+
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(color.name)
+                        .font(.subheadline.weight(.semibold))
+                        .lineLimit(2)
+
+                    Text(color.rgb.hexString)
+                        .font(.caption.monospaced())
+                        .foregroundStyle(.secondary)
+
+                    Text(isDefaultActive ? "Basisfarbe" : "Erweiterungsfarbe")
                         .font(.caption2.weight(.semibold))
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 5)
-                        .background(.ultraThinMaterial, in: Capsule())
-                        .padding(8)
+                        .foregroundStyle(isDefaultActive ? .orange : .secondary)
                 }
 
-            VStack(alignment: .leading, spacing: 4) {
-                Text(color.name)
-                    .font(.subheadline.weight(.semibold))
-                    .lineLimit(2)
-
-                Text(color.rgb.hexString)
-                    .font(.caption.monospaced())
-                    .foregroundStyle(.secondary)
+                Spacer(minLength: 0)
             }
+
+            Toggle(isOn: Binding(
+                get: { color.isActive },
+                set: { _ in toggleColor(color.id) }
+            )) {
+                Text(color.isActive ? "Aktiv für Dithering" : "Nicht aktiv")
+                    .font(.footnote.weight(.medium))
+            }
+            .toggleStyle(.switch)
+            .disabled(color.isActive && activePaletteColorCount <= 1)
         }
         .padding(12)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(
             RoundedRectangle(cornerRadius: 20, style: .continuous)
-                .fill(Color(.secondarySystemGroupedBackground))
+                .fill(color.isActive ? Color(.secondarySystemGroupedBackground) : Color(.tertiarySystemGroupedBackground))
         )
     }
 
@@ -315,6 +353,53 @@ struct SettingsView: View {
         } catch {
             paletteLoadingError = error.localizedDescription
         }
+    }
+
+    private func applyPalettePreset(_ preset: PaletteListMode) {
+        guard let palette else {
+            return
+        }
+
+        let activeColorIDs: Set<String>
+        switch preset {
+        case .simple:
+            activeColorIDs = palette.activeColorIDs
+        case .complete:
+            activeColorIDs = palette.allColorIDs
+        case .custom:
+            return
+        }
+
+        paletteActivationStateRawValue = PaletteActivationStore.save(
+            activeColorIDs: activeColorIDs,
+            for: palette.id,
+            in: paletteActivationStateRawValue
+        )
+    }
+
+    private func toggleColor(_ colorID: String) {
+        guard let palette else {
+            return
+        }
+
+        var activeColorIDs = PaletteActivationStore.activeColorIDs(from: paletteActivationStateRawValue, for: palette)
+
+        if activeColorIDs.contains(colorID) {
+            guard activeColorIDs.count > 1 else {
+                return
+            }
+
+            activeColorIDs.remove(colorID)
+        } else {
+            activeColorIDs.insert(colorID)
+        }
+
+        paletteActivationStateRawValue = PaletteActivationStore.save(
+            activeColorIDs: activeColorIDs,
+            for: palette.id,
+            in: paletteActivationStateRawValue
+        )
+        paletteListModeRawValue = PaletteListMode.custom.rawValue
     }
 }
 

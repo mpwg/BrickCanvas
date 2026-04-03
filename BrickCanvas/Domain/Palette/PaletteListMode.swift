@@ -3,6 +3,7 @@ import Foundation
 enum PaletteListMode: String, CaseIterable, Identifiable, Codable, Hashable, Sendable {
     case simple
     case complete
+    case custom
 
     static let storageKey = "paletteListMode"
 
@@ -11,27 +12,22 @@ enum PaletteListMode: String, CaseIterable, Identifiable, Codable, Hashable, Sen
     var title: String {
         switch self {
         case .simple:
-            "Einfach"
+            "Basis"
         case .complete:
-            "Vollständig"
+            "Alle"
+        case .custom:
+            "Individuell"
         }
     }
 
     var description: String {
         switch self {
         case .simple:
-            "Nur die 12 Basisfarben laut Farbreferenz."
+            "Aktiviert nur die standardmäßig vorgesehenen Basisfarben."
         case .complete:
-            "Alle Basisfarben plus seltene Erweiterungsfarben."
-        }
-    }
-
-    var includesRareColors: Bool {
-        switch self {
-        case .simple:
-            false
-        case .complete:
-            true
+            "Aktiviert die vollständige LEGO-Palette."
+        case .custom:
+            "Beliebige Einzelwahl pro Farbe. Das Dithering nutzt nur aktivierte Farben."
         }
     }
 }

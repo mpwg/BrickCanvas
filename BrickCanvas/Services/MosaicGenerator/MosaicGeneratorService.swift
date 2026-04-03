@@ -215,6 +215,11 @@ private func ditherPixels(
     using method: MosaicDitheringMethod,
     palette: PaletteDescriptor
 ) throws -> [RGBColor] {
+    let activeColors = palette.activeColors
+    guard activeColors.isEmpty == false else {
+        throw ServiceError.invalidInput("Für das Dithering muss mindestens eine LEGO-Farbe aktiv sein.")
+    }
+
     let inputImage = try makeCGImage(from: workingRaster)
     let engine = DitheringEngine()
     try engine.set(image: inputImage)
@@ -224,7 +229,7 @@ private func ditherPixels(
         usingMethod: method.packageMethod,
         andPalette: .custom,
         withDitherMethodSettings: method.makePackageSettings(),
-        withPaletteSettings: CustomPaletteSettingsConfiguration(entries: palette.colors.map(\.rgb.simd3))
+        withPaletteSettings: CustomPaletteSettingsConfiguration(entries: activeColors.map(\.rgb.simd3))
     )
 
     return try extractPixels(
@@ -286,7 +291,7 @@ private func buildCells(
     size: MosaicGridSize,
     palette: PaletteDescriptor
 ) throws -> [MosaicCell] {
-    let colorIDsByRGB = Dictionary(uniqueKeysWithValues: palette.colors.map { ($0.rgb, $0.id) })
+    let colorIDsByRGB = Dictionary(uniqueKeysWithValues: palette.activeColors.map { ($0.rgb, $0.id) })
 
     return try pixels.enumerated().map { index, pixel in
         guard let colorID = colorIDsByRGB[pixel] else {

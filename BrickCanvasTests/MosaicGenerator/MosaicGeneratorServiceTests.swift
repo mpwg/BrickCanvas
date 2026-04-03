@@ -141,6 +141,38 @@ struct MosaicGeneratorServiceTests {
         #expect(Set(colorIDs).isSubset(of: ["black", "white"]))
     }
 
+    @Test
+    func generatorIgnoresInactivePaletteColorsDuringDithering() async throws {
+        let size = try MosaicGridSize(width: 1, height: 1)
+        let request = try MosaicGenerationRequest(
+            image: makeUniformImportedImage(
+                width: 1,
+                height: 1,
+                color: RGBColor(red: 250, green: 0, blue: 0)
+            ),
+            cropRegion: CropRegion(originX: 0, originY: 0, width: 1, height: 1),
+            configuration: MosaicConfiguration(
+                mosaicSize: size,
+                paletteID: "custom",
+                part: .roundPlate1x1,
+                ditheringMethod: .threshold
+            ),
+            palette: BrickPalette(
+                id: "custom",
+                name: "Custom",
+                notes: nil,
+                colors: [
+                    BrickColor(id: "active-blue", name: "Active Blue", rgb: RGBColor(red: 0, green: 0, blue: 255), isActive: true),
+                    BrickColor(id: "inactive-red", name: "Inactive Red", rgb: RGBColor(red: 255, green: 0, blue: 0), isActive: false)
+                ]
+            )
+        )
+
+        let result = try await service.generateMosaic(from: request)
+
+        #expect(result.grid.cells.map(\.colorID) == ["active-blue"])
+    }
+
     private func makeRequest(for fixture: PipelineFixture) throws -> MosaicGenerationRequest {
         MosaicGenerationRequest(
             image: try makeImportedImage(from: fixture.sourcePixels),

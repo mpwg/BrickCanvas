@@ -10,6 +10,25 @@ struct BrickPalette: Identifiable, Codable, Hashable, Sendable {
         colors.filter(\.isActive)
     }
 
+    var activeColorIDs: Set<String> {
+        Set(activeColors.map(\.id))
+    }
+
+    var allColorIDs: Set<String> {
+        Set(colors.map(\.id))
+    }
+
+    func applyingActiveColorIDs(_ activeColorIDs: Set<String>) -> BrickPalette {
+        BrickPalette(
+            id: id,
+            name: name,
+            notes: notes,
+            colors: colors.map { color in
+                color.with(isActive: activeColorIDs.contains(color.id))
+            }
+        )
+    }
+
     func filtered(includeInactiveColors: Bool) -> BrickPalette {
         guard !includeInactiveColors else {
             return self
@@ -95,4 +114,3 @@ extension PaletteCatalog {
         return self
     }
 }
-
