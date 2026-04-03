@@ -81,4 +81,56 @@ struct DomainModelTests {
             #expect(preset.subtitle.contains("\(preset.gridSize.studCount)"))
         }
     }
+
+    @Test
+    func partSummaryContentAggregatesTotalsAndSortsRows() {
+        let content = ProjectPartSummaryContent(project: DomainFixtures.generatedProject)
+
+        #expect(content.projectName == "Familienmosaik")
+        #expect(content.partName == "Runde Platte 1×1")
+        #expect(content.totalPieces == 16)
+        #expect(content.distinctColorCount == 4)
+        #expect(content.rows.map(\.colorName) == ["Bright Blue", "Bright Red", "Bright Yellow", "White"])
+        #expect(content.rows.map(\.quantity) == [5, 4, 4, 3])
+    }
+
+    @Test
+    func partSummaryStateUsesEmptyStateForDraftProjects() {
+        let state = ProjectPartSummaryScreenState(project: DomainFixtures.draftProject)
+
+        guard case let .empty(configuration) = state else {
+            Issue.record("Expected empty part summary state for draft project.")
+            return
+        }
+
+        #expect(configuration.title == "Noch keine Teileliste")
+    }
+
+    @Test
+    func partSummaryContentFallsBackWhenPaletteColorIsMissing() throws {
+        let incompleteArtifacts = GeneratedProjectArtifacts(
+            palette: [],
+            grid: DomainFixtures.grid,
+            partRequirements: [
+                try PartRequirement(part: .roundPlate1x1, colorID: "dark-turquoise", quantity: 2)
+            ],
+            buildPlan: nil
+        )
+        let project = BrickCanvasProject(
+            name: "Fallback",
+            lifecycle: .generated,
+            sourceImage: DomainFixtures.sourceImage,
+            cropRegion: DomainFixtures.cropRegion,
+            configuration: DomainFixtures.configuration,
+            generatedArtifacts: incompleteArtifacts,
+            createdAt: DomainFixtures.createdAt,
+            updatedAt: DomainFixtures.updatedAt
+        )
+
+        let content = ProjectPartSummaryContent(project: project)
+
+        #expect(content.rows.count == 1)
+        #expect(content.rows[0].colorName == "Dark Turquoise")
+        #expect(content.rows[0].colorSubtitle == "DARK-TURQUOISE")
+    }
 }
