@@ -1,0 +1,119 @@
+---
+name: CodeQL
+
+"on":
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  schedule:
+    - cron: '28 3 * * 1'
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+  security-events: write
+
+jobs:
+  analyze:
+    name: Analyze Swift code
+    runs-on: macos-26
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language:
+          - swift
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v4
+        with:
+          languages: ${{ matrix.language }}
+          build-mode: manual
+
+      - name: Select Xcode 26.4
+        run: >-
+          sudo xcode-select -s
+          /Applications/Xcode_26.4.app/Contents/Developer
+
+      - name: Show Xcode version
+        run: xcodebuild -version
+
+      - name: Resolve Metal Toolchain build version
+        id: metal-component
+        run: |
+          BUILD_VERSION="$(
+            xcodebuild -showComponent MetalToolchain -json |
+            ruby -rjson -e 'print JSON.parse(STDIN.read)["buildVersion"]'
+          )"
+          echo "build_version=$BUILD_VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Restore cached Metal Toolchain bundle
+        id: metal-cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/metal-toolchain
+          key: >-
+            metal-toolchain-${{ runner.os }}-xcode-26.4-${{
+            steps.metal-component.outputs.build_version }}
+
+      - name: Download Metal Toolchain bundle
+        if: steps.metal-cache.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p "$RUNNER_TEMP/metal-toolchain"
+          xcodebuild \
+            -downloadComponent MetalToolchain \
+            -exportPath "$RUNNER_TEMP/metal-toolchain"
+
+      - name: Import cached Metal Toolchain
+        run: |
+          if xcodebuild -showComponent MetalToolchain -json |
+            ruby -rjson \
+            -e 'exit(
+              JSON.parse(STDIN.read)["status"] == "installed" ? 0 : 1
+            )'; then
+            echo "Metal Toolchain bereits installiert."
+            exit 0
+          fi
+
+          COMPONENT_PATH="$(
+            find "$RUNNER_TEMP/metal-toolchain" -maxdepth 2 \
+              \( -name '*.bundle' -o -name '*.pkg' \) |
+              head -n 1
+          )"
+
+          if [ -z "$COMPONENT_PATH" ]; then
+            echo "Kein gecachtes Metal-Toolchain-Bundle gefunden."
+            exit 1
+          fi
+
+          xcodebuild \
+            -importComponent MetalToolchain \
+            -importPath "$COMPONENT_PATH"
+
+      - name: Install XcodeGen
+        env:
+          HOMEBREW_NO_AUTO_UPDATE: "1"
+        run: brew install xcodegen
+
+      - name: Generate Xcode project
+        run: ./scripts/generate-xcode-project.sh
+
+      - name: Build app for CodeQL analysis
+        run: >
+          xcodebuild
+          -project BrickCanvas.xcodeproj
+          -scheme BrickCanvas
+          -destination
+          'platform=iOS Simulator,name=iPhone 17,OS=26.4'
+          build
+
+      - name: Perform CodeQL analysis
+        uses: github/codeql-action/analyze@v4
