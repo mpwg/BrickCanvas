@@ -61,13 +61,11 @@ enum DomainFixtures {
         try! PartRequirement(part: .roundPlate1x1, colorID: "white", quantity: 4)
     ]
 
-    static let buildPlan = BuildPlan(
-        rows: [
-            BuildPlanRow(rowIndex: 0, colorIDs: ["bright-red", "bright-red", "bright-blue", "bright-blue"]),
-            BuildPlanRow(rowIndex: 1, colorIDs: ["bright-red", "bright-yellow", "bright-yellow", "bright-blue"]),
-            BuildPlanRow(rowIndex: 2, colorIDs: ["white", "bright-yellow", "bright-yellow", "white"]),
-            BuildPlanRow(rowIndex: 3, colorIDs: ["white", "white", "bright-blue", "bright-blue"])
-        ]
+    static let buildPlan = try! SimpleGridBuildPlanService.makeBuildPlanDocument(
+        from: BuildPlanRequest(
+            grid: grid,
+            palette: palette
+        )
     )
 
     static let generatedArtifacts = GeneratedProjectArtifacts(

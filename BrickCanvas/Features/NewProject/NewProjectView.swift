@@ -18,10 +18,14 @@ struct NewProjectView: View {
     @State private var mosaicPreviewState: MosaicPreviewState = .idle
     @State private var importState: NewProjectImportState = .idle
     @State private var importTask: Task<Void, Never>?
+    @State private var isBuildingProject = false
+    @State private var projectBuildError: String?
+    @State private var generatedProject: BrickCanvasProject?
 
     private let imageImportService = DefaultImageImportService()
     private let paletteService = try! BundledPaletteService()
     private let mosaicGeneratorService = PackageBackedMosaicGeneratorService()
+    private let generatedProjectBuilder = GeneratedProjectBuilder()
 
     var body: some View {
         GeometryReader { proxy in
@@ -79,6 +83,9 @@ struct NewProjectView: View {
         }
         .task(id: mosaicPreviewTrigger) {
             await refreshMosaicPreview()
+        }
+        .navigationDestination(item: $generatedProject) { project in
+            ProjectDetailView(state: .loaded(ProjectDetailContent(project: project)))
         }
         .onDisappear {
             cancelImport()
@@ -310,6 +317,32 @@ struct NewProjectView: View {
                 )
                 .frame(height: 360)
 
+                VStack(alignment: .leading, spacing: 14) {
+                    Button {
+                        Task {
+                            await buildProject(from: content)
+                        }
+                    } label: {
+                        if isBuildingProject {
+                            Label("Projekt wird erzeugt …", systemImage: "hourglass")
+                                .frame(maxWidth: .infinity)
+                        } else {
+                            Label("Projekt erstellen und Bauplan öffnen", systemImage: "hammer")
+                                .frame(maxWidth: .infinity)
+                        }
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .controlSize(.large)
+                    .disabled(isBuildingProject)
+
+                    if let projectBuildError {
+                        Label(projectBuildError, systemImage: "exclamationmark.triangle")
+                            .font(.footnote)
+                            .foregroundStyle(.red)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                }
+
                 VStack(alignment: .leading, spacing: 10) {
                     Label(
                         "Raster \(content.grid.size.width) × \(content.grid.size.height) mit \(selectedDitheringMethod.title)",
@@ -495,6 +528,8 @@ struct NewProjectView: View {
             cropPreset = .square
             mosaicSize = 48
             mosaicPreviewState = .idle
+            projectBuildError = nil
+            generatedProject = nil
             importState = .idle
         } catch is CancellationError {
             importState = .idle
@@ -653,6 +688,43 @@ struct NewProjectView: View {
         }
 
         return image
+    }
+
+    @MainActor
+    private func buildProject(from content: MosaicPreviewContent) async {
+        guard let importedImage, let cropRegion else {
+            projectBuildError = "Für dieses Projekt fehlen noch Import- oder Zuschnittsdaten."
+            return
+        }
+
+        isBuildingProject = true
+        projectBuildError = nil
+
+        do {
+            let configuration = MosaicConfiguration(
+                mosaicSize: currentMosaicGridSize,
+                paletteID: Self.defaultPaletteID,
+                part: .roundPlate1x1,
+                ditheringMethod: selectedDitheringMethod
+            )
+            let project = try await generatedProjectBuilder.buildProject(
+                from: GeneratedProjectBuildRequest(
+                    name: GeneratedProjectBuilder.suggestedProjectName(from: importedImage.asset.filename),
+                    importedImage: importedImage,
+                    cropRegion: cropRegion,
+                    configuration: configuration,
+                    palette: content.palette,
+                    grid: content.grid,
+                    createdAt: Date()
+                )
+            )
+
+            generatedProject = project
+        } catch {
+            projectBuildError = error.localizedDescription
+        }
+
+        isBuildingProject = false
     }
 }
 
