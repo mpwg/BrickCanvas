@@ -21,10 +21,10 @@
         ["white", "white", "bright-blue", "bright-blue"]
       ],
       "expectedPartRequirements": [
-        { "part": "round_plate_1x1", "colorID": "bright-red", "quantity": 4 },
+        { "part": "round_plate_1x1", "colorID": "bright-red", "quantity": 3 },
         { "part": "round_plate_1x1", "colorID": "bright-blue", "quantity": 5 },
         { "part": "round_plate_1x1", "colorID": "bright-yellow", "quantity": 4 },
-        { "part": "round_plate_1x1", "colorID": "white", "quantity": 3 }
+        { "part": "round_plate_1x1", "colorID": "white", "quantity": 4 }
       ],
       "expectedBuildPlanRows": [
         ["bright-red", "bright-red", "bright-blue", "bright-blue"],

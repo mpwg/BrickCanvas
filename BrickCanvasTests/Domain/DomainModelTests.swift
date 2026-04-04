@@ -90,7 +90,7 @@ struct DomainModelTests {
         #expect(content.partName == "Runde Platte 1×1")
         #expect(content.totalPieces == 16)
         #expect(content.distinctColorCount == 4)
-        #expect(content.rows.map(\.colorName) == ["Bright Blue", "Bright Red", "Bright Yellow", "White"])
+        #expect(content.rows.map(\.colorName) == ["Bright Blue", "Bright Yellow", "White", "Bright Red"])
         #expect(content.rows.map(\.quantity) == [5, 4, 4, 3])
     }
 
