@@ -686,7 +686,7 @@ private struct BuildPlanRasterizationMetrics {
     ) -> CGFloat {
         let longestEdge = max(gridSize.width, gridSize.height)
 
-        switch purpose {
+        return switch purpose {
         case .display:
             switch longestEdge {
             case ...24: 34

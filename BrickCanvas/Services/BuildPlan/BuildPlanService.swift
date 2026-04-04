@@ -19,8 +19,9 @@ struct SimpleGridBuildPlanService: BuildPlanService {
     }
 
     static func makeBuildPlanDocument(from request: BuildPlanRequest) throws -> BuildPlan {
+        var seenColorIDs = Set<String>()
         let usedColorIDsInOrder = request.grid.cells.reduce(into: [String]()) { partialResult, cell in
-            guard partialResult.contains(cell.colorID) == false else {
+            guard seenColorIDs.insert(cell.colorID).inserted else {
                 return
             }
 
@@ -48,7 +49,7 @@ struct SimpleGridBuildPlanService: BuildPlanService {
                     BuildPlanStud(
                         columnIndex: cell.coordinate.x,
                         colorID: cell.colorID,
-                        legendNumber: numberByColorID[cell.colorID, default: 0]
+                        legendNumber: numberByColorID[cell.colorID] ?? 0
                     )
                 }
 

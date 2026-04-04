@@ -1,3 +1,4 @@
+import Foundation
 import ImageIO
 import Testing
 @testable import BrickCanvas
@@ -52,7 +53,7 @@ struct ExportEngineTests {
         }
     }
 
-    private func makeImage(from data: Data) throws -> CGImage? {
+    private func makeImage(from data: Data) -> CGImage? {
         guard let source = CGImageSourceCreateWithData(data as CFData, nil) else {
             Issue.record("PNG data could not be loaded into an image source.")
             return nil
