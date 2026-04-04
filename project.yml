@@ -6,6 +6,8 @@ settings:
     PRODUCT_NAME: BrickCanvas
     SWIFT_VERSION: 6.0
     IPHONEOS_DEPLOYMENT_TARGET: 26.4
+    MARKETING_VERSION: 0.1.0
+    CURRENT_PROJECT_VERSION: 1
 packages:
   DitheringEngine:
     url: https://github.com/Eskils/DitheringEngine
@@ -23,10 +25,22 @@ targets:
       - package: DitheringEngine
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.mpwg.BrickCanvas
-        "PRODUCT_BUNDLE_IDENTIFIER[sdk=macosx*]": com.mpwg.BrickCanvas.mac
+        PRODUCT_BUNDLE_IDENTIFIER: eu.mpwg.BrickCanvas
+        "PRODUCT_BUNDLE_IDENTIFIER[sdk=macosx*]": eu.mpwg.BrickCanvas.mac
+        DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER: NO
         INFOPLIST_KEY_CFBundleDisplayName: BrickCanvas
+        INFOPLIST_KEY_ITSAppUsesNonExemptEncryption: NO
+        INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.graphics-design
         INFOPLIST_KEY_NSPhotoLibraryUsageDescription: BrickCanvas benötigt Zugriff auf deine Fotobibliothek, damit du ein Bild für dein Mosaik auswählen kannst.
+        INFOPLIST_KEY_UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
         INFOPLIST_KEY_UIDesignRequiresCompatibility: NO
         INFOPLIST_KEY_UILaunchScreen_Generation: YES
         INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
@@ -38,7 +52,7 @@ targets:
         SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD: NO
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         CODE_SIGN_STYLE: Automatic
-        DEVELOPMENT_TEAM: ""
+        DEVELOPMENT_TEAM: $(BRICKCANVAS_DEVELOPMENT_TEAM)
     scheme:
       testTargets:
         - BrickCanvasTests
@@ -54,5 +68,5 @@ targets:
       base:
         PRODUCT_NAME: BrickCanvasTests
         PRODUCT_MODULE_NAME: BrickCanvasTests
-        PRODUCT_BUNDLE_IDENTIFIER: com.mpwg.BrickCanvasTests
+        PRODUCT_BUNDLE_IDENTIFIER: eu.mpwg.BrickCanvasTests
         GENERATE_INFOPLIST_FILE: YES
