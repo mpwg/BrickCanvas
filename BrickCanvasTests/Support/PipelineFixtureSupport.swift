@@ -99,11 +99,22 @@ struct PipelineFixture: Decodable {
             .sorted { $0.id < $1.id }
     }
 
-    func makeExpectedBuildPlan() -> BuildPlan {
-        BuildPlan(
-            rows: expectedBuildPlanRows.enumerated().map { index, colorIDs in
-                BuildPlanRow(rowIndex: index, colorIDs: colorIDs)
+    func makeExpectedBuildPlan(palette: [BrickColor]) throws -> BuildPlan {
+        let size = try MosaicGridSize(width: mosaicSize.width, height: mosaicSize.height)
+        let cells = expectedBuildPlanRows.enumerated().flatMap { rowIndex, colorIDs in
+            colorIDs.enumerated().map { columnIndex, colorID in
+                MosaicCell(
+                    coordinate: MosaicCoordinate(x: columnIndex, y: rowIndex),
+                    colorID: colorID
+                )
             }
+        }
+
+        return try SimpleGridBuildPlanService.makeBuildPlanDocument(
+            from: BuildPlanRequest(
+                grid: try MosaicGrid(size: size, cells: cells),
+                palette: palette
+            )
         )
     }
 }
