@@ -55,10 +55,10 @@ enum DomainFixtures {
     )
 
     static let partRequirements: [PartRequirement] = [
-        try! PartRequirement(part: .roundPlate1x1, colorID: "bright-red", quantity: 4),
+        try! PartRequirement(part: .roundPlate1x1, colorID: "bright-red", quantity: 3),
         try! PartRequirement(part: .roundPlate1x1, colorID: "bright-blue", quantity: 5),
         try! PartRequirement(part: .roundPlate1x1, colorID: "bright-yellow", quantity: 4),
-        try! PartRequirement(part: .roundPlate1x1, colorID: "white", quantity: 3)
+        try! PartRequirement(part: .roundPlate1x1, colorID: "white", quantity: 4)
     ]
 
     static let buildPlan = BuildPlan(
