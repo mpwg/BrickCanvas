@@ -49,10 +49,19 @@ jobs:
       - name: Resolve Metal Toolchain build version
         id: metal-component
         run: |
-          BUILD_VERSION="$(
-            xcodebuild -showComponent MetalToolchain -json |
-            ruby -rjson -e 'print JSON.parse(STDIN.read)["buildVersion"]'
+          COMPONENT_JSON="$(
+            xcodebuild -showComponent MetalToolchain -json 2>/dev/null || true
           )"
+
+          if [ -n "$COMPONENT_JSON" ]; then
+            BUILD_VERSION="$(
+              printf '%s' "$COMPONENT_JSON" |
+              ruby -rjson -e 'print JSON.parse(STDIN.read)["buildVersion"]'
+            )"
+          else
+            BUILD_VERSION="not-installed"
+          fi
+
           echo "build_version=$BUILD_VERSION" >> "$GITHUB_OUTPUT"
 
       - name: Restore cached Metal Toolchain bundle
@@ -74,7 +83,12 @@ jobs:
 
       - name: Import cached Metal Toolchain
         run: |
-          if xcodebuild -showComponent MetalToolchain -json |
+          COMPONENT_JSON="$(
+            xcodebuild -showComponent MetalToolchain -json 2>/dev/null || true
+          )"
+
+          if [ -n "$COMPONENT_JSON" ] &&
+            printf '%s' "$COMPONENT_JSON" |
             ruby -rjson \
             -e 'exit(
               JSON.parse(STDIN.read)["status"] == "installed" ? 0 : 1

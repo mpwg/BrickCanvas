@@ -1,6 +1,7 @@
+---
 name: iOS CI
 
-on:
+"on":
   pull_request:
     branches:
       - main
@@ -18,7 +19,9 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Select Xcode 26.4
-        run: sudo xcode-select -s /Applications/Xcode_26.4.app/Contents/Developer
+        run: >-
+          sudo xcode-select -s
+          /Applications/Xcode_26.4.app/Contents/Developer
 
       - name: Show Xcode version
         run: xcodebuild -version
@@ -26,36 +29,68 @@ jobs:
       - name: Resolve Metal Toolchain build version
         id: metal-component
         run: |
-          echo "build_version=$(xcodebuild -showComponent MetalToolchain -json | ruby -rjson -e 'print JSON.parse(STDIN.read)[\"buildVersion\"]')" >> "$GITHUB_OUTPUT"
+          COMPONENT_JSON="$(
+            xcodebuild -showComponent MetalToolchain -json 2>/dev/null || true
+          )"
+
+          if [ -n "$COMPONENT_JSON" ]; then
+            BUILD_VERSION="$(
+              printf '%s' "$COMPONENT_JSON" |
+              ruby -rjson -e 'print JSON.parse(STDIN.read)["buildVersion"]'
+            )"
+          else
+            BUILD_VERSION="not-installed"
+          fi
+
+          echo "build_version=$BUILD_VERSION" >> "$GITHUB_OUTPUT"
 
       - name: Restore cached Metal Toolchain bundle
         id: metal-cache
         uses: actions/cache@v5
         with:
           path: ${{ runner.temp }}/metal-toolchain
-          key: metal-toolchain-${{ runner.os }}-xcode-26.4-${{ steps.metal-component.outputs.build_version }}
+          key: >-
+            metal-toolchain-${{ runner.os }}-xcode-26.4-${{
+            steps.metal-component.outputs.build_version }}
 
       - name: Download Metal Toolchain bundle
         if: steps.metal-cache.outputs.cache-hit != 'true'
         run: |
           mkdir -p "$RUNNER_TEMP/metal-toolchain"
-          xcodebuild -downloadComponent MetalToolchain -exportPath "$RUNNER_TEMP/metal-toolchain"
+          xcodebuild \
+            -downloadComponent MetalToolchain \
+            -exportPath "$RUNNER_TEMP/metal-toolchain"
 
       - name: Import cached Metal Toolchain
         run: |
-          if xcodebuild -showComponent MetalToolchain -json | ruby -rjson -e 'exit(JSON.parse(STDIN.read)["status"] == "installed" ? 0 : 1)'; then
+          COMPONENT_JSON="$(
+            xcodebuild -showComponent MetalToolchain -json 2>/dev/null || true
+          )"
+
+          if [ -n "$COMPONENT_JSON" ] &&
+            printf '%s' "$COMPONENT_JSON" |
+            ruby -rjson \
+            -e 'exit(
+              JSON.parse(STDIN.read)["status"] == "installed" ? 0 : 1
+            )'; then
             echo "Metal Toolchain bereits installiert."
             exit 0
           fi
 
-          COMPONENT_PATH="$(find "$RUNNER_TEMP/metal-toolchain" -maxdepth 2 \( -name '*.bundle' -o -name '*.pkg' \) | head -n 1)"
+          COMPONENT_PATH="$(
+            find "$RUNNER_TEMP/metal-toolchain" -maxdepth 2 \
+              \( -name '*.bundle' -o -name '*.pkg' \) |
+              head -n 1
+          )"
 
           if [ -z "$COMPONENT_PATH" ]; then
             echo "Kein gecachtes Metal-Toolchain-Bundle gefunden."
             exit 1
           fi
 
-          xcodebuild -importComponent MetalToolchain -importPath "$COMPONENT_PATH"
+          xcodebuild \
+            -importComponent MetalToolchain \
+            -importPath "$COMPONENT_PATH"
 
       - name: Install XcodeGen
         env:
@@ -82,7 +117,8 @@ jobs:
       - name: Run tests
         run: >
           xcodebuild
+          test
           -project BrickCanvas.xcodeproj
           -scheme BrickCanvas
-          -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.4'
-          test
+          -destination
+          'platform=iOS Simulator,name=iPhone 17,OS=26.4'
