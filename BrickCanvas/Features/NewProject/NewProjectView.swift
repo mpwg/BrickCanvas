@@ -5,17 +5,23 @@ import SwiftUI
 struct NewProjectView: View {
     private static let minimumMosaicDimension = 16.0
     private static let maximumMosaicDimension = 128.0
+    private static let defaultPaletteID = "mvp-default"
 
+    @AppStorage(MosaicDitheringMethod.storageKey) private var ditheringMethodRawValue = MosaicDitheringMethod.jarvisJudiceNinke.rawValue
+    @AppStorage(PaletteActivationStore.storageKey) private var paletteActivationStateRawValue = ""
     @State private var selectedPhotoItem: PhotosPickerItem?
     @State private var importedImage: ImportedImage?
     @State private var previewImage: CGImage?
     @State private var cropRegion: CropRegion?
     @State private var cropPreset: CropAspectPreset = .square
     @State private var mosaicSize: Double = 48
+    @State private var mosaicPreviewState: MosaicPreviewState = .idle
     @State private var importState: NewProjectImportState = .idle
     @State private var importTask: Task<Void, Never>?
 
     private let imageImportService = DefaultImageImportService()
+    private let paletteService = try! BundledPaletteService()
+    private let mosaicGeneratorService = PackageBackedMosaicGeneratorService()
 
     var body: some View {
         GeometryReader { proxy in
@@ -52,6 +58,9 @@ struct NewProjectView: View {
 
                         mosaicConfigurationCard(previewImage: previewImage)
                             .frame(maxWidth: pageWidth, alignment: .leading)
+
+                        mosaicPreviewCard
+                            .frame(maxWidth: pageWidth, alignment: .leading)
                     } else if importState.isRunning == false {
                         emptyStateCard
                             .frame(maxWidth: pageWidth, alignment: .leading)
@@ -67,6 +76,9 @@ struct NewProjectView: View {
         .navigationBarTitleDisplayMode(.inline)
         .onChange(of: selectedPhotoItem) { _, newItem in
             startImport(from: newItem)
+        }
+        .task(id: mosaicPreviewTrigger) {
+            await refreshMosaicPreview()
         }
         .onDisappear {
             cancelImport()
@@ -256,6 +268,86 @@ struct NewProjectView: View {
         .cardStyle(tint: .orange.opacity(0.08))
     }
 
+    @ViewBuilder
+    private var mosaicPreviewCard: some View {
+        VStack(alignment: .leading, spacing: 20) {
+            VStack(alignment: .leading, spacing: 8) {
+                Text("4. Mosaikvorschau")
+                    .font(.title3.weight(.semibold))
+
+                Text("Die Vorschau rendert bereits das quantisierte Raster. Du kannst hineinzoomen, verschieben und das Ergebnis sofort gegen Crop und Zielgröße prüfen.")
+                    .foregroundStyle(.secondary)
+            }
+
+            switch mosaicPreviewState {
+            case .idle:
+                Label("Die Vorschau erscheint, sobald ein Zuschnitt verfügbar ist.", systemImage: "wand.and.stars")
+                    .foregroundStyle(.secondary)
+
+            case .rendering:
+                VStack(alignment: .leading, spacing: 14) {
+                    ProgressView()
+                        .controlSize(.large)
+
+                    Text("Mosaik wird neu berechnet …")
+                        .font(.headline)
+
+                    Text("Änderungen an Zuschnitt, Größe, aktiver Palette oder Dithering werden automatisch übernommen.")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(24)
+                .background(
+                    RoundedRectangle(cornerRadius: 24, style: .continuous)
+                        .fill(Color(.tertiarySystemGroupedBackground))
+                )
+
+            case let .rendered(content):
+                MosaicPreviewView(
+                    grid: content.grid,
+                    palette: content.palette
+                )
+                .frame(height: 360)
+
+                VStack(alignment: .leading, spacing: 10) {
+                    Label(
+                        "Raster \(content.grid.size.width) × \(content.grid.size.height) mit \(selectedDitheringMethod.title)",
+                        systemImage: "sparkles.rectangle.stack"
+                    )
+
+                    Label("Doppeltippen setzt die Ansicht zurück. Das Gitter wird bei stärkerem Zoom bewusst scharf eingeblendet.", systemImage: "hand.draw")
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                .font(.footnote)
+                .foregroundStyle(.secondary)
+
+            case let .failed(message):
+                VStack(alignment: .leading, spacing: 12) {
+                    Label("Vorschau konnte nicht erzeugt werden", systemImage: "exclamationmark.triangle")
+                        .font(.headline)
+
+                    Text(message)
+                        .foregroundStyle(.secondary)
+
+                    Button("Erneut berechnen") {
+                        Task {
+                            await refreshMosaicPreview(force: true)
+                        }
+                    }
+                    .buttonStyle(.bordered)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(24)
+                .background(
+                    RoundedRectangle(cornerRadius: 24, style: .continuous)
+                        .fill(Color(.tertiarySystemGroupedBackground))
+                )
+            }
+        }
+        .cardStyle(tint: .mint.opacity(0.08))
+    }
+
     private var aspectPresetPicker: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text("Seitenverhältnis")
@@ -367,6 +459,7 @@ struct NewProjectView: View {
         importTask?.cancel()
         importTask = nil
         importState = .idle
+        mosaicPreviewState = .idle
     }
 
     @MainActor
@@ -401,6 +494,7 @@ struct NewProjectView: View {
             cropRegion = nil
             cropPreset = .square
             mosaicSize = 48
+            mosaicPreviewState = .idle
             importState = .idle
         } catch is CancellationError {
             importState = .idle
@@ -441,6 +535,24 @@ struct NewProjectView: View {
         return "Zielraster \(size.width) × \(size.height) Noppen (\(size.studCount) Positionen)"
     }
 
+    private var mosaicPreviewTrigger: MosaicPreviewTrigger? {
+        guard let importedImage, let cropRegion else {
+            return nil
+        }
+
+        return MosaicPreviewTrigger(
+            filename: importedImage.asset.filename,
+            cropRegion: cropRegion,
+            mosaicSize: currentMosaicGridSize,
+            ditheringMethodRawValue: ditheringMethodRawValue,
+            paletteActivationStateRawValue: paletteActivationStateRawValue
+        )
+    }
+
+    private var selectedDitheringMethod: MosaicDitheringMethod {
+        MosaicDitheringMethod(rawValue: ditheringMethodRawValue) ?? .jarvisJudiceNinke
+    }
+
     private var currentMosaicDimension: Int {
         Int(mosaicSize.rounded())
     }
@@ -466,6 +578,74 @@ struct NewProjectView: View {
         return trackWidth * normalizedValue + 14
     }
 
+    @MainActor
+    private func refreshMosaicPreview(force: Bool = false) async {
+        guard let importedImage, let cropRegion else {
+            mosaicPreviewState = .idle
+            return
+        }
+
+        if force == false {
+            do {
+                try await Task.sleep(for: .milliseconds(180))
+            } catch {
+                return
+            }
+        }
+
+        mosaicPreviewState = .rendering
+
+        do {
+            let palette = try await loadEffectivePalette()
+            try Task.checkCancellation()
+
+            let request = MosaicGenerationRequest(
+                image: importedImage,
+                cropRegion: cropRegion,
+                configuration: MosaicConfiguration(
+                    mosaicSize: currentMosaicGridSize,
+                    paletteID: Self.defaultPaletteID,
+                    part: .roundPlate1x1,
+                    ditheringMethod: selectedDitheringMethod
+                ),
+                palette: palette
+            )
+            let result = try await mosaicGeneratorService.generateMosaic(from: request)
+            try Task.checkCancellation()
+
+            mosaicPreviewState = .rendered(
+                MosaicPreviewContent(
+                    grid: result.grid,
+                    palette: palette.colors
+                )
+            )
+        } catch is CancellationError {
+            return
+        } catch {
+            mosaicPreviewState = .failed(error.localizedDescription)
+        }
+    }
+
+    private func loadEffectivePalette() async throws -> BrickPalette {
+        let basePalette = try await paletteService.palette(
+            for: PaletteQuery(
+                paletteID: Self.defaultPaletteID,
+                includeInactiveColors: true
+            )
+        )
+        let activeColorIDs = PaletteActivationStore.activeColorIDs(
+            from: paletteActivationStateRawValue,
+            for: basePalette
+        )
+
+        return try await paletteService.palette(
+            for: PaletteQuery(
+                paletteID: Self.defaultPaletteID,
+                activeColorIDs: activeColorIDs
+            )
+        )
+    }
+
     private func makePreviewImage(from data: Data) throws -> CGImage {
         guard let source = CGImageSourceCreateWithData(data as CFData, nil),
               let image = CGImageSourceCreateImageAtIndex(source, 0, nil) else {
@@ -474,6 +654,14 @@ struct NewProjectView: View {
 
         return image
     }
+}
+
+private struct MosaicPreviewTrigger: Hashable {
+    let filename: String
+    let cropRegion: CropRegion
+    let mosaicSize: MosaicGridSize
+    let ditheringMethodRawValue: String
+    let paletteActivationStateRawValue: String
 }
 
 private extension View {

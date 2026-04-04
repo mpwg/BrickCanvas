@@ -6,279 +6,2558 @@
       "name": "LEGO Standardpalette",
       "notes": "Enthält die 12 Basisfarben laut 1000steine sowie alle weiteren Farben aus der referenzierten LEGO-Farbtabelle als seltene Erweiterungen.",
       "colors": [
-        {"id": "white", "name": "White", "rgb": {"red": 255, "green": 255, "blue": 255}, "isActive": true, "notes": "Basisfarbe laut 1000steine-Farbreferenz."},
-        {"id": "tan", "name": "Tan", "rgb": {"red": 228, "green": 205, "blue": 158}, "isActive": true, "notes": "Basisfarbe laut 1000steine-Farbreferenz."},
-        {"id": "bright-red", "name": "Bright Red", "rgb": {"red": 201, "green": 26, "blue": 9}, "isActive": true, "notes": "Basisfarbe laut 1000steine-Farbreferenz."},
-        {"id": "bright-blue", "name": "Bright Blue", "rgb": {"red": 0, "green": 85, "blue": 191}, "isActive": true, "notes": "Basisfarbe laut 1000steine-Farbreferenz."},
-        {"id": "bright-yellow", "name": "Bright Yellow", "rgb": {"red": 242, "green": 205, "blue": 55}, "isActive": true, "notes": "Basisfarbe laut 1000steine-Farbreferenz."},
-        {"id": "black", "name": "Black", "rgb": {"red": 5, "green": 19, "blue": 29}, "isActive": true, "notes": "Basisfarbe laut 1000steine-Farbreferenz."},
-        {"id": "green", "name": "Green", "rgb": {"red": 35, "green": 120, "blue": 65}, "isActive": true, "notes": "Basisfarbe laut 1000steine-Farbreferenz."},
-        {"id": "medium-blue", "name": "Medium Blue", "rgb": {"red": 90, "green": 147, "blue": 219}, "isActive": true, "notes": "Basisfarbe laut 1000steine-Farbreferenz."},
-        {"id": "bright-orange", "name": "Bright Orange", "rgb": {"red": 254, "green": 138, "blue": 24}, "isActive": true, "notes": "Basisfarbe laut 1000steine-Farbreferenz."},
-        {"id": "reddish-brown", "name": "Reddish Brown", "rgb": {"red": 88, "green": 42, "blue": 18}, "isActive": true, "notes": "Basisfarbe laut 1000steine-Farbreferenz."},
-        {"id": "light-bluish-gray", "name": "Light Bluish Gray", "rgb": {"red": 160, "green": 165, "blue": 169}, "isActive": true, "notes": "Basisfarbe laut 1000steine-Farbreferenz."},
-        {"id": "dark-bluish-gray", "name": "Dark Bluish Gray", "rgb": {"red": 108, "green": 110, "blue": 104}, "isActive": true, "notes": "Basisfarbe laut 1000steine-Farbreferenz."},
-        {"id": "lego-3-dark-turquoise", "name": "Dark Turquoise", "rgb": {"red": 0, "green": 143, "blue": 155}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-5-dark-pink", "name": "Dark Pink", "rgb": {"red": 200, "green": 112, "blue": 160}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-6-brown", "name": "Brown", "rgb": {"red": 88, "green": 57, "blue": 39}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-7-light-gray", "name": "Light Gray", "rgb": {"red": 155, "green": 161, "blue": 157}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-8-dark-gray", "name": "Dark Gray", "rgb": {"red": 109, "green": 110, "blue": 92}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-9-light-blue", "name": "Light Blue", "rgb": {"red": 180, "green": 210, "blue": 227}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-10-bright-green", "name": "Bright Green", "rgb": {"red": 75, "green": 159, "blue": 74}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-11-light-turquoise", "name": "Light Turquoise", "rgb": {"red": 85, "green": 165, "blue": 175}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-12-salmon", "name": "Salmon", "rgb": {"red": 242, "green": 112, "blue": 94}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-13-pink", "name": "Pink", "rgb": {"red": 252, "green": 151, "blue": 172}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-17-light-green", "name": "Light Green", "rgb": {"red": 194, "green": 218, "blue": 184}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-18-light-yellow", "name": "Light Yellow", "rgb": {"red": 251, "green": 230, "blue": 150}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-20-light-violet", "name": "Light Violet", "rgb": {"red": 201, "green": 202, "blue": 226}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-21-glow-in-dark-opaque", "name": "Glow In Dark Opaque", "rgb": {"red": 212, "green": 213, "blue": 201}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-22-purple", "name": "Purple", "rgb": {"red": 129, "green": 0, "blue": 123}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-23-dark-blue-violet", "name": "Dark Blue-Violet", "rgb": {"red": 32, "green": 50, "blue": 176}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-26-magenta", "name": "Magenta", "rgb": {"red": 146, "green": 57, "blue": 120}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-27-lime", "name": "Lime", "rgb": {"red": 187, "green": 233, "blue": 11}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-28-dark-tan", "name": "Dark Tan", "rgb": {"red": 149, "green": 138, "blue": 115}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-29-bright-pink", "name": "Bright Pink", "rgb": {"red": 228, "green": 173, "blue": 200}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-30-medium-lavender", "name": "Medium Lavender", "rgb": {"red": 172, "green": 120, "blue": 186}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-31-lavender", "name": "Lavender", "rgb": {"red": 225, "green": 213, "blue": 237}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-32-trans-black-ir-lens", "name": "Trans-Black IR Lens", "rgb": {"red": 99, "green": 95, "blue": 82}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-33-trans-dark-blue", "name": "Trans-Dark Blue", "rgb": {"red": 0, "green": 32, "blue": 160}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-34-trans-green", "name": "Trans-Green", "rgb": {"red": 132, "green": 182, "blue": 141}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-35-trans-bright-green", "name": "Trans-Bright Green", "rgb": {"red": 217, "green": 228, "blue": 167}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-36-trans-red", "name": "Trans-Red", "rgb": {"red": 201, "green": 26, "blue": 9}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-40-trans-brown", "name": "Trans-Brown", "rgb": {"red": 99, "green": 95, "blue": 82}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-41-trans-light-blue", "name": "Trans-Light Blue", "rgb": {"red": 174, "green": 239, "blue": 236}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-42-trans-neon-green", "name": "Trans-Neon Green", "rgb": {"red": 248, "green": 241, "blue": 132}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-43-trans-very-lt-blue", "name": "Trans-Very Lt Blue", "rgb": {"red": 193, "green": 223, "blue": 240}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-45-trans-dark-pink", "name": "Trans-Dark Pink", "rgb": {"red": 223, "green": 102, "blue": 149}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-46-trans-yellow", "name": "Trans-Yellow", "rgb": {"red": 245, "green": 205, "blue": 47}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-47-trans-clear", "name": "Trans-Clear", "rgb": {"red": 252, "green": 252, "blue": 252}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-52-trans-purple", "name": "Trans-Purple", "rgb": {"red": 165, "green": 165, "blue": 203}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-54-trans-neon-yellow", "name": "Trans-Neon Yellow", "rgb": {"red": 218, "green": 176, "blue": 0}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-57-trans-neon-orange", "name": "Trans-Neon Orange", "rgb": {"red": 255, "green": 128, "blue": 13}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-60-chrome-antique-brass", "name": "Chrome Antique Brass", "rgb": {"red": 100, "green": 90, "blue": 76}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-61-chrome-blue", "name": "Chrome Blue", "rgb": {"red": 108, "green": 150, "blue": 191}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-62-chrome-green", "name": "Chrome Green", "rgb": {"red": 60, "green": 179, "blue": 113}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-63-chrome-pink", "name": "Chrome Pink", "rgb": {"red": 170, "green": 77, "blue": 142}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-64-chrome-black", "name": "Chrome Black", "rgb": {"red": 27, "green": 42, "blue": 52}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-68-very-light-orange", "name": "Very Light Orange", "rgb": {"red": 243, "green": 207, "blue": 155}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-69-light-purple", "name": "Light Purple", "rgb": {"red": 205, "green": 98, "blue": 152}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-74-medium-green", "name": "Medium Green", "rgb": {"red": 115, "green": 220, "blue": 161}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-75-speckle-black-copper", "name": "Speckle Black-Copper", "rgb": {"red": 5, "green": 19, "blue": 29}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-76-speckle-dbgray-silver", "name": "Speckle DBGray-Silver", "rgb": {"red": 108, "green": 110, "blue": 104}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-77-light-pink", "name": "Light Pink", "rgb": {"red": 254, "green": 204, "blue": 207}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-78-light-nougat", "name": "Light Nougat", "rgb": {"red": 246, "green": 215, "blue": 179}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-79-milky-white", "name": "Milky White", "rgb": {"red": 255, "green": 255, "blue": 255}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-80-metallic-silver", "name": "Metallic Silver", "rgb": {"red": 165, "green": 169, "blue": 180}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-81-metallic-green", "name": "Metallic Green", "rgb": {"red": 137, "green": 155, "blue": 95}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-82-metallic-gold", "name": "Metallic Gold", "rgb": {"red": 219, "green": 172, "blue": 52}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-84-medium-nougat", "name": "Medium Nougat", "rgb": {"red": 170, "green": 125, "blue": 85}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-85-dark-purple", "name": "Dark Purple", "rgb": {"red": 63, "green": 54, "blue": 145}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-86-light-brown", "name": "Light Brown", "rgb": {"red": 124, "green": 80, "blue": 58}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-89-royal-blue", "name": "Royal Blue", "rgb": {"red": 76, "green": 97, "blue": 219}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-92-nougat", "name": "Nougat", "rgb": {"red": 208, "green": 145, "blue": 104}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-100-light-salmon", "name": "Light Salmon", "rgb": {"red": 254, "green": 186, "blue": 189}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-110-violet", "name": "Violet", "rgb": {"red": 67, "green": 84, "blue": 163}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-112-medium-bluish-violet", "name": "Medium Bluish Violet", "rgb": {"red": 104, "green": 116, "blue": 202}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-114-glitter-trans-dark-pink", "name": "Glitter Trans-Dark Pink", "rgb": {"red": 223, "green": 102, "blue": 149}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-115-medium-lime", "name": "Medium Lime", "rgb": {"red": 199, "green": 210, "blue": 60}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-117-glitter-trans-clear", "name": "Glitter Trans-Clear", "rgb": {"red": 255, "green": 255, "blue": 255}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-118-aqua", "name": "Aqua", "rgb": {"red": 179, "green": 215, "blue": 209}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-120-light-lime", "name": "Light Lime", "rgb": {"red": 217, "green": 228, "blue": 167}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-125-light-orange", "name": "Light Orange", "rgb": {"red": 249, "green": 186, "blue": 97}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-129-glitter-trans-purple", "name": "Glitter Trans-Purple", "rgb": {"red": 165, "green": 165, "blue": 203}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-132-speckle-black-silver", "name": "Speckle Black-Silver", "rgb": {"red": 5, "green": 19, "blue": 29}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-133-speckle-black-gold", "name": "Speckle Black-Gold", "rgb": {"red": 5, "green": 19, "blue": 29}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-134-copper", "name": "Copper", "rgb": {"red": 174, "green": 122, "blue": 89}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-135-pearl-light-gray", "name": "Pearl Light Gray", "rgb": {"red": 156, "green": 163, "blue": 168}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-137-pearl-sand-blue", "name": "Pearl Sand Blue", "rgb": {"red": 121, "green": 136, "blue": 161}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-142-pearl-light-gold", "name": "Pearl Light Gold", "rgb": {"red": 220, "green": 188, "blue": 129}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-143-trans-medium-blue", "name": "Trans-Medium Blue", "rgb": {"red": 207, "green": 226, "blue": 247}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-148-pearl-dark-gray", "name": "Pearl Dark Gray", "rgb": {"red": 87, "green": 88, "blue": 87}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-150-pearl-very-light-gray", "name": "Pearl Very Light Gray", "rgb": {"red": 171, "green": 173, "blue": 172}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-151-very-light-bluish-gray", "name": "Very Light Bluish Gray", "rgb": {"red": 230, "green": 227, "blue": 224}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-158-yellowish-green", "name": "Yellowish Green", "rgb": {"red": 223, "green": 238, "blue": 165}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-178-flat-dark-gold", "name": "Flat Dark Gold", "rgb": {"red": 180, "green": 132, "blue": 85}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-179-flat-silver", "name": "Flat Silver", "rgb": {"red": 137, "green": 135, "blue": 136}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-182-trans-orange", "name": "Trans-Orange", "rgb": {"red": 240, "green": 143, "blue": 28}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-183-pearl-white", "name": "Pearl White", "rgb": {"red": 242, "green": 243, "blue": 242}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-191-bright-light-orange", "name": "Bright Light Orange", "rgb": {"red": 248, "green": 187, "blue": 61}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-212-bright-light-blue", "name": "Bright Light Blue", "rgb": {"red": 159, "green": 195, "blue": 233}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-216-rust", "name": "Rust", "rgb": {"red": 179, "green": 16, "blue": 4}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-226-bright-light-yellow", "name": "Bright Light Yellow", "rgb": {"red": 255, "green": 240, "blue": 58}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-230-trans-pink", "name": "Trans-Pink", "rgb": {"red": 228, "green": 173, "blue": 200}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-232-sky-blue", "name": "Sky Blue", "rgb": {"red": 125, "green": 191, "blue": 221}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-236-trans-light-purple", "name": "Trans-Light Purple", "rgb": {"red": 150, "green": 112, "blue": 159}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-272-dark-blue", "name": "Dark Blue", "rgb": {"red": 10, "green": 52, "blue": 99}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-288-dark-green", "name": "Dark Green", "rgb": {"red": 24, "green": 70, "blue": 50}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-294-glow-in-dark-trans", "name": "Glow In Dark Trans", "rgb": {"red": 189, "green": 198, "blue": 173}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-297-pearl-gold", "name": "Pearl Gold", "rgb": {"red": 170, "green": 127, "blue": 46}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-308-dark-brown", "name": "Dark Brown", "rgb": {"red": 53, "green": 33, "blue": 0}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-313-maersk-blue", "name": "Maersk Blue", "rgb": {"red": 53, "green": 146, "blue": 195}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-320-dark-red", "name": "Dark Red", "rgb": {"red": 114, "green": 14, "blue": 15}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-321-dark-azure", "name": "Dark Azure", "rgb": {"red": 7, "green": 139, "blue": 201}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-322-medium-azure", "name": "Medium Azure", "rgb": {"red": 54, "green": 174, "blue": 191}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-323-light-aqua", "name": "Light Aqua", "rgb": {"red": 173, "green": 195, "blue": 192}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-326-olive-green", "name": "Olive Green", "rgb": {"red": 155, "green": 154, "blue": 90}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-334-chrome-gold", "name": "Chrome Gold", "rgb": {"red": 187, "green": 165, "blue": 61}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-335-sand-red", "name": "Sand Red", "rgb": {"red": 214, "green": 117, "blue": 114}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-351-medium-dark-pink", "name": "Medium Dark Pink", "rgb": {"red": 247, "green": 133, "blue": 177}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-366-earth-orange", "name": "Earth Orange", "rgb": {"red": 250, "green": 156, "blue": 28}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-373-sand-purple", "name": "Sand Purple", "rgb": {"red": 132, "green": 94, "blue": 132}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-378-sand-green", "name": "Sand Green", "rgb": {"red": 160, "green": 188, "blue": 172}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-379-sand-blue", "name": "Sand Blue", "rgb": {"red": 96, "green": 116, "blue": 161}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-383-chrome-silver", "name": "Chrome Silver", "rgb": {"red": 224, "green": 224, "blue": 224}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-450-fabuland-brown", "name": "Fabuland Brown", "rgb": {"red": 182, "green": 123, "blue": 80}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-462-medium-orange", "name": "Medium Orange", "rgb": {"red": 255, "green": 167, "blue": 11}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-484-dark-orange", "name": "Dark Orange", "rgb": {"red": 169, "green": 85, "blue": 0}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-503-very-light-gray", "name": "Very Light Gray", "rgb": {"red": 230, "green": 227, "blue": 218}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1000-glow-in-dark-white", "name": "Glow in Dark White", "rgb": {"red": 217, "green": 217, "blue": 217}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1001-medium-violet", "name": "Medium Violet", "rgb": {"red": 147, "green": 145, "blue": 228}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1002-glitter-trans-neon-green", "name": "Glitter Trans-Neon Green", "rgb": {"red": 192, "green": 245, "blue": 0}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-1003-glitter-trans-light-blue", "name": "Glitter Trans-Light Blue", "rgb": {"red": 104, "green": 188, "blue": 197}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-1004-trans-flame-yellowish-orange", "name": "Trans-Flame Yellowish Orange", "rgb": {"red": 252, "green": 183, "blue": 109}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-1005-trans-fire-yellow", "name": "Trans-Fire Yellow", "rgb": {"red": 251, "green": 232, "blue": 144}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-1006-trans-light-royal-blue", "name": "Trans-Light Royal Blue", "rgb": {"red": 180, "green": 212, "blue": 247}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-1007-reddish-lilac", "name": "Reddish Lilac", "rgb": {"red": 142, "green": 85, "blue": 151}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1008-vintage-blue", "name": "Vintage Blue", "rgb": {"red": 3, "green": 156, "blue": 189}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1009-vintage-green", "name": "Vintage Green", "rgb": {"red": 30, "green": 96, "blue": 30}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1010-vintage-red", "name": "Vintage Red", "rgb": {"red": 202, "green": 31, "blue": 8}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1011-vintage-yellow", "name": "Vintage Yellow", "rgb": {"red": 243, "green": 195, "blue": 5}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1012-fabuland-orange", "name": "Fabuland Orange", "rgb": {"red": 239, "green": 145, "blue": 33}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1013-modulex-white", "name": "Modulex White", "rgb": {"red": 244, "green": 244, "blue": 244}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1014-modulex-light-bluish-gray", "name": "Modulex Light Bluish Gray", "rgb": {"red": 175, "green": 181, "blue": 199}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1015-modulex-light-gray", "name": "Modulex Light Gray", "rgb": {"red": 156, "green": 156, "blue": 156}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1016-modulex-charcoal-gray", "name": "Modulex Charcoal Gray", "rgb": {"red": 89, "green": 93, "blue": 96}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1017-modulex-tile-gray", "name": "Modulex Tile Gray", "rgb": {"red": 107, "green": 90, "blue": 90}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1018-modulex-black", "name": "Modulex Black", "rgb": {"red": 77, "green": 76, "blue": 82}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1019-modulex-tile-brown", "name": "Modulex Tile Brown", "rgb": {"red": 51, "green": 0, "blue": 0}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1020-modulex-terracotta", "name": "Modulex Terracotta", "rgb": {"red": 92, "green": 80, "blue": 48}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1021-modulex-brown", "name": "Modulex Brown", "rgb": {"red": 144, "green": 116, "blue": 80}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1022-modulex-buff", "name": "Modulex Buff", "rgb": {"red": 222, "green": 198, "blue": 156}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1023-modulex-red", "name": "Modulex Red", "rgb": {"red": 181, "green": 44, "blue": 32}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1024-modulex-pink-red", "name": "Modulex Pink Red", "rgb": {"red": 244, "green": 92, "blue": 64}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1025-modulex-orange", "name": "Modulex Orange", "rgb": {"red": 244, "green": 123, "blue": 48}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1026-modulex-light-orange", "name": "Modulex Light Orange", "rgb": {"red": 247, "green": 173, "blue": 99}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1027-modulex-light-yellow", "name": "Modulex Light Yellow", "rgb": {"red": 255, "green": 227, "blue": 113}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1028-modulex-ochre-yellow", "name": "Modulex Ochre Yellow", "rgb": {"red": 254, "green": 213, "blue": 87}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1029-modulex-lemon", "name": "Modulex Lemon", "rgb": {"red": 189, "green": 198, "blue": 24}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1030-modulex-pastel-green", "name": "Modulex Pastel Green", "rgb": {"red": 125, "green": 181, "blue": 56}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1031-modulex-olive-green", "name": "Modulex Olive Green", "rgb": {"red": 124, "green": 144, "blue": 81}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1032-modulex-aqua-green", "name": "Modulex Aqua Green", "rgb": {"red": 39, "green": 134, "blue": 126}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1033-modulex-teal-blue", "name": "Modulex Teal Blue", "rgb": {"red": 70, "green": 112, "blue": 131}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1034-modulex-tile-blue", "name": "Modulex Tile Blue", "rgb": {"red": 0, "green": 87, "blue": 166}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1035-modulex-medium-blue", "name": "Modulex Medium Blue", "rgb": {"red": 97, "green": 175, "blue": 255}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1036-modulex-pastel-blue", "name": "Modulex Pastel Blue", "rgb": {"red": 104, "green": 174, "blue": 206}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1037-modulex-violet", "name": "Modulex Violet", "rgb": {"red": 189, "green": 125, "blue": 133}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1038-modulex-pink", "name": "Modulex Pink", "rgb": {"red": 247, "green": 133, "blue": 177}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1039-modulex-clear", "name": "Modulex Clear", "rgb": {"red": 255, "green": 255, "blue": 255}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1040-modulex-foil-dark-gray", "name": "Modulex Foil Dark Gray", "rgb": {"red": 89, "green": 93, "blue": 96}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1041-modulex-foil-light-gray", "name": "Modulex Foil Light Gray", "rgb": {"red": 156, "green": 156, "blue": 156}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1042-modulex-foil-dark-green", "name": "Modulex Foil Dark Green", "rgb": {"red": 0, "green": 100, "blue": 0}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1043-modulex-foil-light-green", "name": "Modulex Foil Light Green", "rgb": {"red": 125, "green": 181, "blue": 56}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1044-modulex-foil-dark-blue", "name": "Modulex Foil Dark Blue", "rgb": {"red": 0, "green": 87, "blue": 166}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1045-modulex-foil-light-blue", "name": "Modulex Foil Light Blue", "rgb": {"red": 104, "green": 174, "blue": 206}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1046-modulex-foil-violet", "name": "Modulex Foil Violet", "rgb": {"red": 75, "green": 0, "blue": 130}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1047-modulex-foil-red", "name": "Modulex Foil Red", "rgb": {"red": 139, "green": 0, "blue": 0}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1048-modulex-foil-yellow", "name": "Modulex Foil Yellow", "rgb": {"red": 254, "green": 213, "blue": 87}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1049-modulex-foil-orange", "name": "Modulex Foil Orange", "rgb": {"red": 247, "green": 173, "blue": 99}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1050-coral", "name": "Coral", "rgb": {"red": 255, "green": 105, "blue": 143}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1051-pastel-blue", "name": "Pastel Blue", "rgb": {"red": 90, "green": 196, "blue": 218}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1052-glitter-trans-orange", "name": "Glitter Trans-Orange", "rgb": {"red": 240, "green": 143, "blue": 28}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-1053-opal-trans-light-blue", "name": "Opal Trans-Light Blue", "rgb": {"red": 104, "green": 188, "blue": 197}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-1054-opal-trans-dark-pink", "name": "Opal Trans-Dark Pink", "rgb": {"red": 206, "green": 29, "blue": 155}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-1055-opal-trans-clear", "name": "Opal Trans-Clear", "rgb": {"red": 252, "green": 252, "blue": 252}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-1056-opal-trans-brown", "name": "Opal Trans-Brown", "rgb": {"red": 88, "green": 57, "blue": 39}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-1057-trans-light-bright-green", "name": "Trans-Light Bright Green", "rgb": {"red": 201, "green": 231, "blue": 136}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-1058-trans-light-green", "name": "Trans-Light Green", "rgb": {"red": 148, "green": 229, "blue": 171}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-1059-opal-trans-purple", "name": "Opal Trans-Purple", "rgb": {"red": 131, "green": 32, "blue": 183}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-1060-opal-trans-bright-green", "name": "Opal Trans-Bright Green", "rgb": {"red": 132, "green": 182, "blue": 141}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-1061-opal-trans-dark-blue", "name": "Opal Trans-Dark Blue", "rgb": {"red": 0, "green": 32, "blue": 160}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-1062-vibrant-yellow", "name": "Vibrant Yellow", "rgb": {"red": 235, "green": 216, "blue": 0}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1063-pearl-copper", "name": "Pearl Copper", "rgb": {"red": 180, "green": 106, "blue": 0}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1064-fabuland-red", "name": "Fabuland Red", "rgb": {"red": 255, "green": 128, "blue": 20}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1065-reddish-gold", "name": "Reddish Gold", "rgb": {"red": 172, "green": 130, "blue": 71}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1066-curry", "name": "Curry", "rgb": {"red": 221, "green": 152, "blue": 46}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1067-dark-nougat", "name": "Dark Nougat", "rgb": {"red": 173, "green": 97, "blue": 64}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1068-bright-reddish-orange", "name": "Bright Reddish Orange", "rgb": {"red": 238, "green": 84, "blue": 52}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1069-pearl-red", "name": "Pearl Red", "rgb": {"red": 214, "green": 0, "blue": 38}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1070-pearl-blue", "name": "Pearl Blue", "rgb": {"red": 0, "green": 89, "blue": 163}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1071-pearl-green", "name": "Pearl Green", "rgb": {"red": 0, "green": 142, "blue": 60}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1072-pearl-brown", "name": "Pearl Brown", "rgb": {"red": 87, "green": 57, "blue": 44}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1073-pearl-black", "name": "Pearl Black", "rgb": {"red": 10, "green": 19, "blue": 39}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1074-duplo-blue", "name": "Duplo Blue", "rgb": {"red": 0, "green": 158, "blue": 206}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1075-duplo-medium-blue", "name": "Duplo Medium Blue", "rgb": {"red": 62, "green": 149, "blue": 182}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1076-duplo-lime", "name": "Duplo Lime", "rgb": {"red": 255, "green": 242, "blue": 48}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1077-fabuland-lime", "name": "Fabuland Lime", "rgb": {"red": 120, "green": 252, "blue": 120}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1078-duplo-medium-green", "name": "Duplo Medium Green", "rgb": {"red": 70, "green": 138, "blue": 95}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1079-duplo-light-green", "name": "Duplo Light Green", "rgb": {"red": 96, "green": 186, "blue": 118}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1080-light-tan", "name": "Light Tan", "rgb": {"red": 243, "green": 201, "blue": 136}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1081-rust-orange", "name": "Rust Orange", "rgb": {"red": 135, "green": 43, "blue": 23}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1082-clikits-pink", "name": "Clikits Pink", "rgb": {"red": 254, "green": 120, "blue": 176}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1083-two-tone-copper", "name": "Two-tone Copper", "rgb": {"red": 148, "green": 81, "blue": 72}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1084-two-tone-gold", "name": "Two-tone Gold", "rgb": {"red": 171, "green": 103, "blue": 58}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1085-two-tone-silver", "name": "Two-tone Silver", "rgb": {"red": 115, "green": 114, "blue": 113}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1086-pearl-lime", "name": "Pearl Lime", "rgb": {"red": 106, "green": 121, "blue": 68}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1087-duplo-pink", "name": "Duplo Pink", "rgb": {"red": 255, "green": 135, "blue": 156}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1088-medium-brown", "name": "Medium Brown", "rgb": {"red": 117, "green": 89, "blue": 69}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1089-warm-tan", "name": "Warm Tan", "rgb": {"red": 204, "green": 163, "blue": 115}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1090-duplo-turquoise", "name": "Duplo Turquoise", "rgb": {"red": 63, "green": 182, "blue": 158}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1091-warm-yellowish-orange", "name": "Warm Yellowish Orange", "rgb": {"red": 255, "green": 203, "blue": 120}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1092-metallic-copper", "name": "Metallic Copper", "rgb": {"red": 118, "green": 77, "blue": 59}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1093-light-lilac", "name": "Light Lilac", "rgb": {"red": 145, "green": 149, "blue": 202}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1094-trans-medium-purple", "name": "Trans-Medium Purple", "rgb": {"red": 141, "green": 115, "blue": 179}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-1095-trans-black", "name": "Trans-Black", "rgb": {"red": 99, "green": 95, "blue": 82}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-1096-glitter-trans-bright-green", "name": "Glitter Trans-Bright Green", "rgb": {"red": 217, "green": 228, "blue": 167}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-1097-glitter-trans-medium-purple", "name": "Glitter Trans-Medium Purple", "rgb": {"red": 141, "green": 115, "blue": 179}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-1098-glitter-trans-green", "name": "Glitter Trans-Green", "rgb": {"red": 132, "green": 182, "blue": 141}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-1099-glitter-trans-pink", "name": "Glitter Trans-Pink", "rgb": {"red": 228, "green": 173, "blue": 200}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-1100-clikits-yellow", "name": "Clikits Yellow", "rgb": {"red": 255, "green": 207, "blue": 11}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1101-duplo-dark-purple", "name": "Duplo Dark Purple", "rgb": {"red": 95, "green": 39, "blue": 170}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1102-trans-neon-red", "name": "Trans-Neon Red", "rgb": {"red": 255, "green": 0, "blue": 64}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-1103-pearl-titanium", "name": "Pearl Titanium", "rgb": {"red": 62, "green": 60, "blue": 57}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1104-ho-aqua", "name": "HO Aqua", "rgb": {"red": 179, "green": 215, "blue": 209}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1105-ho-azure", "name": "HO Azure", "rgb": {"red": 21, "green": 145, "blue": 203}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1106-ho-blue-gray", "name": "HO Blue-gray", "rgb": {"red": 53, "green": 78, "blue": 90}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1107-ho-cyan", "name": "HO Cyan", "rgb": {"red": 91, "green": 152, "blue": 179}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1108-ho-dark-aqua", "name": "HO Dark Aqua", "rgb": {"red": 167, "green": 220, "blue": 207}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1109-ho-dark-blue", "name": "HO Dark Blue", "rgb": {"red": 10, "green": 52, "blue": 99}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1110-ho-dark-gray", "name": "HO Dark Gray", "rgb": {"red": 109, "green": 110, "blue": 92}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1111-ho-dark-green", "name": "HO Dark Green", "rgb": {"red": 24, "green": 70, "blue": 50}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1112-ho-dark-lime", "name": "HO Dark Lime", "rgb": {"red": 178, "green": 185, "blue": 85}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1113-ho-dark-red", "name": "HO Dark Red", "rgb": {"red": 99, "green": 19, "blue": 20}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1114-ho-dark-sand-green", "name": "HO Dark Sand Green", "rgb": {"red": 98, "green": 122, "blue": 98}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1115-ho-dark-turquoise", "name": "HO Dark Turquoise", "rgb": {"red": 16, "green": 146, "blue": 157}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1116-ho-earth-orange", "name": "HO Earth Orange", "rgb": {"red": 187, "green": 119, "blue": 27}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1117-ho-gold", "name": "HO Gold", "rgb": {"red": 180, "green": 167, "blue": 116}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1118-ho-light-aqua", "name": "HO Light Aqua", "rgb": {"red": 163, "green": 209, "blue": 192}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1119-ho-light-brown", "name": "HO Light Brown", "rgb": {"red": 150, "green": 83, "blue": 54}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1120-ho-light-gold", "name": "HO Light Gold", "rgb": {"red": 205, "green": 194, "blue": 152}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1121-ho-light-tan", "name": "HO Light Tan", "rgb": {"red": 249, "green": 241, "blue": 199}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1122-ho-light-yellow", "name": "HO Light Yellow", "rgb": {"red": 245, "green": 250, "blue": 183}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1123-ho-medium-blue", "name": "HO Medium Blue", "rgb": {"red": 115, "green": 150, "blue": 200}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1124-ho-medium-red", "name": "HO Medium Red", "rgb": {"red": 192, "green": 17, "blue": 17}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1125-ho-metallic-blue", "name": "HO Metallic Blue", "rgb": {"red": 13, "green": 71, "blue": 99}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1126-ho-metallic-dark-gray", "name": "HO Metallic Dark Gray", "rgb": {"red": 94, "green": 94, "blue": 94}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1127-ho-metallic-green", "name": "HO Metallic Green", "rgb": {"red": 135, "green": 152, "blue": 103}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1128-ho-metallic-sand-blue", "name": "HO Metallic Sand Blue", "rgb": {"red": 95, "green": 125, "blue": 140}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1129-ho-olive-green", "name": "HO Olive Green", "rgb": {"red": 155, "green": 154, "blue": 90}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1130-ho-rose", "name": "HO Rose", "rgb": {"red": 208, "green": 98, "blue": 98}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1131-ho-sand-blue", "name": "HO Sand Blue", "rgb": {"red": 110, "green": 138, "blue": 166}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1132-ho-sand-green", "name": "HO Sand Green", "rgb": {"red": 160, "green": 188, "blue": 172}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1133-ho-tan", "name": "HO Tan", "rgb": {"red": 228, "green": 205, "blue": 158}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1134-ho-titanium", "name": "HO Titanium", "rgb": {"red": 97, "green": 97, "blue": 97}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1135-metal", "name": "Metal", "rgb": {"red": 165, "green": 173, "blue": 180}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1136-reddish-orange", "name": "Reddish Orange", "rgb": {"red": 202, "green": 76, "blue": 11}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1137-sienna-brown", "name": "Sienna Brown", "rgb": {"red": 145, "green": 92, "blue": 60}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1138-umber-brown", "name": "Umber Brown", "rgb": {"red": 94, "green": 63, "blue": 51}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1139-opal-trans-yellow", "name": "Opal Trans-Yellow", "rgb": {"red": 245, "green": 205, "blue": 47}, "isActive": false, "notes": "Seltene transparente Erweiterungsfarbe."},
-        {"id": "lego-1140-neon-orange", "name": "Neon Orange", "rgb": {"red": 236, "green": 70, "blue": 18}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1141-neon-green", "name": "Neon Green", "rgb": {"red": 210, "green": 252, "blue": 67}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1142-dark-olive-green", "name": "Dark Olive Green", "rgb": {"red": 93, "green": 92, "blue": 54}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1143-glitter-milky-white", "name": "Glitter Milky White", "rgb": {"red": 255, "green": 255, "blue": 255}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1144-chrome-red", "name": "Chrome Red", "rgb": {"red": 206, "green": 48, "blue": 33}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1145-ochre-yellow", "name": "Ochre Yellow", "rgb": {"red": 221, "green": 158, "blue": 71}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1146-warm-pink", "name": "Warm Pink", "rgb": {"red": 246, "green": 183, "blue": 191}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."},
-        {"id": "lego-1147-blue-violet", "name": "Blue Violet", "rgb": {"red": 163, "green": 169, "blue": 255}, "isActive": false, "notes": "Seltene Erweiterungsfarbe."}
+        {
+          "id": "white",
+          "name": "White",
+          "rgb": {
+            "red": 255,
+            "green": 255,
+            "blue": 255
+          },
+          "isActive": true,
+          "notes": "Basisfarbe laut 1000steine-Farbreferenz."
+        },
+        {
+          "id": "tan",
+          "name": "Tan",
+          "rgb": {
+            "red": 228,
+            "green": 205,
+            "blue": 158
+          },
+          "isActive": true,
+          "notes": "Basisfarbe laut 1000steine-Farbreferenz."
+        },
+        {
+          "id": "bright-red",
+          "name": "Bright Red",
+          "rgb": {
+            "red": 201,
+            "green": 26,
+            "blue": 9
+          },
+          "isActive": true,
+          "notes": "Basisfarbe laut 1000steine-Farbreferenz."
+        },
+        {
+          "id": "bright-blue",
+          "name": "Bright Blue",
+          "rgb": {
+            "red": 0,
+            "green": 85,
+            "blue": 191
+          },
+          "isActive": true,
+          "notes": "Basisfarbe laut 1000steine-Farbreferenz."
+        },
+        {
+          "id": "bright-yellow",
+          "name": "Bright Yellow",
+          "rgb": {
+            "red": 242,
+            "green": 205,
+            "blue": 55
+          },
+          "isActive": true,
+          "notes": "Basisfarbe laut 1000steine-Farbreferenz."
+        },
+        {
+          "id": "black",
+          "name": "Black",
+          "rgb": {
+            "red": 5,
+            "green": 19,
+            "blue": 29
+          },
+          "isActive": true,
+          "notes": "Basisfarbe laut 1000steine-Farbreferenz."
+        },
+        {
+          "id": "green",
+          "name": "Green",
+          "rgb": {
+            "red": 35,
+            "green": 120,
+            "blue": 65
+          },
+          "isActive": true,
+          "notes": "Basisfarbe laut 1000steine-Farbreferenz."
+        },
+        {
+          "id": "medium-blue",
+          "name": "Medium Blue",
+          "rgb": {
+            "red": 90,
+            "green": 147,
+            "blue": 219
+          },
+          "isActive": true,
+          "notes": "Basisfarbe laut 1000steine-Farbreferenz."
+        },
+        {
+          "id": "bright-orange",
+          "name": "Bright Orange",
+          "rgb": {
+            "red": 254,
+            "green": 138,
+            "blue": 24
+          },
+          "isActive": true,
+          "notes": "Basisfarbe laut 1000steine-Farbreferenz."
+        },
+        {
+          "id": "reddish-brown",
+          "name": "Reddish Brown",
+          "rgb": {
+            "red": 88,
+            "green": 42,
+            "blue": 18
+          },
+          "isActive": true,
+          "notes": "Basisfarbe laut 1000steine-Farbreferenz."
+        },
+        {
+          "id": "light-bluish-gray",
+          "name": "Light Bluish Gray",
+          "rgb": {
+            "red": 160,
+            "green": 165,
+            "blue": 169
+          },
+          "isActive": true,
+          "notes": "Basisfarbe laut 1000steine-Farbreferenz."
+        },
+        {
+          "id": "dark-bluish-gray",
+          "name": "Dark Bluish Gray",
+          "rgb": {
+            "red": 108,
+            "green": 110,
+            "blue": 104
+          },
+          "isActive": true,
+          "notes": "Basisfarbe laut 1000steine-Farbreferenz."
+        },
+        {
+          "id": "lego-3-dark-turquoise",
+          "name": "Dark Turquoise",
+          "rgb": {
+            "red": 0,
+            "green": 143,
+            "blue": 155
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-5-dark-pink",
+          "name": "Dark Pink",
+          "rgb": {
+            "red": 200,
+            "green": 112,
+            "blue": 160
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-6-brown",
+          "name": "Brown",
+          "rgb": {
+            "red": 88,
+            "green": 57,
+            "blue": 39
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-7-light-gray",
+          "name": "Light Gray",
+          "rgb": {
+            "red": 155,
+            "green": 161,
+            "blue": 157
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-8-dark-gray",
+          "name": "Dark Gray",
+          "rgb": {
+            "red": 109,
+            "green": 110,
+            "blue": 92
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-9-light-blue",
+          "name": "Light Blue",
+          "rgb": {
+            "red": 180,
+            "green": 210,
+            "blue": 227
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-10-bright-green",
+          "name": "Bright Green",
+          "rgb": {
+            "red": 75,
+            "green": 159,
+            "blue": 74
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-11-light-turquoise",
+          "name": "Light Turquoise",
+          "rgb": {
+            "red": 85,
+            "green": 165,
+            "blue": 175
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-12-salmon",
+          "name": "Salmon",
+          "rgb": {
+            "red": 242,
+            "green": 112,
+            "blue": 94
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-13-pink",
+          "name": "Pink",
+          "rgb": {
+            "red": 252,
+            "green": 151,
+            "blue": 172
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-17-light-green",
+          "name": "Light Green",
+          "rgb": {
+            "red": 194,
+            "green": 218,
+            "blue": 184
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-18-light-yellow",
+          "name": "Light Yellow",
+          "rgb": {
+            "red": 251,
+            "green": 230,
+            "blue": 150
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-20-light-violet",
+          "name": "Light Violet",
+          "rgb": {
+            "red": 201,
+            "green": 202,
+            "blue": 226
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-21-glow-in-dark-opaque",
+          "name": "Glow In Dark Opaque",
+          "rgb": {
+            "red": 212,
+            "green": 213,
+            "blue": 201
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-22-purple",
+          "name": "Purple",
+          "rgb": {
+            "red": 129,
+            "green": 0,
+            "blue": 123
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-23-dark-blue-violet",
+          "name": "Dark Blue-Violet",
+          "rgb": {
+            "red": 32,
+            "green": 50,
+            "blue": 176
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-26-magenta",
+          "name": "Magenta",
+          "rgb": {
+            "red": 146,
+            "green": 57,
+            "blue": 120
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-27-lime",
+          "name": "Lime",
+          "rgb": {
+            "red": 187,
+            "green": 233,
+            "blue": 11
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-28-dark-tan",
+          "name": "Dark Tan",
+          "rgb": {
+            "red": 149,
+            "green": 138,
+            "blue": 115
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-29-bright-pink",
+          "name": "Bright Pink",
+          "rgb": {
+            "red": 228,
+            "green": 173,
+            "blue": 200
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-30-medium-lavender",
+          "name": "Medium Lavender",
+          "rgb": {
+            "red": 172,
+            "green": 120,
+            "blue": 186
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-31-lavender",
+          "name": "Lavender",
+          "rgb": {
+            "red": 225,
+            "green": 213,
+            "blue": 237
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-32-trans-black-ir-lens",
+          "name": "Trans-Black IR Lens",
+          "rgb": {
+            "red": 99,
+            "green": 95,
+            "blue": 82
+          },
+          "isActive": false,
+          "notes": "Seltene transparente Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-33-trans-dark-blue",
+          "name": "Trans-Dark Blue",
+          "rgb": {
+            "red": 0,
+            "green": 32,
+            "blue": 160
+          },
+          "isActive": false,
+          "notes": "Seltene transparente Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-34-trans-green",
+          "name": "Trans-Green",
+          "rgb": {
+            "red": 132,
+            "green": 182,
+            "blue": 141
+          },
+          "isActive": false,
+          "notes": "Seltene transparente Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-35-trans-bright-green",
+          "name": "Trans-Bright Green",
+          "rgb": {
+            "red": 217,
+            "green": 228,
+            "blue": 167
+          },
+          "isActive": false,
+          "notes": "Seltene transparente Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-41-trans-light-blue",
+          "name": "Trans-Light Blue",
+          "rgb": {
+            "red": 174,
+            "green": 239,
+            "blue": 236
+          },
+          "isActive": false,
+          "notes": "Seltene transparente Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-42-trans-neon-green",
+          "name": "Trans-Neon Green",
+          "rgb": {
+            "red": 248,
+            "green": 241,
+            "blue": 132
+          },
+          "isActive": false,
+          "notes": "Seltene transparente Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-43-trans-very-lt-blue",
+          "name": "Trans-Very Lt Blue",
+          "rgb": {
+            "red": 193,
+            "green": 223,
+            "blue": 240
+          },
+          "isActive": false,
+          "notes": "Seltene transparente Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-45-trans-dark-pink",
+          "name": "Trans-Dark Pink",
+          "rgb": {
+            "red": 223,
+            "green": 102,
+            "blue": 149
+          },
+          "isActive": false,
+          "notes": "Seltene transparente Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-46-trans-yellow",
+          "name": "Trans-Yellow",
+          "rgb": {
+            "red": 245,
+            "green": 205,
+            "blue": 47
+          },
+          "isActive": false,
+          "notes": "Seltene transparente Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-47-trans-clear",
+          "name": "Trans-Clear",
+          "rgb": {
+            "red": 252,
+            "green": 252,
+            "blue": 252
+          },
+          "isActive": false,
+          "notes": "Seltene transparente Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-52-trans-purple",
+          "name": "Trans-Purple",
+          "rgb": {
+            "red": 165,
+            "green": 165,
+            "blue": 203
+          },
+          "isActive": false,
+          "notes": "Seltene transparente Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-54-trans-neon-yellow",
+          "name": "Trans-Neon Yellow",
+          "rgb": {
+            "red": 218,
+            "green": 176,
+            "blue": 0
+          },
+          "isActive": false,
+          "notes": "Seltene transparente Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-57-trans-neon-orange",
+          "name": "Trans-Neon Orange",
+          "rgb": {
+            "red": 255,
+            "green": 128,
+            "blue": 13
+          },
+          "isActive": false,
+          "notes": "Seltene transparente Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-60-chrome-antique-brass",
+          "name": "Chrome Antique Brass",
+          "rgb": {
+            "red": 100,
+            "green": 90,
+            "blue": 76
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-61-chrome-blue",
+          "name": "Chrome Blue",
+          "rgb": {
+            "red": 108,
+            "green": 150,
+            "blue": 191
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-62-chrome-green",
+          "name": "Chrome Green",
+          "rgb": {
+            "red": 60,
+            "green": 179,
+            "blue": 113
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-63-chrome-pink",
+          "name": "Chrome Pink",
+          "rgb": {
+            "red": 170,
+            "green": 77,
+            "blue": 142
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-64-chrome-black",
+          "name": "Chrome Black",
+          "rgb": {
+            "red": 27,
+            "green": 42,
+            "blue": 52
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-68-very-light-orange",
+          "name": "Very Light Orange",
+          "rgb": {
+            "red": 243,
+            "green": 207,
+            "blue": 155
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-69-light-purple",
+          "name": "Light Purple",
+          "rgb": {
+            "red": 205,
+            "green": 98,
+            "blue": 152
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-74-medium-green",
+          "name": "Medium Green",
+          "rgb": {
+            "red": 115,
+            "green": 220,
+            "blue": 161
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-77-light-pink",
+          "name": "Light Pink",
+          "rgb": {
+            "red": 254,
+            "green": 204,
+            "blue": 207
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-78-light-nougat",
+          "name": "Light Nougat",
+          "rgb": {
+            "red": 246,
+            "green": 215,
+            "blue": 179
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-80-metallic-silver",
+          "name": "Metallic Silver",
+          "rgb": {
+            "red": 165,
+            "green": 169,
+            "blue": 180
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-81-metallic-green",
+          "name": "Metallic Green",
+          "rgb": {
+            "red": 137,
+            "green": 155,
+            "blue": 95
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-82-metallic-gold",
+          "name": "Metallic Gold",
+          "rgb": {
+            "red": 219,
+            "green": 172,
+            "blue": 52
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-84-medium-nougat",
+          "name": "Medium Nougat",
+          "rgb": {
+            "red": 170,
+            "green": 125,
+            "blue": 85
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-85-dark-purple",
+          "name": "Dark Purple",
+          "rgb": {
+            "red": 63,
+            "green": 54,
+            "blue": 145
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-86-light-brown",
+          "name": "Light Brown",
+          "rgb": {
+            "red": 124,
+            "green": 80,
+            "blue": 58
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-89-royal-blue",
+          "name": "Royal Blue",
+          "rgb": {
+            "red": 76,
+            "green": 97,
+            "blue": 219
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-92-nougat",
+          "name": "Nougat",
+          "rgb": {
+            "red": 208,
+            "green": 145,
+            "blue": 104
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-100-light-salmon",
+          "name": "Light Salmon",
+          "rgb": {
+            "red": 254,
+            "green": 186,
+            "blue": 189
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-110-violet",
+          "name": "Violet",
+          "rgb": {
+            "red": 67,
+            "green": 84,
+            "blue": 163
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-112-medium-bluish-violet",
+          "name": "Medium Bluish Violet",
+          "rgb": {
+            "red": 104,
+            "green": 116,
+            "blue": 202
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-115-medium-lime",
+          "name": "Medium Lime",
+          "rgb": {
+            "red": 199,
+            "green": 210,
+            "blue": 60
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-118-aqua",
+          "name": "Aqua",
+          "rgb": {
+            "red": 179,
+            "green": 215,
+            "blue": 209
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-125-light-orange",
+          "name": "Light Orange",
+          "rgb": {
+            "red": 249,
+            "green": 186,
+            "blue": 97
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-134-copper",
+          "name": "Copper",
+          "rgb": {
+            "red": 174,
+            "green": 122,
+            "blue": 89
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-135-pearl-light-gray",
+          "name": "Pearl Light Gray",
+          "rgb": {
+            "red": 156,
+            "green": 163,
+            "blue": 168
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-137-pearl-sand-blue",
+          "name": "Pearl Sand Blue",
+          "rgb": {
+            "red": 121,
+            "green": 136,
+            "blue": 161
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-142-pearl-light-gold",
+          "name": "Pearl Light Gold",
+          "rgb": {
+            "red": 220,
+            "green": 188,
+            "blue": 129
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-143-trans-medium-blue",
+          "name": "Trans-Medium Blue",
+          "rgb": {
+            "red": 207,
+            "green": 226,
+            "blue": 247
+          },
+          "isActive": false,
+          "notes": "Seltene transparente Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-148-pearl-dark-gray",
+          "name": "Pearl Dark Gray",
+          "rgb": {
+            "red": 87,
+            "green": 88,
+            "blue": 87
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-150-pearl-very-light-gray",
+          "name": "Pearl Very Light Gray",
+          "rgb": {
+            "red": 171,
+            "green": 173,
+            "blue": 172
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-151-very-light-bluish-gray",
+          "name": "Very Light Bluish Gray",
+          "rgb": {
+            "red": 230,
+            "green": 227,
+            "blue": 224
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-158-yellowish-green",
+          "name": "Yellowish Green",
+          "rgb": {
+            "red": 223,
+            "green": 238,
+            "blue": 165
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-178-flat-dark-gold",
+          "name": "Flat Dark Gold",
+          "rgb": {
+            "red": 180,
+            "green": 132,
+            "blue": 85
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-179-flat-silver",
+          "name": "Flat Silver",
+          "rgb": {
+            "red": 137,
+            "green": 135,
+            "blue": 136
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-182-trans-orange",
+          "name": "Trans-Orange",
+          "rgb": {
+            "red": 240,
+            "green": 143,
+            "blue": 28
+          },
+          "isActive": false,
+          "notes": "Seltene transparente Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-183-pearl-white",
+          "name": "Pearl White",
+          "rgb": {
+            "red": 242,
+            "green": 243,
+            "blue": 242
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-191-bright-light-orange",
+          "name": "Bright Light Orange",
+          "rgb": {
+            "red": 248,
+            "green": 187,
+            "blue": 61
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-212-bright-light-blue",
+          "name": "Bright Light Blue",
+          "rgb": {
+            "red": 159,
+            "green": 195,
+            "blue": 233
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-216-rust",
+          "name": "Rust",
+          "rgb": {
+            "red": 179,
+            "green": 16,
+            "blue": 4
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-226-bright-light-yellow",
+          "name": "Bright Light Yellow",
+          "rgb": {
+            "red": 255,
+            "green": 240,
+            "blue": 58
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-232-sky-blue",
+          "name": "Sky Blue",
+          "rgb": {
+            "red": 125,
+            "green": 191,
+            "blue": 221
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-236-trans-light-purple",
+          "name": "Trans-Light Purple",
+          "rgb": {
+            "red": 150,
+            "green": 112,
+            "blue": 159
+          },
+          "isActive": false,
+          "notes": "Seltene transparente Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-272-dark-blue",
+          "name": "Dark Blue",
+          "rgb": {
+            "red": 10,
+            "green": 52,
+            "blue": 99
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-288-dark-green",
+          "name": "Dark Green",
+          "rgb": {
+            "red": 24,
+            "green": 70,
+            "blue": 50
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-294-glow-in-dark-trans",
+          "name": "Glow In Dark Trans",
+          "rgb": {
+            "red": 189,
+            "green": 198,
+            "blue": 173
+          },
+          "isActive": false,
+          "notes": "Seltene transparente Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-297-pearl-gold",
+          "name": "Pearl Gold",
+          "rgb": {
+            "red": 170,
+            "green": 127,
+            "blue": 46
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-308-dark-brown",
+          "name": "Dark Brown",
+          "rgb": {
+            "red": 53,
+            "green": 33,
+            "blue": 0
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-313-maersk-blue",
+          "name": "Maersk Blue",
+          "rgb": {
+            "red": 53,
+            "green": 146,
+            "blue": 195
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-320-dark-red",
+          "name": "Dark Red",
+          "rgb": {
+            "red": 114,
+            "green": 14,
+            "blue": 15
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-321-dark-azure",
+          "name": "Dark Azure",
+          "rgb": {
+            "red": 7,
+            "green": 139,
+            "blue": 201
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-322-medium-azure",
+          "name": "Medium Azure",
+          "rgb": {
+            "red": 54,
+            "green": 174,
+            "blue": 191
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-323-light-aqua",
+          "name": "Light Aqua",
+          "rgb": {
+            "red": 173,
+            "green": 195,
+            "blue": 192
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-326-olive-green",
+          "name": "Olive Green",
+          "rgb": {
+            "red": 155,
+            "green": 154,
+            "blue": 90
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-334-chrome-gold",
+          "name": "Chrome Gold",
+          "rgb": {
+            "red": 187,
+            "green": 165,
+            "blue": 61
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-335-sand-red",
+          "name": "Sand Red",
+          "rgb": {
+            "red": 214,
+            "green": 117,
+            "blue": 114
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-351-medium-dark-pink",
+          "name": "Medium Dark Pink",
+          "rgb": {
+            "red": 247,
+            "green": 133,
+            "blue": 177
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-366-earth-orange",
+          "name": "Earth Orange",
+          "rgb": {
+            "red": 250,
+            "green": 156,
+            "blue": 28
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-373-sand-purple",
+          "name": "Sand Purple",
+          "rgb": {
+            "red": 132,
+            "green": 94,
+            "blue": 132
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-378-sand-green",
+          "name": "Sand Green",
+          "rgb": {
+            "red": 160,
+            "green": 188,
+            "blue": 172
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-379-sand-blue",
+          "name": "Sand Blue",
+          "rgb": {
+            "red": 96,
+            "green": 116,
+            "blue": 161
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-383-chrome-silver",
+          "name": "Chrome Silver",
+          "rgb": {
+            "red": 224,
+            "green": 224,
+            "blue": 224
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-450-fabuland-brown",
+          "name": "Fabuland Brown",
+          "rgb": {
+            "red": 182,
+            "green": 123,
+            "blue": 80
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-462-medium-orange",
+          "name": "Medium Orange",
+          "rgb": {
+            "red": 255,
+            "green": 167,
+            "blue": 11
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-484-dark-orange",
+          "name": "Dark Orange",
+          "rgb": {
+            "red": 169,
+            "green": 85,
+            "blue": 0
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-503-very-light-gray",
+          "name": "Very Light Gray",
+          "rgb": {
+            "red": 230,
+            "green": 227,
+            "blue": 218
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1000-glow-in-dark-white",
+          "name": "Glow in Dark White",
+          "rgb": {
+            "red": 217,
+            "green": 217,
+            "blue": 217
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1001-medium-violet",
+          "name": "Medium Violet",
+          "rgb": {
+            "red": 147,
+            "green": 145,
+            "blue": 228
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1002-glitter-trans-neon-green",
+          "name": "Glitter Trans-Neon Green",
+          "rgb": {
+            "red": 192,
+            "green": 245,
+            "blue": 0
+          },
+          "isActive": false,
+          "notes": "Seltene transparente Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1003-glitter-trans-light-blue",
+          "name": "Glitter Trans-Light Blue",
+          "rgb": {
+            "red": 104,
+            "green": 188,
+            "blue": 197
+          },
+          "isActive": false,
+          "notes": "Seltene transparente Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1004-trans-flame-yellowish-orange",
+          "name": "Trans-Flame Yellowish Orange",
+          "rgb": {
+            "red": 252,
+            "green": 183,
+            "blue": 109
+          },
+          "isActive": false,
+          "notes": "Seltene transparente Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1005-trans-fire-yellow",
+          "name": "Trans-Fire Yellow",
+          "rgb": {
+            "red": 251,
+            "green": 232,
+            "blue": 144
+          },
+          "isActive": false,
+          "notes": "Seltene transparente Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1006-trans-light-royal-blue",
+          "name": "Trans-Light Royal Blue",
+          "rgb": {
+            "red": 180,
+            "green": 212,
+            "blue": 247
+          },
+          "isActive": false,
+          "notes": "Seltene transparente Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1007-reddish-lilac",
+          "name": "Reddish Lilac",
+          "rgb": {
+            "red": 142,
+            "green": 85,
+            "blue": 151
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1008-vintage-blue",
+          "name": "Vintage Blue",
+          "rgb": {
+            "red": 3,
+            "green": 156,
+            "blue": 189
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1009-vintage-green",
+          "name": "Vintage Green",
+          "rgb": {
+            "red": 30,
+            "green": 96,
+            "blue": 30
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1010-vintage-red",
+          "name": "Vintage Red",
+          "rgb": {
+            "red": 202,
+            "green": 31,
+            "blue": 8
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1011-vintage-yellow",
+          "name": "Vintage Yellow",
+          "rgb": {
+            "red": 243,
+            "green": 195,
+            "blue": 5
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1012-fabuland-orange",
+          "name": "Fabuland Orange",
+          "rgb": {
+            "red": 239,
+            "green": 145,
+            "blue": 33
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1013-modulex-white",
+          "name": "Modulex White",
+          "rgb": {
+            "red": 244,
+            "green": 244,
+            "blue": 244
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1014-modulex-light-bluish-gray",
+          "name": "Modulex Light Bluish Gray",
+          "rgb": {
+            "red": 175,
+            "green": 181,
+            "blue": 199
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1015-modulex-light-gray",
+          "name": "Modulex Light Gray",
+          "rgb": {
+            "red": 156,
+            "green": 156,
+            "blue": 156
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1016-modulex-charcoal-gray",
+          "name": "Modulex Charcoal Gray",
+          "rgb": {
+            "red": 89,
+            "green": 93,
+            "blue": 96
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1017-modulex-tile-gray",
+          "name": "Modulex Tile Gray",
+          "rgb": {
+            "red": 107,
+            "green": 90,
+            "blue": 90
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1018-modulex-black",
+          "name": "Modulex Black",
+          "rgb": {
+            "red": 77,
+            "green": 76,
+            "blue": 82
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1019-modulex-tile-brown",
+          "name": "Modulex Tile Brown",
+          "rgb": {
+            "red": 51,
+            "green": 0,
+            "blue": 0
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1020-modulex-terracotta",
+          "name": "Modulex Terracotta",
+          "rgb": {
+            "red": 92,
+            "green": 80,
+            "blue": 48
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1021-modulex-brown",
+          "name": "Modulex Brown",
+          "rgb": {
+            "red": 144,
+            "green": 116,
+            "blue": 80
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1022-modulex-buff",
+          "name": "Modulex Buff",
+          "rgb": {
+            "red": 222,
+            "green": 198,
+            "blue": 156
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1023-modulex-red",
+          "name": "Modulex Red",
+          "rgb": {
+            "red": 181,
+            "green": 44,
+            "blue": 32
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1024-modulex-pink-red",
+          "name": "Modulex Pink Red",
+          "rgb": {
+            "red": 244,
+            "green": 92,
+            "blue": 64
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1025-modulex-orange",
+          "name": "Modulex Orange",
+          "rgb": {
+            "red": 244,
+            "green": 123,
+            "blue": 48
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1026-modulex-light-orange",
+          "name": "Modulex Light Orange",
+          "rgb": {
+            "red": 247,
+            "green": 173,
+            "blue": 99
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1027-modulex-light-yellow",
+          "name": "Modulex Light Yellow",
+          "rgb": {
+            "red": 255,
+            "green": 227,
+            "blue": 113
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1028-modulex-ochre-yellow",
+          "name": "Modulex Ochre Yellow",
+          "rgb": {
+            "red": 254,
+            "green": 213,
+            "blue": 87
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1029-modulex-lemon",
+          "name": "Modulex Lemon",
+          "rgb": {
+            "red": 189,
+            "green": 198,
+            "blue": 24
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1030-modulex-pastel-green",
+          "name": "Modulex Pastel Green",
+          "rgb": {
+            "red": 125,
+            "green": 181,
+            "blue": 56
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1031-modulex-olive-green",
+          "name": "Modulex Olive Green",
+          "rgb": {
+            "red": 124,
+            "green": 144,
+            "blue": 81
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1032-modulex-aqua-green",
+          "name": "Modulex Aqua Green",
+          "rgb": {
+            "red": 39,
+            "green": 134,
+            "blue": 126
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1033-modulex-teal-blue",
+          "name": "Modulex Teal Blue",
+          "rgb": {
+            "red": 70,
+            "green": 112,
+            "blue": 131
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1034-modulex-tile-blue",
+          "name": "Modulex Tile Blue",
+          "rgb": {
+            "red": 0,
+            "green": 87,
+            "blue": 166
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1035-modulex-medium-blue",
+          "name": "Modulex Medium Blue",
+          "rgb": {
+            "red": 97,
+            "green": 175,
+            "blue": 255
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1036-modulex-pastel-blue",
+          "name": "Modulex Pastel Blue",
+          "rgb": {
+            "red": 104,
+            "green": 174,
+            "blue": 206
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1037-modulex-violet",
+          "name": "Modulex Violet",
+          "rgb": {
+            "red": 189,
+            "green": 125,
+            "blue": 133
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1042-modulex-foil-dark-green",
+          "name": "Modulex Foil Dark Green",
+          "rgb": {
+            "red": 0,
+            "green": 100,
+            "blue": 0
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1046-modulex-foil-violet",
+          "name": "Modulex Foil Violet",
+          "rgb": {
+            "red": 75,
+            "green": 0,
+            "blue": 130
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1047-modulex-foil-red",
+          "name": "Modulex Foil Red",
+          "rgb": {
+            "red": 139,
+            "green": 0,
+            "blue": 0
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1050-coral",
+          "name": "Coral",
+          "rgb": {
+            "red": 255,
+            "green": 105,
+            "blue": 143
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1051-pastel-blue",
+          "name": "Pastel Blue",
+          "rgb": {
+            "red": 90,
+            "green": 196,
+            "blue": 218
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1054-opal-trans-dark-pink",
+          "name": "Opal Trans-Dark Pink",
+          "rgb": {
+            "red": 206,
+            "green": 29,
+            "blue": 155
+          },
+          "isActive": false,
+          "notes": "Seltene transparente Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1057-trans-light-bright-green",
+          "name": "Trans-Light Bright Green",
+          "rgb": {
+            "red": 201,
+            "green": 231,
+            "blue": 136
+          },
+          "isActive": false,
+          "notes": "Seltene transparente Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1058-trans-light-green",
+          "name": "Trans-Light Green",
+          "rgb": {
+            "red": 148,
+            "green": 229,
+            "blue": 171
+          },
+          "isActive": false,
+          "notes": "Seltene transparente Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1059-opal-trans-purple",
+          "name": "Opal Trans-Purple",
+          "rgb": {
+            "red": 131,
+            "green": 32,
+            "blue": 183
+          },
+          "isActive": false,
+          "notes": "Seltene transparente Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1062-vibrant-yellow",
+          "name": "Vibrant Yellow",
+          "rgb": {
+            "red": 235,
+            "green": 216,
+            "blue": 0
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1063-pearl-copper",
+          "name": "Pearl Copper",
+          "rgb": {
+            "red": 180,
+            "green": 106,
+            "blue": 0
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1064-fabuland-red",
+          "name": "Fabuland Red",
+          "rgb": {
+            "red": 255,
+            "green": 128,
+            "blue": 20
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1065-reddish-gold",
+          "name": "Reddish Gold",
+          "rgb": {
+            "red": 172,
+            "green": 130,
+            "blue": 71
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1066-curry",
+          "name": "Curry",
+          "rgb": {
+            "red": 221,
+            "green": 152,
+            "blue": 46
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1067-dark-nougat",
+          "name": "Dark Nougat",
+          "rgb": {
+            "red": 173,
+            "green": 97,
+            "blue": 64
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1068-bright-reddish-orange",
+          "name": "Bright Reddish Orange",
+          "rgb": {
+            "red": 238,
+            "green": 84,
+            "blue": 52
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1069-pearl-red",
+          "name": "Pearl Red",
+          "rgb": {
+            "red": 214,
+            "green": 0,
+            "blue": 38
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1070-pearl-blue",
+          "name": "Pearl Blue",
+          "rgb": {
+            "red": 0,
+            "green": 89,
+            "blue": 163
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1071-pearl-green",
+          "name": "Pearl Green",
+          "rgb": {
+            "red": 0,
+            "green": 142,
+            "blue": 60
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1072-pearl-brown",
+          "name": "Pearl Brown",
+          "rgb": {
+            "red": 87,
+            "green": 57,
+            "blue": 44
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1073-pearl-black",
+          "name": "Pearl Black",
+          "rgb": {
+            "red": 10,
+            "green": 19,
+            "blue": 39
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1074-duplo-blue",
+          "name": "Duplo Blue",
+          "rgb": {
+            "red": 0,
+            "green": 158,
+            "blue": 206
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1075-duplo-medium-blue",
+          "name": "Duplo Medium Blue",
+          "rgb": {
+            "red": 62,
+            "green": 149,
+            "blue": 182
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1076-duplo-lime",
+          "name": "Duplo Lime",
+          "rgb": {
+            "red": 255,
+            "green": 242,
+            "blue": 48
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1077-fabuland-lime",
+          "name": "Fabuland Lime",
+          "rgb": {
+            "red": 120,
+            "green": 252,
+            "blue": 120
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1078-duplo-medium-green",
+          "name": "Duplo Medium Green",
+          "rgb": {
+            "red": 70,
+            "green": 138,
+            "blue": 95
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1079-duplo-light-green",
+          "name": "Duplo Light Green",
+          "rgb": {
+            "red": 96,
+            "green": 186,
+            "blue": 118
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1080-light-tan",
+          "name": "Light Tan",
+          "rgb": {
+            "red": 243,
+            "green": 201,
+            "blue": 136
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1081-rust-orange",
+          "name": "Rust Orange",
+          "rgb": {
+            "red": 135,
+            "green": 43,
+            "blue": 23
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1082-clikits-pink",
+          "name": "Clikits Pink",
+          "rgb": {
+            "red": 254,
+            "green": 120,
+            "blue": 176
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1083-two-tone-copper",
+          "name": "Two-tone Copper",
+          "rgb": {
+            "red": 148,
+            "green": 81,
+            "blue": 72
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1084-two-tone-gold",
+          "name": "Two-tone Gold",
+          "rgb": {
+            "red": 171,
+            "green": 103,
+            "blue": 58
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1085-two-tone-silver",
+          "name": "Two-tone Silver",
+          "rgb": {
+            "red": 115,
+            "green": 114,
+            "blue": 113
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1086-pearl-lime",
+          "name": "Pearl Lime",
+          "rgb": {
+            "red": 106,
+            "green": 121,
+            "blue": 68
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1087-duplo-pink",
+          "name": "Duplo Pink",
+          "rgb": {
+            "red": 255,
+            "green": 135,
+            "blue": 156
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1088-medium-brown",
+          "name": "Medium Brown",
+          "rgb": {
+            "red": 117,
+            "green": 89,
+            "blue": 69
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1089-warm-tan",
+          "name": "Warm Tan",
+          "rgb": {
+            "red": 204,
+            "green": 163,
+            "blue": 115
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1090-duplo-turquoise",
+          "name": "Duplo Turquoise",
+          "rgb": {
+            "red": 63,
+            "green": 182,
+            "blue": 158
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1091-warm-yellowish-orange",
+          "name": "Warm Yellowish Orange",
+          "rgb": {
+            "red": 255,
+            "green": 203,
+            "blue": 120
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1092-metallic-copper",
+          "name": "Metallic Copper",
+          "rgb": {
+            "red": 118,
+            "green": 77,
+            "blue": 59
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1093-light-lilac",
+          "name": "Light Lilac",
+          "rgb": {
+            "red": 145,
+            "green": 149,
+            "blue": 202
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1094-trans-medium-purple",
+          "name": "Trans-Medium Purple",
+          "rgb": {
+            "red": 141,
+            "green": 115,
+            "blue": 179
+          },
+          "isActive": false,
+          "notes": "Seltene transparente Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1100-clikits-yellow",
+          "name": "Clikits Yellow",
+          "rgb": {
+            "red": 255,
+            "green": 207,
+            "blue": 11
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1101-duplo-dark-purple",
+          "name": "Duplo Dark Purple",
+          "rgb": {
+            "red": 95,
+            "green": 39,
+            "blue": 170
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1102-trans-neon-red",
+          "name": "Trans-Neon Red",
+          "rgb": {
+            "red": 255,
+            "green": 0,
+            "blue": 64
+          },
+          "isActive": false,
+          "notes": "Seltene transparente Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1103-pearl-titanium",
+          "name": "Pearl Titanium",
+          "rgb": {
+            "red": 62,
+            "green": 60,
+            "blue": 57
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1105-ho-azure",
+          "name": "HO Azure",
+          "rgb": {
+            "red": 21,
+            "green": 145,
+            "blue": 203
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1106-ho-blue-gray",
+          "name": "HO Blue-gray",
+          "rgb": {
+            "red": 53,
+            "green": 78,
+            "blue": 90
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1107-ho-cyan",
+          "name": "HO Cyan",
+          "rgb": {
+            "red": 91,
+            "green": 152,
+            "blue": 179
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1108-ho-dark-aqua",
+          "name": "HO Dark Aqua",
+          "rgb": {
+            "red": 167,
+            "green": 220,
+            "blue": 207
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1112-ho-dark-lime",
+          "name": "HO Dark Lime",
+          "rgb": {
+            "red": 178,
+            "green": 185,
+            "blue": 85
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1113-ho-dark-red",
+          "name": "HO Dark Red",
+          "rgb": {
+            "red": 99,
+            "green": 19,
+            "blue": 20
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1114-ho-dark-sand-green",
+          "name": "HO Dark Sand Green",
+          "rgb": {
+            "red": 98,
+            "green": 122,
+            "blue": 98
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1115-ho-dark-turquoise",
+          "name": "HO Dark Turquoise",
+          "rgb": {
+            "red": 16,
+            "green": 146,
+            "blue": 157
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1116-ho-earth-orange",
+          "name": "HO Earth Orange",
+          "rgb": {
+            "red": 187,
+            "green": 119,
+            "blue": 27
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1117-ho-gold",
+          "name": "HO Gold",
+          "rgb": {
+            "red": 180,
+            "green": 167,
+            "blue": 116
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1118-ho-light-aqua",
+          "name": "HO Light Aqua",
+          "rgb": {
+            "red": 163,
+            "green": 209,
+            "blue": 192
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1119-ho-light-brown",
+          "name": "HO Light Brown",
+          "rgb": {
+            "red": 150,
+            "green": 83,
+            "blue": 54
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1120-ho-light-gold",
+          "name": "HO Light Gold",
+          "rgb": {
+            "red": 205,
+            "green": 194,
+            "blue": 152
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1121-ho-light-tan",
+          "name": "HO Light Tan",
+          "rgb": {
+            "red": 249,
+            "green": 241,
+            "blue": 199
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1122-ho-light-yellow",
+          "name": "HO Light Yellow",
+          "rgb": {
+            "red": 245,
+            "green": 250,
+            "blue": 183
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1123-ho-medium-blue",
+          "name": "HO Medium Blue",
+          "rgb": {
+            "red": 115,
+            "green": 150,
+            "blue": 200
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1124-ho-medium-red",
+          "name": "HO Medium Red",
+          "rgb": {
+            "red": 192,
+            "green": 17,
+            "blue": 17
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1125-ho-metallic-blue",
+          "name": "HO Metallic Blue",
+          "rgb": {
+            "red": 13,
+            "green": 71,
+            "blue": 99
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1126-ho-metallic-dark-gray",
+          "name": "HO Metallic Dark Gray",
+          "rgb": {
+            "red": 94,
+            "green": 94,
+            "blue": 94
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1127-ho-metallic-green",
+          "name": "HO Metallic Green",
+          "rgb": {
+            "red": 135,
+            "green": 152,
+            "blue": 103
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1128-ho-metallic-sand-blue",
+          "name": "HO Metallic Sand Blue",
+          "rgb": {
+            "red": 95,
+            "green": 125,
+            "blue": 140
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1130-ho-rose",
+          "name": "HO Rose",
+          "rgb": {
+            "red": 208,
+            "green": 98,
+            "blue": 98
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1131-ho-sand-blue",
+          "name": "HO Sand Blue",
+          "rgb": {
+            "red": 110,
+            "green": 138,
+            "blue": 166
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1134-ho-titanium",
+          "name": "HO Titanium",
+          "rgb": {
+            "red": 97,
+            "green": 97,
+            "blue": 97
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1135-metal",
+          "name": "Metal",
+          "rgb": {
+            "red": 165,
+            "green": 173,
+            "blue": 180
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1136-reddish-orange",
+          "name": "Reddish Orange",
+          "rgb": {
+            "red": 202,
+            "green": 76,
+            "blue": 11
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1137-sienna-brown",
+          "name": "Sienna Brown",
+          "rgb": {
+            "red": 145,
+            "green": 92,
+            "blue": 60
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1138-umber-brown",
+          "name": "Umber Brown",
+          "rgb": {
+            "red": 94,
+            "green": 63,
+            "blue": 51
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1140-neon-orange",
+          "name": "Neon Orange",
+          "rgb": {
+            "red": 236,
+            "green": 70,
+            "blue": 18
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1141-neon-green",
+          "name": "Neon Green",
+          "rgb": {
+            "red": 210,
+            "green": 252,
+            "blue": 67
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1142-dark-olive-green",
+          "name": "Dark Olive Green",
+          "rgb": {
+            "red": 93,
+            "green": 92,
+            "blue": 54
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1144-chrome-red",
+          "name": "Chrome Red",
+          "rgb": {
+            "red": 206,
+            "green": 48,
+            "blue": 33
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1145-ochre-yellow",
+          "name": "Ochre Yellow",
+          "rgb": {
+            "red": 221,
+            "green": 158,
+            "blue": 71
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1146-warm-pink",
+          "name": "Warm Pink",
+          "rgb": {
+            "red": 246,
+            "green": 183,
+            "blue": 191
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        },
+        {
+          "id": "lego-1147-blue-violet",
+          "name": "Blue Violet",
+          "rgb": {
+            "red": 163,
+            "green": 169,
+            "blue": 255
+          },
+          "isActive": false,
+          "notes": "Seltene Erweiterungsfarbe."
+        }
       ]
     }
   ]
