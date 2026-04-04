@@ -13,6 +13,34 @@ def signing_xcargs
   "DEVELOPMENT_TEAM=#{team_id}"
 end
 
+def release_app_identifiers
+  [
+    ENV.fetch("BRICKCANVAS_APP_IDENTIFIER", "eu.mpwg.BrickCanvas"),
+    ENV.fetch("BRICKCANVAS_MAC_APP_IDENTIFIER", "eu.mpwg.BrickCanvas.mac")
+  ]
+end
+
+def match_readonly?
+  ENV["MATCH_READONLY"] == "1" || ENV["CI"] == "true"
+end
+
+def sync_match_signing(api_key:)
+  options = {
+    api_key: api_key,
+    type: "appstore",
+    readonly: match_readonly?,
+    app_identifier: release_app_identifiers
+  }
+
+  keychain_name = ENV["MATCH_KEYCHAIN_NAME"]
+  keychain_password = ENV["MATCH_KEYCHAIN_PASSWORD"]
+
+  options[:keychain_name] = keychain_name unless keychain_name.to_s.empty?
+  options[:keychain_password] = keychain_password unless keychain_password.to_s.empty?
+
+  match(**options)
+end
+
 def app_store_connect_api_key_config
   key_id = required_env!("APP_STORE_CONNECT_API_KEY_ID")
   issuer_id = required_env!("APP_STORE_CONNECT_API_ISSUER_ID")
@@ -41,6 +69,15 @@ platform :ios do
   desc "Erzeugt das Xcode-Projekt aus project.yml"
   lane :generate_project do
     sh("./scripts/generate-xcode-project.sh")
+  end
+
+  desc "Synchronisiert Zertifikate und Provisioning Profiles über match"
+  lane :sync_signing do
+    api_key = app_store_connect_api_key(
+      **app_store_connect_api_key_config
+    )
+
+    sync_match_signing(api_key: api_key)
   end
 
   desc "Archiviert die Release-App für iPhone und iPad"
@@ -80,6 +117,8 @@ platform :ios do
     api_key = app_store_connect_api_key(
       **app_store_connect_api_key_config
     )
+
+    sync_match_signing(api_key: api_key)
 
     build_app(
       project: "BrickCanvas.xcodeproj",

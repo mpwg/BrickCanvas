@@ -1,0 +1,14 @@
+git_url(ENV.fetch("MATCH_GIT_URL"))
+storage_mode("git")
+git_branch(ENV.fetch("MATCH_GIT_BRANCH", "main"))
+type("appstore")
+
+app_identifier([
+  ENV.fetch("BRICKCANVAS_APP_IDENTIFIER", "eu.mpwg.BrickCanvas"),
+  ENV.fetch("BRICKCANVAS_MAC_APP_IDENTIFIER", "eu.mpwg.BrickCanvas.mac")
+])
+
+readonly(ENV["MATCH_READONLY"] == "1" || ENV["CI"] == "true")
+
+username(ENV["APP_STORE_CONNECT_APPLE_ID"]) if ENV["APP_STORE_CONNECT_APPLE_ID"]
+team_id(ENV["BRICKCANVAS_DEVELOPMENT_TEAM"]) if ENV["BRICKCANVAS_DEVELOPMENT_TEAM"]
