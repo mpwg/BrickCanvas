@@ -37,8 +37,23 @@ struct PaletteServiceTests {
             )
         )
 
-        #expect(palette.colors.count == 273)
+        #expect(palette.colors.count == 232)
         #expect(palette.colors.contains(where: { $0.id == "lego-47-trans-clear" }))
+    }
+
+    @Test
+    func bundledCompletePaletteDoesNotContainDuplicateRGBValues() async throws {
+        let service = try BundledPaletteService()
+
+        let palette = try await service.palette(
+            for: PaletteQuery(
+                paletteID: "mvp-default",
+                includeInactiveColors: true
+            )
+        )
+
+        let uniqueRGBValues = Set(palette.colors.map(\.rgb))
+        #expect(uniqueRGBValues.count == palette.colors.count)
     }
 
     @Test
