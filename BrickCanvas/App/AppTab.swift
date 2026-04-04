@@ -34,6 +34,7 @@ enum AppTab: String, CaseIterable, Identifiable {
         }
     }
 
+    @MainActor
     @ViewBuilder
     var rootView: some View {
         switch self {
@@ -48,4 +49,3 @@ enum AppTab: String, CaseIterable, Identifiable {
         }
     }
 }
-

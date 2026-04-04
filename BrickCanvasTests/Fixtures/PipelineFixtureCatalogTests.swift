@@ -12,19 +12,28 @@ struct PipelineFixtureCatalogTests {
     }
 
     @Test
-    func fixtureCasesMaterializeExpectedArtifacts() throws {
+    func fixtureCasesMaterializeExpectedArtifacts() async throws {
         let catalog = try PipelineFixtureRepository.loadCatalog()
+        let paletteService = try BundledPaletteService()
 
         for fixture in catalog.fixtures {
             try fixture.validateShape()
 
             let grid = try fixture.makeExpectedGrid()
-            let buildPlan = fixture.makeExpectedBuildPlan()
+            let buildPlan = try fixture.makeExpectedBuildPlan(
+                palette: try await paletteService.palette(
+                    for: PaletteQuery(
+                        paletteID: fixture.paletteID,
+                        includeInactiveColors: true
+                    )
+                ).colors
+            )
             let partRequirements = try fixture.makeExpectedPartRequirements()
 
             #expect(grid.size.width == fixture.mosaicSize.width)
             #expect(grid.size.height == fixture.mosaicSize.height)
             #expect(buildPlan.rows.count == fixture.mosaicSize.height)
+            #expect(buildPlan.legend.isEmpty == false)
             #expect(partRequirements.isEmpty == false)
         }
     }
@@ -36,7 +45,7 @@ struct PipelineFixtureCatalogTests {
 
         let grid = try fixture.makeExpectedGrid()
         let partRequirements = try fixture.makeExpectedPartRequirements()
-        let buildPlan = fixture.makeExpectedBuildPlan()
+        let buildPlan = try fixture.makeExpectedBuildPlan(palette: DomainFixtures.palette)
 
         #expect(grid == DomainFixtures.grid)
         #expect(partRequirements == DomainFixtures.partRequirements.sorted { $0.id < $1.id })

@@ -26,12 +26,28 @@ struct PartRequirement: Identifiable, Codable, Hashable, Sendable {
     }
 }
 
+struct BuildPlanLegendEntry: Identifiable, Codable, Hashable, Sendable {
+    let number: Int
+    let colorID: String
+
+    var id: Int {
+        number
+    }
+}
+
+struct BuildPlanStud: Codable, Hashable, Sendable {
+    let columnIndex: Int
+    let colorID: String
+    let legendNumber: Int
+}
+
 struct BuildPlanRow: Codable, Hashable, Sendable {
     let rowIndex: Int
-    let colorIDs: [String]
+    let studs: [BuildPlanStud]
 }
 
 struct BuildPlan: Codable, Hashable, Sendable {
+    let size: MosaicGridSize
+    let legend: [BuildPlanLegendEntry]
     let rows: [BuildPlanRow]
 }
-

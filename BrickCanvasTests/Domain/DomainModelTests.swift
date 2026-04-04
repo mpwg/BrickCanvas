@@ -83,31 +83,32 @@ struct DomainModelTests {
     }
 
     @Test
-    func partSummaryContentAggregatesTotalsAndSortsRows() {
-        let content = ProjectPartSummaryContent(project: DomainFixtures.generatedProject)
+    func projectDetailContentAggregatesTotalsAndSortsRows() {
+        let content = ProjectDetailContent(project: DomainFixtures.generatedProject)
 
         #expect(content.projectName == "Familienmosaik")
         #expect(content.partName == "Runde Platte 1×1")
         #expect(content.totalPieces == 16)
         #expect(content.distinctColorCount == 4)
+        #expect(content.buildPlanDocument?.legendItems.map(\.number) == [1, 2, 3, 4])
         #expect(content.rows.map(\.colorName) == ["Bright Blue", "Bright Yellow", "White", "Bright Red"])
         #expect(content.rows.map(\.quantity) == [5, 4, 4, 3])
     }
 
     @Test
-    func partSummaryStateUsesEmptyStateForDraftProjects() {
-        let state = ProjectPartSummaryScreenState(project: DomainFixtures.draftProject)
+    func projectDetailStateUsesEmptyStateForDraftProjects() {
+        let state = ProjectDetailScreenState(project: DomainFixtures.draftProject)
 
         guard case let .empty(configuration) = state else {
-            Issue.record("Expected empty part summary state for draft project.")
+            Issue.record("Expected empty project detail state for draft project.")
             return
         }
 
-        #expect(configuration.title == "Noch keine Teileliste")
+        #expect(configuration.title == "Noch kein generiertes Projekt")
     }
 
     @Test
-    func partSummaryContentFallsBackWhenPaletteColorIsMissing() throws {
+    func projectDetailContentFallsBackWhenPaletteColorIsMissing() throws {
         let incompleteArtifacts = GeneratedProjectArtifacts(
             palette: [],
             grid: DomainFixtures.grid,
@@ -127,10 +128,40 @@ struct DomainModelTests {
             updatedAt: DomainFixtures.updatedAt
         )
 
-        let content = ProjectPartSummaryContent(project: project)
+        let content = ProjectDetailContent(project: project)
 
         #expect(content.rows.count == 1)
         #expect(content.rows[0].colorName == "Dark Turquoise")
         #expect(content.rows[0].colorSubtitle == "DARK-TURQUOISE")
+        #expect(content.buildPlanDocument == nil)
+    }
+
+    @Test
+    func projectDetailStateKeepsLoadedScreenWhenOnlyBuildPlanIsMissing() throws {
+        let artifacts = GeneratedProjectArtifacts(
+            palette: DomainFixtures.palette,
+            grid: DomainFixtures.grid,
+            partRequirements: DomainFixtures.partRequirements,
+            buildPlan: nil
+        )
+        let project = BrickCanvasProject(
+            name: "Nur Teile",
+            lifecycle: .generated,
+            sourceImage: DomainFixtures.sourceImage,
+            cropRegion: DomainFixtures.cropRegion,
+            configuration: DomainFixtures.configuration,
+            generatedArtifacts: artifacts,
+            createdAt: DomainFixtures.createdAt,
+            updatedAt: DomainFixtures.updatedAt
+        )
+        let state = ProjectDetailScreenState(project: project)
+
+        guard case let .loaded(content) = state else {
+            Issue.record("Expected loaded detail state when only the build plan is missing.")
+            return
+        }
+
+        #expect(content.totalPieces == 16)
+        #expect(content.buildPlanDocument == nil)
     }
 }
