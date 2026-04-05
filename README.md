@@ -2,6 +2,26 @@
 
 Turn photos into LEGO-style mosaic art with build plans and parts lists.
 
+## Projektstatus
+
+BrickCanvas ist derzeit on hold.
+
+Das Projekt wird pausiert, bis es eine neue Produktvision gibt, da die aktuellen Ergebnisse die gewünschte Qualitätsstufe nicht erreichen.
+
+### Gründe für den On-Hold-Status
+
+- die Beschaffung der benötigten Bauteile ist zu schwierig
+- die Beschaffung geeigneter Bauplatten ist zu schwierig
+- die Bildqualität bei kleineren Größen ist nicht gut genug
+- die Bildqualität mit den Standard-LEGO-Farben ist nicht gut genug
+
+### Mögliche spätere Entwicklungen
+
+Diese Ansätze sind derzeit nur Ideen und ausdrücklich ungeplant:
+
+- Einsatz von 3D-gedruckten Teilen
+- Umsetzung mit einer anderen Methode statt mit LEGO
+
 ## Vision
 
 BrickCanvas is a mobile-first app that lets people upload or capture a photo and transform it into a custom brick mosaic that can actually be built.
