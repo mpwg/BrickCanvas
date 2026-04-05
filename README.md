@@ -1,250 +1,90 @@
 # BrickCanvas
 
-Turn photos into LEGO-style mosaic art with build plans and parts lists.
+BrickCanvas is an iOS SwiftUI prototype for turning photos into brick-style mosaic projects with a generated preview, parts summary, and build-plan output.
 
-## Projektstatus
+## Status
 
-BrickCanvas ist derzeit on hold.
+BrickCanvas is currently on hold.
 
-Das Projekt wird pausiert, bis es eine neue Produktvision gibt, da die aktuellen Ergebnisse die gewünschte Qualitätsstufe nicht erreichen.
+Development is paused until there is a new product vision. The prototype proved useful for validating the pipeline, but the current approach did not reach the required quality level for a real product.
 
-### Gründe für den On-Hold-Status
+### Why the project is on hold
 
-- die Beschaffung der benötigten Bauteile ist zu schwierig
-- die Beschaffung geeigneter Bauplatten ist zu schwierig
-- die Bildqualität bei kleineren Größen ist nicht gut genug
-- die Bildqualität mit den Standard-LEGO-Farben ist nicht gut genug
+- sourcing the required parts is too difficult
+- sourcing suitable baseplates is too difficult
+- image quality at smaller mosaic sizes is not good enough
+- image quality with standard LEGO colors is not good enough
 
-### Mögliche spätere Entwicklungen
+### Possible future directions
 
-Diese Ansätze sind derzeit nur Ideen und ausdrücklich ungeplant:
+These are ideas only and are not planned work:
 
-- Einsatz von 3D-gedruckten Teilen
-- Umsetzung mit einer anderen Methode statt mit LEGO
+- use 3D-printed parts
+- use a non-LEGO production method
 
-## Vision
+## Current Implementation
 
-BrickCanvas is a mobile-first app that lets people upload or capture a photo and transform it into a custom brick mosaic that can actually be built.
+The repository contains a working prototype, not just an app shell.
 
-The app should bridge the gap between a beautiful visual preview and a practical building plan by generating:
+### Implemented today
 
-- a brick mosaic preview
-- a reduced color version mapped to real LEGO colors
-- a build plan / instruction layout
-- a parts list with quantities by part and color
-- optional sourcing support via third-party services
+- SwiftUI app with tab-based navigation
+- photo import from the iOS photo library
+- image normalization during import
+- interactive crop editor with multiple aspect presets
+- square mosaic sizing from 16x16 up to 128x128
+- mosaic preview generation with configurable dithering
+- bundled palette loading and color activation controls
+- generated project assembly from imported image, crop, palette, and grid
+- parts list generation for the selected mosaic
+- build-plan generation and rasterized build-plan preview
+- PNG sharing for the generated build plan
+- unit tests for domain models and core services
 
-## Problem
+### Current app surfaces
 
-People often want to recreate photos, portraits, pets, family moments, or artwork as LEGO wall art, but doing so manually is tedious.
+- `Home`: placeholder screen only
+- `New Project`: implemented prototype flow for import, crop, preview, and project generation
+- `Projects`: currently shows a generated project detail screen rather than a persisted project list
+- `Settings`: implemented controls for dithering and palette activation
 
-Current workflows are fragmented:
+### Not implemented
 
-- image editing in one tool
-- palette reduction in another
-- manual counting of parts
-- no clean mobile-first experience
+- real project persistence behind `ProjectStorage`
+- a finished home dashboard
+- a real projects overview backed by saved data
+- sourcing integrations for parts or baseplates
+- cost estimation
+- inventory-aware planning
+- larger-part optimization
+- PDF export
+- production-ready image quality for small outputs
 
-BrickCanvas should make the full flow easy, visual, and fun.
+## Technical Snapshot
 
-## Core User Flow
+BrickCanvas is currently an Apple-platform-first prototype with these building blocks:
 
-1. User imports a photo from the camera or photo library
-2. User crops and adjusts the image
-3. User chooses a mosaic size and style
-4. App maps the image to a LEGO-compatible color palette
-5. App generates a stud-based mosaic preview
-6. App shows:
-   - final preview
-   - build instructions
-   - parts list
-   - optional price estimate
-7. User exports or saves the project
+- SwiftUI for all current UI
+- Swift Concurrency in the generation flow
+- XcodeGen via `project.yml`
+- `DitheringEngine` as an external Swift Package
+- domain models for projects, grids, colors, parts, and build-plan artifacts
+- service-based architecture for import, palette loading, color matching, mosaic generation, part planning, build-plan generation, and export
 
-## Target Users
+Relevant architecture documents:
 
-- LEGO fans
-- families
-- hobby builders
-- parents doing creative projects with children
-- people who want personalized wall art
-- users who want custom alternatives to official LEGO Art sets
+- [ADR 0001: SwiftUI First](docs/adr/0001-swiftui-first.md)
+- [Architecture Guidelines](docs/architecture.md)
 
-## MVP
+## Repository Structure
 
-The first version should focus on the shortest useful path from photo to buildable mosaic.
-
-### MVP Features
-
-- import image from photo library or camera
-- crop image to target aspect ratio
-- choose mosaic size, for example:
-  - 24x24
-  - 48x48
-  - 64x64
-- reduce the image to a real LEGO color palette
-- render a stud grid preview
-- generate a parts list by color and quantity
-- export a simple build plan
-
-### MVP Constraints
-
-To keep scope realistic, the MVP should initially use only simple piece strategies such as:
-
-- 1x1 round plates
-- or 1x1 square plates / tiles
-
-This avoids early complexity around advanced piece optimization and availability.
-
-## Future Features
-
-- support larger parts like 2x2 and 2x4 for optimization
-- inventory-aware mode using parts the user already owns
-- build using pieces from selected sets only
-- face-aware portrait enhancement
-- background removal
-- automatic contrast and edge enhancement
-- official LEGO Art frame presets
-- multi-panel murals
-- Rebrickable or BrickLink export
-- PDF build instructions
-- project sync and sharing
-
-## Product Differentiators
-
-BrickCanvas can stand out through:
-
-- mobile-first UX
-- family-friendly flow
-- practical buildability, not just visual conversion
-- support for real LEGO colors and real piece constraints
-- optional optimization based on owned inventory
-
-## Technical Overview
-
-### Image Pipeline
-
-The processing flow should roughly be:
-
-1. load image
-2. normalize orientation
-3. crop to target ratio
-4. resize to target stud resolution
-5. optionally improve contrast / clarity
-6. quantize colors to a LEGO palette
-7. generate the mosaic grid
-8. count parts and produce build output
-
-### Color Mapping
-
-One of the key quality factors is color mapping.
-
-The app should map image colors to a restricted palette of real LEGO colors using perceptual matching rather than simple RGB distance.
-
-Possible approach:
-
-- maintain a curated LEGO palette
-- convert colors into a perceptual space
-- pick nearest allowed color
-- optionally apply palette reduction before final mapping
-
-### Mosaic Grid
-
-The processed image becomes a 2D stud grid.
-
-Example:
-
-- 48x48 mosaic
-- 2304 stud positions
-- each cell stores:
-  - x coordinate
-  - y coordinate
-  - target color
-  - optional assigned part
-
-### Part Planning
-
-MVP:
-
-- one stud = one part
-- count by color
-
-Later:
-
-- detect larger monochrome regions
-- replace many 1x1 parts with larger elements where useful
-- optimize against cost, availability, and build simplicity
-
-### Build Plan Generation
-
-Initial output formats can be simple:
-
-- full coordinate grid
-- row-by-row build layout
-- quadrant-based sections for larger mosaics
-
-Later versions can add more polished step-by-step instruction generation.
-
-### Export
-
-Possible export targets:
-
-- image export
-- PDF instructions
-- plain text parts list
-- CSV parts list
-- future sourcing export
-
-## External Data
-
-Useful external data sources include:
-
-- LEGO color definitions
-- available parts by color
-- metadata for parts and sets
-- optional pricing and inventory data
-
-Rebrickable is an obvious starting point for:
-
-- colors
-- parts
-- sets
-- inventory metadata
-
-## Suggested App Architecture
-
-For a first version, an Apple-platform-first native app makes sense.
-
-### Suggested stack
-
-- SwiftUI for UI
-- Swift concurrency for processing pipeline orchestration
-- Core Image / Vision / Accelerate where useful
-- local persistence for saved projects
-- optional networking for external metadata
-
-### Suggested modules
-
-- `ImageImport`
-- `ImagePreprocessing`
-- `Palette`
-- `ColorMatcher`
-- `MosaicGrid`
-- `PartPlanner`
-- `InstructionGenerator`
-- `ExportEngine`
-- `ProjectStorage`
-
-## Current App Scaffold
-
-The repository now contains the initial iOS app skeleton for the MVP:
-
-- SwiftUI app entry point
-- tab-based root navigation
-- placeholder screens for Home, New Project, Projects, and Settings
-- XcodeGen-based project definition in `project.yml`
-
-This scaffold is intentionally limited to app structure and navigation. Domain models, image processing, and color matching are introduced in later PR slices.
+- `BrickCanvas/App`: app entry point and tab wiring
+- `BrickCanvas/Features`: SwiftUI feature screens
+- `BrickCanvas/Domain`: domain models and fixtures
+- `BrickCanvas/Services`: service contracts and implementations
+- `BrickCanvas/Storage`: storage contracts
+- `BrickCanvas/Resources`: bundled palette and fixture data
+- `BrickCanvasTests`: unit tests for domain and service behavior
 
 ## Local Development
 
@@ -254,15 +94,15 @@ This scaffold is intentionally limited to app structure and navigation. Domain m
 - XcodeGen
 - Metal Toolchain
 
-`BrickCanvas` bindet [`DitheringEngine`](https://github.com/Eskils/DitheringEngine) als echtes Swift Package von GitHub ein. Das Paket enthält Metal-Shader für Ordered-Dithering-Verfahren. Deshalb muss die Metal Toolchain lokal installiert sein, damit der Build inklusive Package-Abhängigkeiten vollständig läuft.
+BrickCanvas depends on [`DitheringEngine`](https://github.com/Eskils/DitheringEngine), which includes Metal shader code. The local Metal Toolchain must therefore be available for complete builds.
 
-Prüfe den Installationsstatus:
+Check whether the Metal Toolchain is installed:
 
 ```bash
 xcodebuild -showComponent MetalToolchain
 ```
 
-Falls die Toolchain noch nicht installiert ist:
+Install it if needed:
 
 ```bash
 xcodebuild -downloadComponent MetalToolchain
@@ -288,96 +128,19 @@ Run tests from the command line:
 xcodebuild test -project BrickCanvas.xcodeproj -scheme BrickCanvas -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.4'
 ```
 
-## CI
+## Test Coverage Focus
 
-GitHub Actions restores a cached Metal Toolchain bundle when available. Only if no matching cache entry exists, the workflow downloads the toolchain, imports it, and then builds the project. This keeps the upstream Swift Package reference intact while avoiding unnecessary component downloads on unchanged CI images.
+The current automated tests primarily cover:
 
-## Current Palette Dataset
+- domain model invariants
+- image import and crop services
+- perceptual color distance and color matching
+- mosaic generation
+- part planning
+- build-plan generation
+- export engine behavior
+- generated project assembly
 
-The current MVP palette dataset lives in `BrickCanvas/Resources/Palette/mvp-palettes-v1.json`.
+## Notes
 
-- versioned JSON resource
-- one curated palette: `mvp-default`
-- small starter set intended for MVP reviewability and future expansion
-
-The dataset is loaded through `BundledPaletteService` and validated for duplicate IDs and structurally invalid entries before use.
-
-## Key Challenges
-
-### Visual quality
-
-Bad color reduction will immediately make the result look disappointing.
-
-### Portrait handling
-
-Faces are highly sensitive and often need tuned contrast and palette behavior.
-
-### Buildability
-
-A pretty mosaic is not automatically easy or cheap to build.
-
-### Real-world constraints
-
-Not every part exists in every color, so piece planning must eventually respect actual availability.
-
-### UX
-
-The app should feel creative and accessible, not like a complex CAD tool.
-
-## Monetization Ideas
-
-- free small mosaics, paid larger exports
-- one-time Pro unlock
-- premium export features
-- subscription for unlimited projects and advanced optimization
-- optional affiliate revenue from sourcing links
-
-## Milestones
-
-### Milestone 1 — Image to Mosaic
-
-- import image
-- crop and resize
-- palette mapping
-- mosaic preview
-
-### Milestone 2 — Build Output
-
-- parts counting
-- grid plan output
-- export support
-
-### Milestone 3 — Quality Improvements
-
-- portrait presets
-- contrast presets
-- better palette tuning
-
-### Milestone 4 — Advanced Planning
-
-- larger part optimization
-- owned inventory mode
-- external integration
-
-## Open Questions
-
-- Should the app target official LEGO Art dimensions first?
-- Should the MVP use only 1x1 parts?
-- Should PDF export be included in the first release?
-- Should sourcing integrations be delayed until after the core generation flow is polished?
-
-## Working Taglines
-
-- Build your memories in bricks
-- Turn photos into brick art
-- Your photo, rebuilt in LEGO style
-- From snapshot to brick masterpiece
-
-## Immediate Next Step
-
-Build a technical prototype for:
-
-1. downscaling an image to stud resolution
-2. mapping pixels to a LEGO color palette
-3. rendering a mosaic preview
-4. generating a simple color-based parts list
+The README now reflects the current prototype state rather than the original product ambition. If work resumes, the next documentation update should be driven by the new product direction instead of the earlier LEGO-mosaic roadmap.
